@@ -1,0 +1,51 @@
+{
+    "plugins\/enedis\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Récupération des données à la minute": ""
+    },
+    "plugins\/enedis\/desktop\/php\/enedis.php": {
+        "401 - Accès non autorisé": "401 - Akses tidak sah",
+        "Gestion": "Manajemen",
+        "Ajouter": "Tambahan",
+        "Configuration": "Konfigurasi",
+        "Mes comptes Enedis": "",
+        "Rechercher": "Pencarian",
+        "Configuration avancée": "Konfigurasi lanjutan",
+        "Dupliquer": "Duplikat",
+        "Sauvegarder": "Menyimpan",
+        "Supprimer": "Menghapus",
+        "Equipement": "Peralatan",
+        "Commandes": "Perintah",
+        "Nom de l'équipement Enedis": "",
+        "Objet parent": "Objek induk",
+        "Aucun": "Tak ada",
+        "Catégorie": "Kategori",
+        "Options": "Pilihan",
+        "Activer": "Mengaktifkan",
+        "Visible": "Terlihat",
+        "Identifiant Enedis": "",
+        "Mot de passe Enedis": "",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "",
+        "Template de widget": "",
+        "Id": "",
+        "Nom": "Nama",
+        "Type": "Jenis",
+        "Action": "Tindakan"
+    },
+    "plugins\/enedis\/desktop\/js\/enedis.js": {
+        "Min": "",
+        "Max": "",
+        "Unité": "Satuan",
+        "Afficher": "Memenitikan",
+        "Historiser": "Historicize",
+        "Tester": "Coba"
+    },
+    "plugins\/enedis\/core\/class\/enedis.class.php": {
+        "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "",
+        "L\\'identifiant du compte Enedis doit être renseigné": "",
+        "Le mot de passe du compte Enedis doit être renseigné": ""
+    },
+    "info.json": {
+        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": ""
+    }
+}

@@ -1,0 +1,51 @@
+{
+    "plugins\/enedis\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Récupération des données à la minute": ""
+    },
+    "plugins\/enedis\/desktop\/php\/enedis.php": {
+        "401 - Accès non autorisé": "401-不正アクセス",
+        "Gestion": "管理",
+        "Ajouter": "加えます",
+        "Configuration": "コンフィギュレーション",
+        "Mes comptes Enedis": "",
+        "Rechercher": "検索",
+        "Configuration avancée": "高度な構成",
+        "Dupliquer": "重複",
+        "Sauvegarder": "セーブ",
+        "Supprimer": "取り除きます",
+        "Equipement": "設備",
+        "Commandes": "コマンド",
+        "Nom de l'équipement Enedis": "",
+        "Objet parent": "親オブジェクト",
+        "Aucun": "何でもありません",
+        "Catégorie": "カテゴリ",
+        "Options": "オプション",
+        "Activer": "アクティブ",
+        "Visible": "目に見えます",
+        "Identifiant Enedis": "",
+        "Mot de passe Enedis": "",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "",
+        "Template de widget": "",
+        "Id": "",
+        "Nom": "表題",
+        "Type": "タイプ",
+        "Action": "アクション"
+    },
+    "plugins\/enedis\/desktop\/js\/enedis.js": {
+        "Min": "低いです",
+        "Max": "マックス",
+        "Unité": "団結",
+        "Afficher": "ディスプレイ",
+        "Historiser": "Historicize",
+        "Tester": "テスト"
+    },
+    "plugins\/enedis\/core\/class\/enedis.class.php": {
+        "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "",
+        "L\\'identifiant du compte Enedis doit être renseigné": "",
+        "Le mot de passe du compte Enedis doit être renseigné": ""
+    },
+    "info.json": {
+        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": ""
+    }
+}

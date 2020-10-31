@@ -1,0 +1,51 @@
+{
+    "plugins\/enedis\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Récupération des données à la minute": "Datenwiederherstellung pro Minute"
+    },
+    "plugins\/enedis\/desktop\/php\/enedis.php": {
+        "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
+        "Gestion": "Verwaltung",
+        "Ajouter": "Hinzufügen",
+        "Configuration": "Konfiguration",
+        "Mes comptes Enedis": "Meine Enedis-Konten",
+        "Rechercher": "Suchen nach",
+        "Configuration avancée": "Erweiterte Konfiguration",
+        "Dupliquer": "Duplikat",
+        "Sauvegarder": "Speichern",
+        "Supprimer": "Löschen",
+        "Equipement": "Gerät",
+        "Commandes": "Befehle",
+        "Nom de l'équipement Enedis": "Name der Enedis-Ausrüstung",
+        "Objet parent": "Übergeordnetes Objekt",
+        "Aucun": "Ohne",
+        "Catégorie": "Kategorie",
+        "Options": "Optionen",
+        "Activer": "Aktivieren",
+        "Visible": "Sichtbar",
+        "Identifiant Enedis": "Enedis ID",
+        "Mot de passe Enedis": "Enedis Passwort",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "Aktivieren Sie das Kontrollkästchen, um die Widget-Vorlage in den Farben des Linky-Zählers zu verwenden",
+        "Template de widget": "Widget-Vorlage",
+        "Id": "Identifikation",
+        "Nom": "Name",
+        "Type": "Typ",
+        "Action": "Aktion"
+    },
+    "plugins\/enedis\/desktop\/js\/enedis.js": {
+        "Min": "Niedrig",
+        "Max": "Max",
+        "Unité": "Unit",
+        "Afficher": "Anzeige",
+        "Historiser": "Chronik",
+        "Tester": "Test"
+    },
+    "plugins\/enedis\/core\/class\/enedis.class.php": {
+        "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Authentifizierungsfehler: Überprüfen Sie die Gültigkeit des Benutzernamens und des Kennworts",
+        "L\\'identifiant du compte Enedis doit être renseigné": "Die Kennung des Enedis-Kontos muss eingegeben werden",
+        "Le mot de passe du compte Enedis doit être renseigné": "Das Passwort für das Enedis-Konto muss eingegeben werden"
+    },
+    "info.json": {
+        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": "Rufen Sie die Informationen des Linky Smart Meters von ihrem Enedis-Kundenkonto ab. Bitte beachten Sie, dass Sie unbedingt auf den \"professionellen\" Teil der Enedis-Website mit Ihren üblichen Kennungen zugreifen müssen (siehe Dokumentation)"
+    }
+}

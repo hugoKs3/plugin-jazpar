@@ -1,0 +1,35 @@
+<div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class#" data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" style="width:#width#;height:#height#;background-color:#CCE630!important;">
+<link rel="stylesheet" href="plugins/enedis/data/css/enedis.template.css"/>
+  <div class="text-center" style="padding:2% 0;">
+	   <span class="warning" title="#alert_name#"><i class='#alert_icon#'></i></span>
+	   <span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
+	   <a href="#eqLink#" class="reportModeHidden enedisEqlogicName">#name_display# <span class="object_name">#object_name#</span></a>
+  </div>
+  <div class="enedis_template text-center">
+	   <div class="history cursor" data-cmd_id="#consoy_id#" title="#consoy_collect#" style="padding-top:25%;">
+		    <div class="enedisCdc">ANNUEL</div>
+		    <div class="enedisValueUnite"><span class="enedisValue">#consoy#</span><span class="enedisUnite"> kWh</span></div>
+	   </div>
+	   <div class="history cursor" data-cmd_id="#consom_id#" title="#consom_collect#">
+		  <div class="enedisCdc">MENSUEL</div>
+		  <div class="enedisValueUnite"><span class="enedisValue">#consom#</span><span class="enedisUnite"> kWh</span></div>
+	  </div>
+	  <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#">
+		  <div class="enedisCdc">QUOTIDIEN</div>
+		  <div class="enedisValueUnite"><span class="enedisValue">#consod#</span><span class="enedisUnite"> kWh</span></div>
+	  </div>
+	  <div class="history cursor" data-cmd_id="#charge_id#" title="#charge_collect#">
+	 	  <div class="enedisCdc">CHARGE</div>
+		  <div class="enedisValueUnite"><span class="enedisValue">#charge#</span><span class="enedisUnite"> kW</span></div>
+	  </div>
+ </div>
+<script>
+    var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
+    var eqlogic_width = eqLogic.width();
+    var LinkyScreen_width = eqLogic.find('.enedis_template').width();
+    eqLogic.find('.enedisEqlogicName').attr('style', 'font-size :' + (eqlogic_width*0.13)+'px !important');
+    eqLogic.find('.enedisCdc').css('font-size', (LinkyScreen_width*0.10)+'px');
+    eqLogic.find('.enedisValue').css('font-size', (LinkyScreen_width*0.12)+'px');
+    eqLogic.find('.enedisUnite').css('font-size', (LinkyScreen_width*0.08)+'px');
+ </script>
+</div>

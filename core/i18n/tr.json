@@ -1,0 +1,51 @@
+{
+    "plugins\/enedis\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Récupération des données à la minute": ""
+    },
+    "plugins\/enedis\/desktop\/php\/enedis.php": {
+        "401 - Accès non autorisé": "401 - Yetkisiz erişim",
+        "Gestion": "Idare",
+        "Ajouter": "Ekle",
+        "Configuration": "Ayar",
+        "Mes comptes Enedis": "",
+        "Rechercher": "Arayın",
+        "Configuration avancée": "Gelişmiş ayarlar",
+        "Dupliquer": "Kopyala",
+        "Sauvegarder": "Kaydet",
+        "Supprimer": "Sil",
+        "Equipement": "Cihaz",
+        "Commandes": "Komutalar",
+        "Nom de l'équipement Enedis": "",
+        "Objet parent": "Üst nesne",
+        "Aucun": "Hiçbir",
+        "Catégorie": "Kategori",
+        "Options": "Opsiyonlar",
+        "Activer": "Etkinleştir",
+        "Visible": "Görülebilir",
+        "Identifiant Enedis": "",
+        "Mot de passe Enedis": "",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "",
+        "Template de widget": "",
+        "Id": "Kimlik",
+        "Nom": "İsim",
+        "Type": "Çeşit",
+        "Action": "Eylem"
+    },
+    "plugins\/enedis\/desktop\/js\/enedis.js": {
+        "Min": "Minimum",
+        "Max": "Maximum",
+        "Unité": "Ünite",
+        "Afficher": "Göster",
+        "Historiser": "Tarihe göre sırala",
+        "Tester": "Test et"
+    },
+    "plugins\/enedis\/core\/class\/enedis.class.php": {
+        "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "",
+        "L\\'identifiant du compte Enedis doit être renseigné": "",
+        "Le mot de passe du compte Enedis doit être renseigné": ""
+    },
+    "info.json": {
+        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": ""
+    }
+}

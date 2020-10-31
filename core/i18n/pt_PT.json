@@ -1,0 +1,51 @@
+{
+    "plugins\/enedis\/plugin_info\/configuration.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Récupération des données à la minute": "Recuperação de dados por minuto"
+    },
+    "plugins\/enedis\/desktop\/php\/enedis.php": {
+        "401 - Accès non autorisé": "401 - Acesso não autorizado",
+        "Gestion": "Gestão",
+        "Ajouter": "Adicionar",
+        "Configuration": "Configuração",
+        "Mes comptes Enedis": "Minhas contas Enedis",
+        "Rechercher": "Pesquisa",
+        "Configuration avancée": "Configuração avançada",
+        "Dupliquer": "Duplicar",
+        "Sauvegarder": "Salvar",
+        "Supprimer": "Remover",
+        "Equipement": "Equipamento",
+        "Commandes": "Comandos",
+        "Nom de l'équipement Enedis": "Nome do equipamento Enedis",
+        "Objet parent": "Objeto pai",
+        "Aucun": "Nemhum",
+        "Catégorie": "Categoria",
+        "Options": "Opções",
+        "Activer": "Ativar",
+        "Visible": "Visivél",
+        "Identifiant Enedis": "ID Enedis",
+        "Mot de passe Enedis": "Senha Enedis",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "Marque a caixa para usar o template do widget nas cores do contador Linky",
+        "Template de widget": "Template de widget",
+        "Id": "ID",
+        "Nom": "Nome",
+        "Type": "Tipo",
+        "Action": "Ação"
+    },
+    "plugins\/enedis\/desktop\/js\/enedis.js": {
+        "Min": "Baixo",
+        "Max": "Máx.",
+        "Unité": "Unidade",
+        "Afficher": "Display",
+        "Historiser": "Historicizar",
+        "Tester": "Teste"
+    },
+    "plugins\/enedis\/core\/class\/enedis.class.php": {
+        "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Erro de autenticação: verifique a validade do nome de usuário e senha",
+        "L\\'identifiant du compte Enedis doit être renseigné": "O identificador da conta Enedis deve ser inserido",
+        "Le mot de passe du compte Enedis doit être renseigné": "A senha para a conta Enedis deve ser inserida"
+    },
+    "info.json": {
+        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": "Recupere as informações do medidor inteligente Linky de sua conta de cliente Enedis. Por favor, note que é essencial ter acesso à parte \"profissional\" do site Enedis com seus identificadores usuais (veja a documentação)"
+    }
+}
