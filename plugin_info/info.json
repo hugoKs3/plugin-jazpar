@@ -13,8 +13,8 @@
     "hasDependency": false,
     "hasOwnDeamon": false,
     "maxDependancyInstallTime": 0,
-    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/enedis\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/enedis\/",
+    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/jazpar\/changelog",
+    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/jazpar\/",
     "language": [
         "fr_FR",
         "en_US"

@@ -1,6 +1,6 @@
-# Changelog Enedis Linky
+# Changelog GRDF Gazpar
 
-# Changelog plugin Enedis Linky
+# Changelog plugin GRDF Gazpar
 
 >**IMPORTANT**
 >

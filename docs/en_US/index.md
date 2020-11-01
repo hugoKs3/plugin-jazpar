@@ -1,4 +1,4 @@
-# Enedis GRDF Gazpar
+# GRDF Gazpar
 
 Plugin allowing the recovery of consumption of the communicating meter *Gazpar* by querying the customer account *GRDF*. As the data is not made available in real time, the plugin retrieves the gaz consumption data from the day before each day.
 

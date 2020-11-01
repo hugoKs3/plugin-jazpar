@@ -19,7 +19,7 @@
 /* * ***************************Includes********************************* */
 require_once __DIR__  . '/../../../../core/php/core.inc.php';
 
-class enedis extends eqLogic {
+class jazpar extends eqLogic {
     /*     * *************************Attributs****************************** */
 
   /*
@@ -361,7 +361,7 @@ class enedis extends eqLogic {
         if (!is_object($cmd))
         {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Création commande :'.$logicalId.'/'.$name);
-  				$cmd = new enedisCmd();
+  				$cmd = new jazparCmd();
 					$cmd->setLogicalId($logicalId);
           $cmd->setEqLogic_id($this->getId());
 					$cmd->setName($name);
@@ -379,7 +379,7 @@ class enedis extends eqLogic {
       }
 
 		  if ($this->getIsEnable() == 1) {
-        $this->pullEnedis();
+        $this->pullJazpar();
       }
 
     }
@@ -392,7 +392,7 @@ class enedis extends eqLogic {
     /*     * **********************Getteur Setteur*************************** */
 }
 
-class enedisCmd extends cmd {
+class jazparCmd extends cmd {
     /*     * *************************Attributs****************************** */
 
     /*
