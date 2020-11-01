@@ -1,14 +1,14 @@
 {
-    "plugins\/enedis\/plugin_info\/configuration.php": {
+    "plugins\/jazpar\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Récupération des données à la minute": "Récupération des données à la minute"
     },
-    "plugins\/enedis\/desktop\/php\/enedis.php": {
+    "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
         "Configuration": "Configuration",
-        "Mes comptes Enedis": "Mes comptes Enedis",
+        "Mes comptes GRDF": "Mes comptes GRDF",
         "Rechercher": "Rechercher",
         "Configuration avancée": "Configuration avancée",
         "Dupliquer": "Dupliquer",
@@ -16,23 +16,22 @@
         "Supprimer": "Supprimer",
         "Equipement": "Equipement",
         "Commandes": "Commandes",
-        "Nom de l'équipement Enedis": "Nom de l'équipement Enedis",
+        "Nom de l'équipement GRDF": "Nom de l'équipement GRDF",
         "Objet parent": "Objet parent",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
         "Options": "Options",
         "Activer": "Activer",
         "Visible": "Visible",
-        "Identifiant Enedis": "Identifiant Enedis",
-        "Mot de passe Enedis": "Mot de passe Enedis",
-        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky": "Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky",
+        "Identifiant GRDF": "Identifiant GRDF",
+        "Mot de passe GRDF": "Mot de passe GRDF",
         "Template de widget": "Template de widget",
         "Id": "Id",
         "Nom": "Nom",
         "Type": "Type",
         "Action": "Action"
     },
-    "plugins\/enedis\/desktop\/js\/enedis.js": {
+    "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
         "Max": "Max",
         "Unité": "Unité",
@@ -40,12 +39,12 @@
         "Historiser": "Historiser",
         "Tester": "Tester"
     },
-    "plugins\/enedis\/core\/class\/enedis.class.php": {
+    "plugins\/jazpar\/core\/class\/jazpar.class.php": {
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe",
-        "L\\'identifiant du compte Enedis doit être renseigné": "L\\'identifiant du compte Enedis doit être renseigné",
-        "Le mot de passe du compte Enedis doit être renseigné": "Le mot de passe du compte Enedis doit être renseigné"
+        "L\\'identifiant du compte GRDF doit être renseigné": "L\\'identifiant du compte GRDF doit être renseigné",
+        "Le mot de passe du compte GRDF doit être renseigné": "Le mot de passe du compte GRDF doit être renseigné"
     },
     "info.json": {
-        "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)": "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)"
+        "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."
     }
 }

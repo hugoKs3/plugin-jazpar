@@ -20,19 +20,19 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 // Fonction exécutée automatiquement après l'installation du plugin
   function enedis_install() {
-    $cronMinute = config::byKey('cronMinute', 'enedis');
+    $cronMinute = config::byKey('cronMinute', 'jazpar');
     if (empty($cronMinute)) {
       $randMinute = rand(3, 59);
-      config::save('cronMinute', $randMinute, 'enedis');
+      config::save('cronMinute', $randMinute, 'jazpar');
     }
   }
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
   function enedis_update() {
-    $cronMinute = config::byKey('cronMinute', 'enedis');
+    $cronMinute = config::byKey('cronMinute', 'jazpar');
     if (empty($cronMinute)) {
       $randMinute = rand(3, 59);
-      config::save('cronMinute', $randMinute, 'enedis');
+      config::save('cronMinute', $randMinute, 'jazpar');
     }
 
   }

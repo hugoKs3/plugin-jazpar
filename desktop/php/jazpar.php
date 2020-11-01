@@ -2,7 +2,7 @@
 if (!isConnect('admin')) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
-$plugin = plugin::byId('enedis');
+$plugin = plugin::byId('jazpar');
 sendVarToJS('eqType', $plugin->getId());
 $eqLogics = eqLogic::byType($plugin->getId());
 ?>
@@ -22,7 +22,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
     <span>{{Configuration}}</span>
   </div>
   </div>
-  <legend><i class="fas fa-table"></i> {{Mes comptes Enedis}}</legend>
+  <legend><i class="fas fa-table"></i> {{Mes comptes GRDF}}</legend>
 	   <input class="form-control" placeholder="{{Rechercher}}" id="in_searchEqlogic" />
 <div class="eqLogicThumbnailContainer">
     <?php
@@ -56,10 +56,10 @@ foreach ($eqLogics as $eqLogic) {
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
-                <label class="col-sm-3 control-label">{{Nom de l'équipement Enedis}}</label>
+                <label class="col-sm-3 control-label">{{Nom de l'équipement GRDF}}</label>
                 <div class="col-sm-3">
                     <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
-                    <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement Enedis}}"/>
+                    <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement GRDF}}"/>
                 </div>
             </div>
             <div class="form-group">
@@ -96,23 +96,17 @@ foreach (jeeObject::all() as $object) {
 	</div>
 	<br>
 	<div class="form-group">
-	 <label class="col-sm-3 control-label">{{Identifiant Enedis}}</label>
+	 <label class="col-sm-3 control-label">{{Identifiant GRDF}}</label>
 	 <div class="col-sm-3">
-			 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="login" placeholder="Identifiant du compte Enedis"/>
+			 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="login" placeholder="Identifiant du compte GRDF"/>
 	 </div>
 </div>
 		<div class="form-group">
-		 <label class="col-sm-3 control-label">{{Mot de passe Enedis}}</label>
+		 <label class="col-sm-3 control-label">{{Mot de passe GRDF}}</label>
 		 <div class="col-sm-3">
-				 <input type="password" autocomplete="new-password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password" placeholder="Mot de passe du compte Enedis"/>
+				 <input type="password" autocomplete="new-password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password" placeholder="Mot de passe du compte GRDF"/>
 		 </div>
  </div>
- <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Cocher la case pour utiliser le template de widget aux couleurs du compteur Linky}}">{{Template de widget}}</label>
-	 <div class="col-sm-3">
-		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate"/>
- 	 </div>
-	</div>
 </fieldset>
 </form>
 </div>
@@ -140,6 +134,6 @@ foreach (jeeObject::all() as $object) {
 </div>
 
 <!-- Inclusion du fichier javascript du plugin (dossier, nom_du_fichier, extension_du_fichier, nom_du_plugin) -->
-<?php include_file('desktop', 'enedis', 'js', 'enedis');?>
+<?php include_file('desktop', 'jazpar', 'js', 'jazpar');?>
 <!-- Inclusion du fichier javascript du core - NE PAS MODIFIER NI SUPPRIMER -->
 <?php include_file('core', 'plugin.template', 'js');?>

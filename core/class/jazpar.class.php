@@ -41,23 +41,23 @@ class enedis extends eqLogic {
     {
       if (date('G') < 4 || date('G') >= 22)
       {
-        if ($eqLogic->getCache('getEnedisData') == 'done')
+        if ($eqLogic->getCache('getJazparData') == 'done')
     		{
-          $eqLogic->setCache('getEnedisData', null);
+          $eqLogic->setCache('getJazparData', null);
         }
         return;
       }
 
-      if ($eqLogic->getCache('getEnedisData') != 'done')
+      if ($eqLogic->getCache('getJazparData') != 'done')
       {
-        $eqLogic->pullEnedis();
+        $eqLogic->pullJazpar();
       }
     }
   }
 
     /*     * *********************Méthodes d'instance************************* */
 
-    public function pullEnedis()
+    public function pullJazpar()
     {
       $need_refresh = false;
 
@@ -78,7 +78,7 @@ class enedis extends eqLogic {
       if ($need_refresh == true)
       {
         sleep(rand(5,50));
-        $cookies = $this->connectEnedis();
+        $cookies = $this->connectJazpar();
 
         $charge = $this->getCmd(null, 'charge');
         if (is_object($charge))
@@ -86,7 +86,7 @@ class enedis extends eqLogic {
           $end = date('d/m/Y');
           $start = date('d/m/Y', strtotime('-1 day'));
           $resource_id = 'urlCdcHeure';
-          $this->getEnedisData($cookies, $resource_id, $start, $end);
+          $this->getJazparData($cookies, $resource_id, $start, $end);
         }
 
         $consoDay = $this->getCmd(null, 'consod');
@@ -95,7 +95,7 @@ class enedis extends eqLogic {
           $end = date('d/m/Y', strtotime('-1 day'));
           $start = date('d/m/Y', strtotime('-31 days'));
           $resource_id = 'urlCdcJour';
-          $this->getEnedisData($cookies, $resource_id, $start, $end);
+          $this->getJazparData($cookies, $resource_id, $start, $end);
         }
 
         $consoMonth = $this->getCmd(null, 'consom');
@@ -104,7 +104,7 @@ class enedis extends eqLogic {
           $end = date('d/m/Y', strtotime('-1 day'));
           $start = date('d/m/Y', strtotime('first day of this month -11 months'));
           $resource_id = 'urlCdcMois';
-          $this->getEnedisData($cookies, $resource_id, $start, $end);
+          $this->getJazparData($cookies, $resource_id, $start, $end);
         }
 
         $consoYear = $this->getCmd(null, 'consoy');
@@ -113,23 +113,23 @@ class enedis extends eqLogic {
           $end = date('d/m/Y', strtotime('-1 day'));
           $start = date('d/m/Y', strtotime('first day of january this year -3 years'));
           $resource_id = 'urlCdcAn';
-          $this->getEnedisData($cookies, $resource_id, $start, $end);
+          $this->getJazparData($cookies, $resource_id, $start, $end);
         }
       }
       else
       {
-        if ($this->getCache('getEnedisData') != 'done')
+        if ($this->getCache('getJazparData') != 'done')
         {
-          $this->setCache('getEnedisData', 'done');
+          $this->setCache('getJazparData', 'done');
           log::add(__CLASS__, 'info', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : toutes les données sont à jour - désactivation de la vérification automatique pour aujourd\'hui');
         }
       }
 
     }
 
-    public function connectEnedis()
+    public function connectJazpar()
 		{
-      log::add(__CLASS__, 'info', $this->getHumanName() . ' 1ère étape d\'authentification Enedis - Récupération du token');
+      log::add(__CLASS__, 'info', $this->getHumanName() . ' 1ère étape d\'authentification Jazpar - Récupération du token');
 
       $login = $this->getConfiguration('login');
       $password = $this->getConfiguration('password');
@@ -192,7 +192,7 @@ class enedis extends eqLogic {
         return;
       }
 
-      log::add(__CLASS__, 'info', $this->getHumanName() . ' 2ème étape d\'authentification Enedis - Récupération des informations de session');
+      log::add(__CLASS__, 'info', $this->getHumanName() . ' 2ème étape d\'authentification Jazpar - Récupération des informations de session');
 
       $curl = curl_init();
       curl_setopt_array($curl, array(
@@ -231,7 +231,7 @@ class enedis extends eqLogic {
       return array($iPlanetDirectoryPro, $JSESSIONID);
    }
 
-   public function getEnedisData($cookies, $resource_id, $start, $end)
+   public function getJazparData($cookies, $resource_id, $start, $end)
    {
      log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end);
 
@@ -339,10 +339,10 @@ class enedis extends eqLogic {
  // Fonction exécutée automatiquement avant la mise à jour de l'équipement
     public function preUpdate() {
       if (empty($this->getConfiguration('login'))) {
-        throw new Exception(__('L\'identifiant du compte Enedis doit être renseigné',__FILE__));
+        throw new Exception(__('L\'identifiant du compte GRDF doit être renseigné',__FILE__));
       }
       if (empty($this->getConfiguration('password'))) {
-        throw new Exception(__('Le mot de passe du compte Enedis doit être renseigné',__FILE__));
+        throw new Exception(__('Le mot de passe du compte GRDF doit être renseigné',__FILE__));
       }
     }
 
@@ -386,28 +386,7 @@ class enedis extends eqLogic {
 
     // Non obligatoire : permet de modifier l'affichage du widget (également utilisable par les commandes)
     public function toHtml($_version = 'dashboard') {
-      if ($this->getConfiguration('widgetTemplate') != 1)
-    	{
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' Utilisation du template Jeedom (' . $_version . ')');
         return parent::toHtml($_version);
-    	}
-
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Utilisation du template Linky (' . $_version . ')');
-      $replace = $this->preToHtml($_version);
-      if (!is_array($replace)) {
-        return $replace;
-      }
-      $version = jeedom::versionAlias($_version);
-
-      foreach ($this->getCmd('info') as $cmd) {
-        $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-        $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
-        $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
-      }
-
-      $html = template_replace($replace, getTemplate('core', $version, 'enedis.template', __CLASS__));
-      cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
-      return $html;
     }
 
     /*     * **********************Getteur Setteur*************************** */

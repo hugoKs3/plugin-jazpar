@@ -1,17 +1,14 @@
 {
-    "id": "enedis",
-    "name": "Enedis Linky",
+    "id": "jazpar",
+    "name": "GRDF Gazpar",
     "description": {
-        "fr_FR": "Récupérer les informations du compteur communicant Linky à partir de son compte-client Enedis. Attention il est indispensable d'avoir accès à la partie \"professionnels\" du site Enedis avec vos identifiants habituels (voir la documentation)",
-        "en_US": "Retrieve the information of the Linky smart meter from their Enedis customer account. Please note, it is essential to have access to the \"professional\" part of the Enedis site with your usual identifiers (see the documentation)",
-        "es_ES": "Recupere la información del medidor inteligente Linky de su cuenta de cliente de Enedis. Tenga en cuenta que es fundamental tener acceso a la parte \"profesional\" del sitio de Enedis con sus identificadores habituales (consulte la documentación)",
-        "de_DE": "Rufen Sie die Informationen des Linky Smart Meters von ihrem Enedis-Kundenkonto ab. Bitte beachten Sie, dass Sie unbedingt auf den \"professionellen\" Teil der Enedis-Website mit Ihren üblichen Kennungen zugreifen müssen (siehe Dokumentation)",
-        "pt_PT": "Recupere as informações do medidor inteligente Linky de sua conta de cliente Enedis. Por favor, note que é essencial ter acesso à parte \"profissional\" do site Enedis com seus identificadores usuais (veja a documentação)"
+        "fr_FR": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.",
+        "en_US": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."
     },
-    "utilization": "Sur la page de l'équipement renseignez l'identifiant ainsi que le mot de passe de votre compte-client Enedis puis cliquez sur le bouton Sauvegarder.",
+    "utilization": "Sur la page de l'équipement renseignez l'identifiant ainsi que le mot de passe de votre compte-client GRDF puis cliquez sur le bouton Sauvegarder.",
     "licence": "AGPL",
-    "author": "Jeedom SAS",
-    "require": "3.3.39",
+    "author": "HugoKs3",
+    "require": "4.0.61",
     "category": "energy",
     "hasDependency": false,
     "hasOwnDeamon": false,
@@ -20,10 +17,7 @@
     "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/enedis\/",
     "language": [
         "fr_FR",
-        "en_US",
-        "es_ES",
-        "de_DE",
-        "pt_PT"
+        "en_US"
     ],
     "compatibility": [
         "miniplus",

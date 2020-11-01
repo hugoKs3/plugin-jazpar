@@ -24,7 +24,7 @@ if (!isConnect('admin')) {
 <form class="form-horizontal">
 	<fieldset>
    <div class="form-group">
-    <label class="col-lg-4 control-label" title="Afin de ne pas surcharger les serveurs Enedis, les données sont vérifiées une fois par heure à une minute aléatoire">{{Récupération des données à la minute}}</label>
+    <label class="col-lg-4 control-label" title="Afin de ne pas surcharger les serveurs GRDF, les données sont vérifiées une fois par heure à une minute aléatoire">{{Récupération des données à la minute}}</label>
     <div class="col-lg-4">
      <input class="configKey form-control" data-l1key="cronMinute" disabled/>
    </div>
