@@ -393,10 +393,10 @@ class jazpar extends eqLogic {
      
      preg_match_all('/^.*donneesCourante = \"(.*?)\"/mi', $response, $matches);
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1]);
-     $measures = explode(",", $matches[1]);
+     $measures = explode(",", $matches[1][0]);
      preg_match_all('/^.*tooltipDatesInfo = \"(.*?)\"/mi', $response, $matches);
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1]);   
-     $periods = explode(",", $matches[1]);
+     $periods = explode(",", $matches[1][0]);
     
      foreach($periods as $key=>$period) {
         $measure = $measures[$key];
