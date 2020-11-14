@@ -80,22 +80,27 @@ class jazpar extends eqLogic {
         sleep(rand(5,50));
         $cookies = $this->connectJazpar();
 
-        $consoDay = $this->getCmd(null, 'consod');
-        if (is_object($consoDay))
-        {
-          $end = date('d/m/Y', strtotime('-2 day'));
-          $start = date('d/m/Y', strtotime('-31 days'));
-          $resource_id = 'jour';
-          $this->getJazparData($cookies, $resource_id, $start, $end);
-        }
+        if (!is_null($cookies)) {
+            $consoDay = $this->getCmd(null, 'consod');
+            if (is_object($consoDay))
+            {
+              $end = date('d/m/Y', strtotime('-2 day'));
+              $start = date('d/m/Y', strtotime('-31 days'));
+              $resource_id = 'jour';
+              $this->getJazparData($cookies, $resource_id, $start, $end);
+            }
 
-        $consoMonth = $this->getCmd(null, 'consom');
-        if (is_object($consoMonth))
-        {
-          $end = date('d/m/Y', strtotime('-1 day'));
-          $start = date('d/m/Y', strtotime('-11 months'));
-          $resource_id = 'mois';
-          $this->getJazparData($cookies, $resource_id, $start, $end);
+            $consoMonth = $this->getCmd(null, 'consom');
+            if (is_object($consoMonth))
+            {
+              $end = date('d/m/Y', strtotime('-1 day'));
+              $start = date('d/m/Y', strtotime('-11 months'));
+              $resource_id = 'mois';
+              $this->getJazparData($cookies, $resource_id, $start, $end);
+            }
+        }
+        else {
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Erreur connexion - Abandon');
         }
       }
       else
@@ -254,7 +259,7 @@ class jazpar extends eqLogic {
       else
       {
         log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des informations de session - Abandon');
-        return;
+        return null;
       }
 
       return array($jsession, $token);
