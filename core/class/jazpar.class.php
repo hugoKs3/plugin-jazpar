@@ -83,7 +83,7 @@ class jazpar extends eqLogic {
         $consoDay = $this->getCmd(null, 'consod');
         if (is_object($consoDay))
         {
-          $end = date('d/m/Y', strtotime('-1 day'));
+          $end = date('d/m/Y', strtotime('-2 day'));
           $start = date('d/m/Y', strtotime('-31 days'));
           $resource_id = 'jour';
           $this->getJazparData($cookies, $resource_id, $start, $end);
@@ -93,7 +93,7 @@ class jazpar extends eqLogic {
         if (is_object($consoMonth))
         {
           $end = date('d/m/Y', strtotime('-1 day'));
-          $start = date('d/m/Y', strtotime('first day of this month -11 months'));
+          $start = date('d/m/Y', strtotime('-11 months'));
           $resource_id = 'mois';
           $this->getJazparData($cookies, $resource_id, $start, $end);
         }
@@ -392,8 +392,10 @@ class jazpar extends eqLogic {
      curl_close($curl);
      
      preg_match_all('/^.*donneesCourante = \"(.*?)\"/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1]);
      $measures = explode(",", $matches[1]);
      preg_match_all('/^.*tooltipDatesInfo = \"(.*?)\"/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1]);   
      $periods = explode(",", $matches[1]);
     
      foreach($periods as $key=>$period) {
