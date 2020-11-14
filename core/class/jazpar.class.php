@@ -478,6 +478,20 @@ class jazpar extends eqLogic {
         $cmd->setSubType('numeric');
         $cmd->save();
       }
+        
+      $cmd = $this->getCmd(null, 'refresh');
+      if (!is_object($cmd))
+        {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Création commande :refresh/refresh');
+  		  $cmd = new jazparCmd();
+          $cmd->setLogicalId('refresh');
+          $cmd->setEqLogic_id($this->getId());
+          $cmd->setName('refresh');
+        }
+		$cmd->setType('action');
+		$cmd->setSubType('other');
+        $cmd->save();
+
 
 		  if ($this->getIsEnable() == 1) {
         $this->pullJazpar();
@@ -507,7 +521,9 @@ class jazparCmd extends cmd {
 
   // Exécution d'une commande
      public function execute($_options = array()) {
-
+		if ($this->getLogicalId() == 'refresh') {
+			$this->pullJazpar();
+		}
      }
 
     /*     * **********************Getteur Setteur*************************** */
