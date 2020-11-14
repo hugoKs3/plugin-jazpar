@@ -292,7 +292,6 @@ class jazpar extends eqLogic {
      ));
      $response = curl_exec($curl);
      curl_close($curl);
-     log::add(__CLASS__, 'debug', print_r($response, true));
 
      libxml_use_internal_errors(true);
      $dom = new DOMDocument();
@@ -392,10 +391,10 @@ class jazpar extends eqLogic {
      curl_close($curl);
      
      preg_match_all('/^.*donneesCourante = \"(.*?)\"/mi', $response, $matches);
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1]);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1][0]);
      $measures = explode(",", $matches[1][0]);
      preg_match_all('/^.*tooltipDatesInfo = \"(.*?)\"/mi', $response, $matches);
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1]);   
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1][0]);   
      $periods = explode(",", $matches[1][0]);
     
      foreach($periods as $key=>$period) {
