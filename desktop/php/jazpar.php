@@ -107,6 +107,12 @@ foreach (jeeObject::all() as $object) {
 				 <input type="password" autocomplete="new-password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password" placeholder="Mot de passe du compte GRDF"/>
 		 </div>
  </div>
+ <div class="form-group">
+	 <label class="col-sm-3 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la répcupération des données}}</label>
+	 <div class="col-sm-3">
+		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="forceRefresh"/>
+ 	 </div>
+	</div>
 </fieldset>
 </form>
 </div>

@@ -64,14 +64,19 @@ class jazpar extends eqLogic {
       foreach ($this->getCmd('info') as $eqLogicCmd)
       {
         $eqLogicCmd->execCmd();
-        if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')))
+        if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
         {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
         }
         else
         {
           $need_refresh = true;
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
+          if ($this->getConfiguration('forceRefresh') == 1) {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName() . ' mais Force Refresh activé');
+          }
+          else {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
+          }
         }
       }
 
@@ -84,7 +89,7 @@ class jazpar extends eqLogic {
             $consoDay = $this->getCmd(null, 'consod');
             if (is_object($consoDay))
             {
-              $end = date('d/m/Y', strtotime('-2 day'));
+              $end = date('d/m/Y', strtotime('-1 day'));
               $start = date('d/m/Y', strtotime('-31 days'));
               $resource_id = 'jour';
               $this->getJazparData($cookies, $resource_id, $start, $end);
@@ -395,22 +400,31 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             case 'jour':
                 $cmd = $this->getCmd(null, 'consod');
                 $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
-                $date = $dt->format('Y-m-d 23:55:00'); 
+                $dateReal = $dt->format('Y-m-d 23:55:00'); 
                 break;
             case 'mois':
                 $cmd = $this->getCmd(null, 'consom');
                 $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
-                $date = $dt->format('Y-m-t 23:55:00'); 
+                if ($key == count($periods) - 1) {
+                    $dateReal = date('Y-m-d 23:55:00', strtotime('-1 day'));
+                    //$dateReal = $dt->format('Y-m-' . $dayNum . '23:55:00'); 
+                } else {
+                    $dateReal = $dt->format('Y-m-t 23:55:00'); 
+                }
                 break;
         }
         $cmdId = $cmd->getId();
-        $cmdHistory = history::byCmdIdDatetime($cmdId, $date);
+        $cmdHistory = history::byCmdIdDatetime($cmdId, $dateReal);
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $measure) {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $date . ' => Mesure = ' . $measure);
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
         }
-        else {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $date . ' => Mesure = ' . $measure);
-            $cmd->event($measure, $date);
+        else {      
+            if ($resource_id == 'mois') {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
+                history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
+            }
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
+            $cmd->event($measure, $dateReal);
         }
      }
    }
@@ -419,7 +433,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
     public function preInsert() {
       $this->setDisplay('height','332px');
       $this->setDisplay('width', '192px');
-      $this->setConfiguration('widgetTemplate', 1);
+      $this->setConfiguration('forceRefresh', 0);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
