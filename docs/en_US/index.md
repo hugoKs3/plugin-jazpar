@@ -2,13 +2,12 @@
 
 Plugin allowing the recovery of consumption of the communicating meter *Gazpar* by querying the customer account *GRDF*. As the data is not made available in real time, the plugin retrieves the gaz consumption data from the day before each day.
 
-3 types of consumption data are accessible :
+2 types of consumption data are accessible :
 - the **daily consumption** *(in kWh)*.
 - the **monthly consumption** *(in kWh)*.
-- the **annual consumption** *(in kWh)*.
 
 >**Important**      
->You must have a GRDF customer account. The plugin retrieves information from the game *my space* [of the GRDF site](https://monespace.grdf.fr/monespace/connexion/accueil){:target = "\_ blank"}, you must therefore check that you have access to it with your usual identifiers and that the data is visible there. Otherwise, the plugin will not work.
+>You must have a GRDF customer account. The plugin retrieves information from the game *my space* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">of the GRDF website</a>, you must therefore check that you have access to it with your usual identifiers and that the data is visible there. Otherwise, the plugin will not work.
 
 # Configuration
 
@@ -27,10 +26,33 @@ To access the different equipment **GRDF Gazpar**, go to the menu **Plugins → 
 
 On the equipment page, fill in the'**Login** as well as the **Password** of your customer account *GRDF* then click on the button **Save**.
 
+The option **Force data retrieval** to force data retrieval even if data is already present for concerned periods.
+
 The plugin will then check the correct connection to the site *GRDF* and retrieve and insert in history :
-- **daily consumption** : the last 30 days,
+- **daily consumption** : the last 10 days,
 - **monthly consumption** : the last 12 months,
-- **annual consumption** : the last 3 years.
 
 >**TRICK**     
 >In desktop version, the information displayed on the widget adapts in size when resizing the tile.
+
+# Remarks
+
+During tests, it appeared that the GRDF website is quite "unstable" with direct impacts on the plugin. On Jeedom, the plugin is configured to gather data every hour. It may happen that it does not work each time: no issue, just wait for the next scheduled run.
+
+This plugin heavily relies on how the GRDF website is structured/designed. Any change on the website will most probably break the plugin and will then require to perform code changes on the plugin.
+
+# Contributions
+
+This plugin is opened for contributions and even encouraged! Please submit your pull requests for improvements/fixes on <a href="https://github.com/hugoKs3/plugin-jazpar" target="_blank">Github</a>
+
+# Credits
+
+This plugin has been inspired by the work done by:
+
+-   [Jeedom](https://github.com/jeedom)  through their Enedis plugin:  [plugin-enedis](https://github.com/jeedom/plugin-enedis)
+-   [empierre](https://github.com/empierre)  through his similar work done for Domoticz:  [domoticz_gaspar](https://github.com/empierre/domoticz_gaspar)
+
+# Disclaimer
+
+-   This code does not pretend to be bug-free
+-   Although it should not harm your Jeedom system, it is provided without any warranty or liability
