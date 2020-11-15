@@ -452,8 +452,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
  // Fonction exécutée automatiquement après la mise à jour de l'équipement
     public function postUpdate() {
       $cmdInfos = [
-    		'consod' => 'Conso Jour',
-    		'consom' => 'Conso Mois'
+    		'consod' => 'Conso veille',
+    		'consom' => 'Conso mois en cours (- 1 jour)'
     	];
 
       foreach ($cmdInfos as $logicalId => $name)
