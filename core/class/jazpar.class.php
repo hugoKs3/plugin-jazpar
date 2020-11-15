@@ -485,12 +485,6 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
     }
 
-    // Non obligatoire : permet de modifier l'affichage du widget (également utilisable par les commandes)
-    public function toHtml($_version = 'dashboard') {
-        return parent::toHtml($_version);
-    }
-
-    /*     * **********************Getteur Setteur*************************** */
 }
 
 class jazparCmd extends cmd {
