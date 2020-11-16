@@ -315,6 +315,7 @@ class jazpar extends eqLogic {
 
      if ($jvws == '') {
         log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des données (1/3) - Abandon');
+	log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (1/3): ' . $response);
         return;
      }
        
@@ -351,6 +352,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      ));
      $response = curl_exec($curl);
      curl_close($curl);  
+	   
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (2/3): ' . $response);
 
      log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " - 3ème étape");
      
@@ -385,6 +388,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      ));
      $response = curl_exec($curl);
      curl_close($curl);
+	   
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (3/3): ' . $response);
      
      preg_match_all('/^.*donneesCourante = \"(.*?)\"/mi', $response, $matches);
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1][0]);
