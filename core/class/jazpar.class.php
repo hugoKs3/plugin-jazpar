@@ -160,6 +160,7 @@ class jazpar extends eqLogic {
       }
       $jsession = $cookies['JSESSIONID_EP'];
 
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Session: ' . $jsession);
         
       log::add(__CLASS__, 'info', $this->getHumanName() . ' 2ème étape d\'authentification Jazpar');
         
@@ -212,9 +213,12 @@ class jazpar extends eqLogic {
       preg_match('/^.*CDATA\[(.*)\]]/mi', $response, $matches);
       $jvws = $matches[1];
         
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' JVWS (authent): ' . $jvws);
+        
       log::add(__CLASS__, 'info', $this->getHumanName() . ' 3ème étape d\'authentification Jazpar');
         
       $data['javax.faces.ViewState'] = $jvws;
+        
       
       $curl = curl_init();
       curl_setopt_array($curl, array(
@@ -256,6 +260,8 @@ class jazpar extends eqLogic {
         $cookies = array_merge($cookies, $cookie);
       }
 
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Token: ' . $cookies['GRDF_EP']);    
+        
       if (isset($cookies['GRDF_EP']) && $cookies['GRDF_EP'] <> '')
       {
         log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des informations de session réussie');
