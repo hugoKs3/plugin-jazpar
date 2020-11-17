@@ -321,7 +321,7 @@ class jazpar extends eqLogic {
 
      if ($jvws == '') {
         log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des données (1/4) - Abandon');
-	    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (1/3): ' . $response);
+	    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (1/4): ' . $response);
         return;
      }
        
