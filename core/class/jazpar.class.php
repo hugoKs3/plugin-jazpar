@@ -404,7 +404,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1][0]);   
      $periods = explode(",", $matches[1][0]);
        
-     recordData($measures, $periods, $resource_id, ''); 
+     $this->recordData($measures, $periods, $resource_id, ''); 
        
        
      log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " (m3) - 4ème étape");
@@ -448,7 +448,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1][0]);   
      $periods = explode(",", $matches[1][0]);
        
-     recordData($measures, $periods, $resource_id, '3'); 
+     $this->recordData($measures, $periods, $resource_id, '3'); 
        
    }
      
