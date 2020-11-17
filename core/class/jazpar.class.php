@@ -457,7 +457,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
        
      foreach($periods as $key=>$period) {
         $measure = $measures[$key];
-        switch($resource_id)
+        switch($timeframe)
         {
             case 'jour':
                 $cmd = $this->getCmd(null, 'consod' . $suffix);
