@@ -462,7 +462,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             case 'jour':
                 $cmd = $this->getCmd(null, 'consod' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
-                if (is_bool($dt) {
+                if (is_bool($dt)) {
                     return;
                 }
                 $dateReal = $dt->format('Y-m-d 23:55:00'); 
@@ -470,7 +470,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             case 'mois':
                 $cmd = $this->getCmd(null, 'consom' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
-                if (is_bool($dt) {
+                if (is_bool($dt)) {
                     return;
                 }
                 if ($key == count($periods) - 1) {
@@ -495,7 +495,6 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->event($measure, $dateReal);
         }
      }
-       
    }
 
  // Fonction exécutée automatiquement avant la création de l'équipement
