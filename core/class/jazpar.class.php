@@ -314,7 +314,7 @@ class jazpar extends eqLogic {
      log::add(__CLASS__, 'debug', $this->getHumanName() . "JVWS=". $jvws);
 
      if ($jvws == '') {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des données (1/3) - Abandon');
+        log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des données (1/4) - Abandon');
         return;
      }
        
@@ -352,7 +352,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      $response = curl_exec($curl);
      curl_close($curl);  
 
-     log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " - 3ème étape");
+     log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " (kwh) - 3ème étape");
      
 $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite1%3A2&javax.faces.partial.execute=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite1&javax.faces.partial.render=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ArefreshHighchart+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AupdateDatesBean+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AboutonTelechargerDonnees+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AidBlocSeuilParametrage&javax.faces.behavior.event=valueChange&javax.faces.partial.event=change&eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.encodedURL=https%3A%2F%2Fmonespace.grdf.fr%2Fweb%2Fguest%2Fmonespace%2Fparticulier%2Fconsommation%2Fconsommations%3Fp_p_id%3DeConsoconsoDetaille_WAR_eConsoportlet%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D5%26p_p_col_pos%3D3%26_eConsoconsoDetaille_WAR_eConsoportlet__jsfBridgeAjax%3Dtrue%26_eConsoconsoDetaille_WAR_eConsoportlet__facesViewIdResource%3D%252Fviews%252Fconso%252Fdetaille%252FconsoDetailleViewMode.xhtml&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AidDateDebutConsoDetaille=".str_replace("/", "%2F", $start)."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AidDateFinConsoDetaille=".str_replace("/", "%2F", $end)."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite1=".$resource_id."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite3=".$resource_id."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType2=kwh&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType4=kwh&javax.faces.ViewState=".$jvws;
 
@@ -392,18 +392,69 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      preg_match_all('/^.*tooltipDatesInfo = \"(.*?)\"/mi', $response, $matches);
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1][0]);   
      $periods = explode(",", $matches[1][0]);
-    
+       
+     recordData($measures, $periods, $resource_id, ''); 
+       
+       
+     log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " (m3) - 4ème étape");
+     
+     $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType2%3A1&javax.faces.partial.execute=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType2&javax.faces.partial.render=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ArefreshHighchart+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AupdateDatesBean+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AboutonTelechargerDonnees+_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType&javax.faces.behavior.event=valueChange&javax.faces.partial.event=change&eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.encodedURL=https%3A%2F%2Fmonespace.grdf.fr%2Fweb%2Fguest%2Fmonespace%2Fparticulier%2Fconsommation%2Fconsommations%3Fp_p_id%3DeConsoconsoDetaille_WAR_eConsoportlet%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D5%26p_p_col_pos%3D3%26_eConsoconsoDetaille_WAR_eConsoportlet__jsfBridgeAjax%3Dtrue%26_eConsoconsoDetaille_WAR_eConsoportlet__facesViewIdResource%3D%252Fviews%252Fconso%252Fdetaille%252FconsoDetailleViewMode.xhtml&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AidDateDebutConsoDetaille=".str_replace("/", "%2F", $start)."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AidDateFinConsoDetaille=".str_replace("/", "%2F", $end)."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite1=".$resource_id."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3ApanelTypeGranularite3=".$resource_id."&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType2=mcube&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3AselecteurVolumeType4=kwh&javax.faces.ViewState=".$jvws;
+
+     $curl = curl_init();
+     curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://monespace.grdf.fr/monespace/particulier/consommation/consommations?p_p_id=eConsoconsoDetaille_WAR_eConsoportlet&p_p_lifecycle=2&p_p_state=normal&p_p_mode=view&p_p_cacheability=cacheLevelPage&p_p_col_id=column-3&p_p_col_count=5&p_p_col_pos=3&_eConsoconsoDetaille_WAR_eConsoportlet__jsfBridgeAjax=true&_eConsoconsoDetaille_WAR_eConsoportlet__facesViewIdResource=/views/conso/detaille/consoDetailleViewMode.xhtml",
+        CURLOPT_HEADER  => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => $postfields,
+        CURLOPT_HTTPHEADER => array(
+                "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36",
+                "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6",
+                "Accept-Encoding: gzip, deflate, br", 
+                "Accept: application/xml, application/json, text/javascript, */*; q=0.01",
+                "Faces-Request: partial/ajax",
+				"Host: monespace.grdf.fr",
+                "Origin: https://monespace.grdf.fr",
+                "Referer: https://monespace.grdf.fr/monespace/particulier/consommation/consommations",
+				"Sec-Fetch-Mode: cors",
+				"Sec-Fetch-Site: same-origin",
+                "X-Requested-With: XMLHttpRequest",
+          "Cookie: connectedLUser=0; COOKIE_SUPPORT=true; GUEST_LANGUAGE_ID=fr_FR; ROUTEID_EP=.1; JSESSIONID_EP=".$cookies[0]."; GRDF_EP=".$cookies[1]."; KPISavedRef=https://monespace.grdf.fr/monespace/particulier/consommation/consommations;")
+     ));
+     $response = curl_exec($curl);
+     curl_close($curl);
+     
+     preg_match_all('/^.*donneesCourante = \"(.*?)\"/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesures : ' . $matches[1][0]);
+     $measures = explode(",", $matches[1][0]);
+     preg_match_all('/^.*tooltipDatesInfo = \"(.*?)\"/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Periodes : ' . $matches[1][0]);   
+     $periods = explode(",", $matches[1][0]);
+       
+     recordData($measures, $periods, $resource_id, '3'); 
+       
+   }
+     
+     
+   public function recordData($measures, $periods, $timeframe, $suffix) {
+       
      foreach($periods as $key=>$period) {
         $measure = $measures[$key];
         switch($resource_id)
         {
             case 'jour':
-                $cmd = $this->getCmd(null, 'consod');
+                $cmd = $this->getCmd(null, 'consod' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
                 $dateReal = $dt->format('Y-m-d 23:55:00'); 
                 break;
             case 'mois':
-                $cmd = $this->getCmd(null, 'consom');
+                $cmd = $this->getCmd(null, 'consom' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
                 if ($key == count($periods) - 1) {
                     $dateReal = date('Y-m-d 23:55:00', strtotime('-1 day'));
@@ -419,7 +470,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
         }
         else {      
-            if ($resource_id == 'mois') {
+            if ($timeframe == 'mois') {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
                 history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
             }
@@ -427,6 +478,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->event($measure, $dateReal);
         }
      }
+       
    }
 
  // Fonction exécutée automatiquement avant la création de l'équipement
@@ -453,7 +505,9 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
     public function postUpdate() {
       $cmdInfos = [
     		'consod' => 'Conso veille',
-    		'consom' => 'Conso mois en cours (- 1 jour)'
+    		'consom' => 'Conso mois en cours',
+            'consod3' => 'Conso veille (m3)',
+            'consom3' => 'Conso mois en cours (m3)'
     	];
 
       foreach ($cmdInfos as $logicalId => $name)
