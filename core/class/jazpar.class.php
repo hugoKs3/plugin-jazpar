@@ -454,7 +454,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      
      
    public function recordData($measures, $periods, $timeframe, $suffix) {
-       
+     
      foreach($periods as $key=>$period) {
         $measure = $measures[$key];
         switch($timeframe)
@@ -462,11 +462,17 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             case 'jour':
                 $cmd = $this->getCmd(null, 'consod' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
+                if (is_bool($dt) {
+                    return;
+                }
                 $dateReal = $dt->format('Y-m-d 23:55:00'); 
                 break;
             case 'mois':
                 $cmd = $this->getCmd(null, 'consom' . $suffix);
                 $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
+                if (is_bool($dt) {
+                    return;
+                }
                 if ($key == count($periods) - 1) {
                     $dateReal = date('Y-m-d 23:55:00', strtotime('-1 day'));
                     //$dateReal = $dt->format('Y-m-' . $dayNum . '23:55:00'); 
