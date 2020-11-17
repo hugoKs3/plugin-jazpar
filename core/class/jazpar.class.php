@@ -530,14 +530,18 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
   				$cmd = new jazparCmd();
 					$cmd->setLogicalId($logicalId);
           $cmd->setEqLogic_id($this->getId());
-					$cmd->setName($name);
           $cmd->setGeneric_type('CONSUMPTION');
-          $cmd->setUnite('kWh');
           $cmd->setIsHistorized(1);
           $cmd->setDisplay('showStatsOndashboard', 0);
           $cmd->setDisplay('showStatsOnmobile', 0);
           $cmd->setTemplate('dashboard','tile');
           $cmd->setTemplate('mobile','tile');
+        }
+        $cmd->setName($name);
+        if (substr($logicalId, -1) == '3') {
+          $cmd->setUnite('m3');
+        } else {
+          $cmd->setUnite('kWh');
         }
         $cmd->setType('info');
         $cmd->setSubType('numeric');
