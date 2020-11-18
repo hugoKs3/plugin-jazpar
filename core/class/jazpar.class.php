@@ -324,10 +324,16 @@ class jazpar extends eqLogic {
 	    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (1/4): ' . $response);
         return;
      }
+     
+     preg_match_all('/.*process:\'(_eConsoconsoDetaille_WAR_eConsoportlet_:idFormConsoDetaille:.*)\'/miU', $response, $output_array);
+     $formId = $output_array[1][0];
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Form : ' . $formId);   
+       
+     $formId = str_replace(":", "%3A", $formId);
        
      log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données ' . $resource_id . ' du ' . $start . ' au ' . $end . " - 2ème étape");
        
-$postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3Aj_idt140&javax.faces.partial.execute=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille%3Aj_idt140&javax.faces.partial.render=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.behavior.event=click&javax.faces.partial.event=click&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.encodedURL=https%3A%2F%2Fmonespace.grdf.fr%2Fweb%2Fguest%2Fmonespace%2Fparticulier%2Fconsommation%2Fconsommations%3Fp_p_id%3DeConsoconsoDetaille_WAR_eConsoportlet%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D5%26p_p_col_pos%3D3%26_eConsoconsoDetaille_WAR_eConsoportlet__jsfBridgeAjax%3Dtrue%26_eConsoconsoDetaille_WAR_eConsoportlet__facesViewIdResource%3D%252Fviews%252Fconso%252Fdetaille%252FconsoDetailleViewMode.xhtml&javax.faces.ViewState=".$jvws;
+$postfields = "javax.faces.partial.ajax=true&javax.faces.source=".$formId."&javax.faces.partial.execute=".$formId."&javax.faces.partial.render=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.behavior.event=click&javax.faces.partial.event=click&_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille=_eConsoconsoDetaille_WAR_eConsoportlet_%3AidFormConsoDetaille&javax.faces.encodedURL=https%3A%2F%2Fmonespace.grdf.fr%2Fweb%2Fguest%2Fmonespace%2Fparticulier%2Fconsommation%2Fconsommations%3Fp_p_id%3DeConsoconsoDetaille_WAR_eConsoportlet%26p_p_lifecycle%3D2%26p_p_state%3Dnormal%26p_p_mode%3Dview%26p_p_cacheability%3DcacheLevelPage%26p_p_col_id%3Dcolumn-3%26p_p_col_count%3D5%26p_p_col_pos%3D3%26_eConsoconsoDetaille_WAR_eConsoportlet__jsfBridgeAjax%3Dtrue%26_eConsoconsoDetaille_WAR_eConsoportlet__facesViewIdResource%3D%252Fviews%252Fconso%252Fdetaille%252FconsoDetailleViewMode.xhtml&javax.faces.ViewState=".$jvws;
     
      $curl = curl_init();
      curl_setopt_array($curl, array(
