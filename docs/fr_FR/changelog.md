@@ -1,6 +1,4 @@
-# Changelog GRDF Gazpar
-
-# Changelog plugin GRDF Gazpar
+# Changelog
 
 >**IMPORTANT**
 >
