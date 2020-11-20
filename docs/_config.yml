@@ -2,3 +2,4 @@ theme: jekyll-theme-minimal
 title: Jazpar - Jeedom plugin for GRDF Gazpar
 description: Jeedom plugin to retrieve gaz consumption from GRDF website
 show_downloads: true
+logo: /assets/images/logo.png
