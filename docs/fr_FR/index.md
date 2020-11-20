@@ -1,7 +1,5 @@
 # Plugin GRDF Gazpar
 
-[ChangeLog](./changelog.html).
-
 Plugin permettant la récupération des consommations du compteur communicant *Gazpar* par l'interrogation du compte-client *GRDF*. Les données n'étant pas mises à disposition en temps réel, le plugin récupère chaque jour les données de consommation de gaz de la veille. 
 
 2 types de données de consommation sont accessibles :
@@ -58,3 +56,6 @@ Ce pugin s'est inspiré des travaux suivants :
 
 -   Ce plugin ne prétend pas être exempt de bugs.
 -   Ce plugin vous est fourni sans aucune garantie. Bien aue peu probable, si il venait à corrompre votre installation Jeedom,l'auteur ne pourrait en être tenu pour responsable.
+
+# ChangeLog
+Disponible [ici](./changelog.html).
