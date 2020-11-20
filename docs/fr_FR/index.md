@@ -1,10 +1,12 @@
 # Plugin GRDF Gazpar
 
-Plugin permettant la récupération des consommations du compteur communicant *Gazpar* par l'interrogation du compte-client *GRDF*. Les données n'étant pas mises à disposition en temps réel, le plugin récupère chaque jour les données de consommation de gaz de la veille.
+[ChangeLog](./changelog.html).
+
+Plugin permettant la récupération des consommations du compteur communicant *Gazpar* par l'interrogation du compte-client *GRDF*. Les données n'étant pas mises à disposition en temps réel, le plugin récupère chaque jour les données de consommation de gaz de la veille. 
 
 2 types de données de consommation sont accessibles :
-- la **consommation journalière** *(en kWh)*.
-- la **consommation mensuelle** *(en kWh)*.
+- la **consommation journalière** *(en kWh et m3)*.
+- la **consommation mensuelle** *(en kWh et m3)*.
 
 >**Important**      
 >Il est nécessaire d'être en possession d'un compte-client GRDF. Le plugin récupère les informations à partir de la partie *mon espace* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">du site GRDF</a>, il faut donc vérifier que vous y avez bien accès avec vos identifiants habituels et que les données y sont visibles. Dans le cas contraire, le plugin ne fonctionnera pas.
