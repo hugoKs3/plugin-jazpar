@@ -7,14 +7,14 @@
     },
     "utilization": "Sur la page de l'équipement renseignez l'identifiant ainsi que le mot de passe de votre compte-client GRDF puis cliquez sur le bouton Sauvegarder.",
     "licence": "AGPL",
-    "author": "HugoKs3",
+    "author": "hugoKs3",
     "require": "4.0.61",
     "category": "energy",
     "hasDependency": false,
     "hasOwnDeamon": false,
     "maxDependancyInstallTime": 0,
-    "changelog": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/jazpar\/changelog",
-    "documentation": "https:\/\/doc.jeedom.com\/#language#\/plugins\/energy\/jazpar\/",
+    "changelog": "https:\/\/hugoks3.github.io/plugin-jazpar\/#language#\/changelog",
+    "documentation": "https:\/\/hugoks3.github.io/plugin-jazpar\/#language#\/",
     "language": [
         "fr_FR",
         "en_US"
