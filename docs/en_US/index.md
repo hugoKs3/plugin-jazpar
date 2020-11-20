@@ -3,8 +3,8 @@
 Plugin allowing the recovery of consumption of the communicating meter *Gazpar* by querying the customer account *GRDF*. As the data is not made available in real time, the plugin retrieves the gaz consumption data from the day before each day.
 
 2 types of consumption data are accessible :
-- the **daily consumption** *(in kWh)*.
-- the **monthly consumption** *(in kWh)*.
+- the **daily consumption** *(in kWh and m3)*.
+- the **monthly consumption** *(in kWh and m3)*.
 
 >**Important**      
 >You must have a GRDF customer account. The plugin retrieves information from the game *my space* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">of the GRDF website</a>, you must therefore check that you have access to it with your usual identifiers and that the data is visible there. Otherwise, the plugin will not work.
@@ -56,3 +56,6 @@ This plugin has been inspired by the work done by:
 
 -   This code does not pretend to be bug-free
 -   Although it should not harm your Jeedom system, it is provided without any warranty or liability
+
+# ChangeLog
+Available [here](./changelog.html).
