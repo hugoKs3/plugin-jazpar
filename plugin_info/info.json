@@ -8,7 +8,7 @@
     "utilization": "Sur la page de l'équipement renseignez l'identifiant ainsi que le mot de passe de votre compte-client GRDF puis cliquez sur le bouton Sauvegarder.",
     "licence": "AGPL",
     "author": "hugoKs3",
-    "require": "4.0.61",
+    "require": "3.3.39",
     "category": "energy",
     "hasDependency": false,
     "hasOwnDeamon": false,
