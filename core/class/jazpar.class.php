@@ -564,6 +564,29 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       }
 
     }
+    
+    public function toHtml($_version = 'dashboard') {
+      if ($this->getConfiguration('widgetTemplate') != 1)
+    	{
+    		return parent::toHtml($_version);
+    	}
+
+      $replace = $this->preToHtml($_version);
+      if (!is_array($replace)) {
+        return $replace;
+      }
+      $version = jeedom::versionAlias($_version);
+
+      foreach ($this->getCmd('info') as $cmd) {
+        $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+        $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
+        $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
+      }
+
+      $html = template_replace($replace, getTemplate('core', $version, 'jazpar.template', __CLASS__));
+      cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
+      return $html;
+    }
 
 }
 

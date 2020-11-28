@@ -27,6 +27,7 @@
         "Mot de passe GRDF": "GRDF password",
         "Forcer la répcupération des données": "Force data retrieval",
         "Cocher la case pour forcer la récupération des données même si déjà présentes": "Check this option to force data retrieval even if data already present for concerned periods",
+        "Cocher la case pour utiliser le template de widget aux couleurs du compteur Gazpar": "Check this option to use widget's template with Gazpar colors",
         "Id": "ID",
         "Nom": "Name",
         "Type": "Type",
