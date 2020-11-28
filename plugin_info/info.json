@@ -13,8 +13,8 @@
     "hasDependency": false,
     "hasOwnDeamon": false,
     "maxDependancyInstallTime": 0,
-    "changelog": "https:\/\/hugoks3.github.io/plugin-jazpar\/#language#\/changelog",
-    "documentation": "https:\/\/hugoks3.github.io/plugin-jazpar\/#language#\/",
+    "changelog": "https:\/\/hugoks3.github.io\/plugin-jazpar\/#language#\/changelog",
+    "documentation": "https:\/\/hugoks3.github.io\/plugin-jazpar\/#language#\/",
     "language": [
         "fr_FR",
         "en_US"
