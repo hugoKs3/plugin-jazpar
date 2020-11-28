@@ -26,7 +26,7 @@ Pour accéder aux différents équipements **GRDF Gazpar**, dirigez-vous vers le
 
 Sur la page de l'équipement, renseignez l'**identifiant** ainsi que le **mot de passe** de votre compte-client *GRDF* puis cliquez sur le bouton **Sauvegarder**.
 
-L'option **Forcer la répcupération des données** permet de récupérer les informations de consommation même si elles ont déjà été récupérées pour la période concernée.
+L'option **Forcer la récupération des données** permet de récupérer les informations de consommation même si elles ont déjà été récupérées pour la période concernée.
 
 Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et insérer en historique :
 - **consommation journalière** : les 10 derniers jours,
@@ -39,7 +39,7 @@ Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et
 
 Le site GRDF étant un peu "instable", il se peut que la récupération des données ne marche pas à chaque fois. Pas de panique, le plugin est configuré pour essayer toutes les heures.
 
-Le plugin se repose sur la manière dont le site GRDF est structuré. Tout changement sur le site entrainera vraissemblablement une erreur sur le plugin et nécessitera une adaptation de celui-ci plus ou moins difficile à faire.
+Le plugin se repose sur la manière dont le site GRDF est structuré. Tout changement sur le site entrainera vraisemblablement une erreur sur le plugin et nécessitera une adaptation de celui-ci plus ou moins difficile à faire.
 
 # Contributions
 
@@ -47,7 +47,7 @@ Ce plugin gratuit est ouvert à contributions (améliorations et/ou corrections)
 
 # Credits
 
-Ce pugin s'est inspiré des travaux suivants :
+Ce plugin s'est inspiré des travaux suivants :
 
 -   [Jeedom](https://github.com/jeedom) via leur plugin Enedis :  [plugin-enedis](https://github.com/jeedom/plugin-enedis)
 -   [empierre](https://github.com/empierre)  via son travail similaire pour Domoticz:  [domoticz_gaspar](https://github.com/empierre/domoticz_gaspar)
@@ -55,7 +55,7 @@ Ce pugin s'est inspiré des travaux suivants :
 # Disclaimer
 
 -   Ce plugin ne prétend pas être exempt de bugs.
--   Ce plugin vous est fourni sans aucune garantie. Bien aue peu probable, si il venait à corrompre votre installation Jeedom,l'auteur ne pourrait en être tenu pour responsable.
+-   Ce plugin vous est fourni sans aucune garantie. Bien que peu probable, si il venait à corrompre votre installation Jeedom,l'auteur ne pourrait en être tenu pour responsable.
 
 # ChangeLog
 Disponible [ici](./changelog.html).
