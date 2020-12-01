@@ -462,43 +462,48 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
    public function recordData($measures, $periods, $timeframe, $suffix) {
      
      foreach($periods as $key=>$period) {
-        $measure = $measures[$key];
-        switch($timeframe)
-        {
-            case 'jour':
-                $cmd = $this->getCmd(null, 'consod' . $suffix);
-                $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
-                if (is_bool($dt)) {
-                    return;
-                }
-                $dateReal = $dt->format('Y-m-d 23:55:00'); 
-                break;
-            case 'mois':
-                $cmd = $this->getCmd(null, 'consom' . $suffix);
-                $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
-                if (is_bool($dt)) {
-                    return;
-                }
-                if ($key == count($periods) - 1) {
-                    $dateReal = date('Y-m-d 23:55:00', strtotime('-1 day'));
-                    //$dateReal = $dt->format('Y-m-' . $dayNum . '23:55:00'); 
-                } else {
-                    $dateReal = $dt->format('Y-m-t 23:55:00'); 
-                }
-                break;
+        if (is_null($period) || $period == 'null') {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' NULL period, skipping');   
         }
-        $cmdId = $cmd->getId();
-        $cmdHistory = history::byCmdIdDatetime($cmdId, $dateReal);
-        if (is_object($cmdHistory) && $cmdHistory->getValue() == $measure) {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
-        }
-        else {      
-            if ($timeframe == 'mois') {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
-                history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
+        else {
+            $measure = $measures[$key];
+            switch($timeframe)
+            {
+                case 'jour':
+                    $cmd = $this->getCmd(null, 'consod' . $suffix);
+                    $dt = DateTime::createFromFormat('d/m/Y', str_replace("Le ", "", $period));
+                    if (is_bool($dt)) {
+                        return;
+                    }
+                    $dateReal = $dt->format('Y-m-d 23:55:00'); 
+                    break;
+                case 'mois':
+                    $cmd = $this->getCmd(null, 'consom' . $suffix);
+                    $dt = DateTime::createFromFormat('d/m/Y', "01/" . $period);
+                    if (is_bool($dt)) {
+                        return;
+                    }
+                    if ($key == count($periods) - 1) {
+                        $dateReal = date('Y-m-d 23:55:00', strtotime('-1 day'));
+                        //$dateReal = $dt->format('Y-m-' . $dayNum . '23:55:00'); 
+                    } else {
+                        $dateReal = $dt->format('Y-m-t 23:55:00'); 
+                    }
+                    break;
             }
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
-            $cmd->event($measure, $dateReal);
+            $cmdId = $cmd->getId();
+            $cmdHistory = history::byCmdIdDatetime($cmdId, $dateReal);
+            if (is_object($cmdHistory) && $cmdHistory->getValue() == $measure) {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
+            }
+            else {      
+                if ($timeframe == 'mois') {
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
+                    history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
+                }
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
+                $cmd->event($measure, $dateReal);
+            }
         }
      }
    }
