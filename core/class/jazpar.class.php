@@ -456,6 +456,74 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
        
      $this->recordData($measures, $periods, $resource_id, '3'); 
        
+    
+     log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données de comparaison');
+
+     $curl = curl_init();
+     curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://monespace.grdf.fr/monespace/particulier/consommation/comparaison",
+        CURLOPT_HEADER  => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => false,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+                "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36",
+                "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6",
+                "Accept-Encoding: gzip, deflate, br", 
+                "Accept: application/xml, application/json, text/javascript, */*; q=0.01",
+                "Faces-Request: partial/ajax",
+				"Host: monespace.grdf.fr",
+                "Origin: https://monespace.grdf.fr",
+                "Referer: https://monespace.grdf.fr/monespace/particulier/consommation/consommation",
+				"Sec-Fetch-Mode: cors",
+				"Sec-Fetch-Site: same-origin",
+                "X-Requested-With: XMLHttpRequest",
+                "Cookie: connectedLUser=0; COOKIE_SUPPORT=true; GUEST_LANGUAGE_ID=fr_FR; ROUTEID_EP=.1; JSESSIONID_EP=".$cookies[0]."; GRDF_EP=".$cookies[1]."; KPISavedRef=https://monespace.grdf.fr/monespace/connexion;")
+     ));
+     $response = curl_exec($curl);
+     curl_close($curl);
+     
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (comparison): ' . $response);
+     
+     preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
+     $dateDebutStr = $matches[1][0];
+     $dt = DateTime::createFromFormat('Y-m-d', $dateDebutStr);
+     preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
+     $averages = explode(",", $matches[1][0]);
+     preg_match_all('/^.*conso_haute:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data max : ' . $matches[1][0]);
+     $maximums = explode(",", $matches[1][0]);
+     preg_match_all('/^.*conso_basse:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
+     $minimums = explode(",", $matches[1][0]);
+       
+     $this->recordComparison($dt, $averages, $this->getCmd(null, 'localavg'));
+     $this->recordComparison($dt, $maximums, $this->getCmd(null, 'localmax'));
+     $this->recordComparison($dt, $minimums, $this->getCmd(null, 'localmin'));
+       
+   }
+   
+   public function recordComparison($startDate, $values, $cmdComp) {
+       $cmdId = $cmdComp->getId();
+       foreach ($values as $value) {
+           $period = $startDate->format('Y-m-t 23:55:00'); 
+           $cmdHistory = history::byCmdIdDatetime($cmdId, $period);
+            if (is_object($cmdHistory) && $cmdHistory->getValue() == $value) {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure de comparaison en historique - Aucune action : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
+            }
+            else {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
+                $cmd->event($value, $period);
+            }
+           $startDate->modify('+1 month');
+       }
    }
      
      
@@ -563,6 +631,55 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $cmd->setSubType('numeric');
         $cmd->save();
       }
+      
+        $cmd = $eqLogic->getCmd(null, 'localmax');
+        if ( ! is_object($cmd)) {
+            $cmd = new githubCmd();
+            $cmd->setName('Conso max locale');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('localmax');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $vmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $cmd = $eqLogic->getCmd(null, 'localmin');
+        if ( ! is_object($cmd)) {
+            $cmd = new githubCmd();
+            $cmd->setName('Conso min locale');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('localmin');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $vmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $cmd = $eqLogic->getCmd(null, 'localavg');
+        if ( ! is_object($cmd)) {
+            $cmd = new githubCmd();
+            $cmd->setName('Conso moyenne locale');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('localavg');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $vmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
 
 		  if ($this->getIsEnable() == 1) {
         $this->pullJazpar();
