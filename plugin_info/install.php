@@ -37,7 +37,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso max locale');
             $cmd->setEqLogic_id($eqLogic->getId());
             $cmd->setLogicalId('localmax');
@@ -53,7 +53,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         $cmd = $eqLogic->getCmd(null, 'localmin');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso min locale');
             $cmd->setEqLogic_id($eqLogic->getId());
             $cmd->setLogicalId('localmin');
@@ -69,7 +69,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         $cmd = $eqLogic->getCmd(null, 'localavg');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso moyenne locale');
             $cmd->setEqLogic_id($eqLogic->getId());
             $cmd->setLogicalId('localavg');
