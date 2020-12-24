@@ -634,7 +634,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso max locale');
             $cmd->setEqLogic_id($this->getId());
             $cmd->setLogicalId('localmax');
@@ -650,7 +650,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         }
         $cmd = $eqLogic->getCmd(null, 'localmin');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso min locale');
             $cmd->setEqLogic_id($this->getId());
             $cmd->setLogicalId('localmin');
@@ -666,7 +666,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         }
         $cmd = $eqLogic->getCmd(null, 'localavg');
         if ( ! is_object($cmd)) {
-            $cmd = new githubCmd();
+            $cmd = new jazparCmd();
             $cmd->setName('Conso moyenne locale');
             $cmd->setEqLogic_id($this->getId());
             $cmd->setLogicalId('localavg');
