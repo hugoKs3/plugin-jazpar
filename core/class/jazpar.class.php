@@ -520,7 +520,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             }
             else {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
-                $cmd->event($value, $period);
+                $cmdComp->event($value, $period);
             }
            $startDate->modify('+1 month');
        }
