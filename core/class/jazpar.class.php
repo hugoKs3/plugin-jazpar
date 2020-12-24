@@ -493,7 +493,6 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
      $dateDebutStr = $matches[1][0];
-     $dt = DateTime::createFromFormat('Y-m-d', $dateDebutStr);
      preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
      $averages = explode(",", $matches[1][0]);
@@ -504,17 +503,16 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
      $minimums = explode(",", $matches[1][0]);
        
-     $this->recordComparison($dt, $averages, $this->getCmd(null, 'localavg'));
-     $this->recordComparison($dt, $maximums, $this->getCmd(null, 'localmax'));
-     $this->recordComparison($dt, $minimums, $this->getCmd(null, 'localmin'));
+     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
+     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr);, $maximums, $this->getCmd(null, 'localmax'));
+     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr);, $minimums, $this->getCmd(null, 'localmin'));
        
    }
    
    public function recordComparison($startDate, $values, $cmdComp) {
        $cmdId = $cmdComp->getId();
-       $workingDate = clone $startDate;
        foreach ($values as $value) {
-           $period = $workingDate->format('Y-m-t 23:55:00'); 
+           $period = $startDate->format('Y-m-t 23:55:00'); 
            $cmdHistory = history::byCmdIdDatetime($cmdId, $period);
             if (is_object($cmdHistory) && $cmdHistory->getValue() == $value) {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure de comparaison en historique - Aucune action : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
@@ -523,7 +521,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
                 $cmdComp->event($value, $period);
             }
-           $workingDate->modify('+1 month');
+           $startDate->modify('+1 month');
        }
    }
      
