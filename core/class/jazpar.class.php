@@ -504,8 +504,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      $minimums = explode(",", $matches[1][0]);
        
      $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
-     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr);, $maximums, $this->getCmd(null, 'localmax'));
-     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr);, $minimums, $this->getCmd(null, 'localmin'));
+     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $maximums, $this->getCmd(null, 'localmax'));
+     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
        
    }
    
