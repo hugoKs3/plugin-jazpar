@@ -512,8 +512,9 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
    
    public function recordComparison($startDate, $values, $cmdComp) {
        $cmdId = $cmdComp->getId();
+       $workingDate = clone $startDate;
        foreach ($values as $value) {
-           $period = $startDate->format('Y-m-t 23:55:00'); 
+           $period = $workingDate->format('Y-m-t 23:55:00'); 
            $cmdHistory = history::byCmdIdDatetime($cmdId, $period);
             if (is_object($cmdHistory) && $cmdHistory->getValue() == $value) {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure de comparaison en historique - Aucune action : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
@@ -522,7 +523,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
                 $cmdComp->event($value, $period);
             }
-           $startDate->modify('+1 month');
+           $workingDate->modify('+1 month');
        }
    }
      
