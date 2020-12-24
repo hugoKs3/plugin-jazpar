@@ -641,7 +641,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setType('info');
             $cmd->setSubType('numeric');
             $cmd->setIsHistorized(1);
-            $vmd->setIsVisible(0);
+            $cmd->setIsVisible(0);
             $cmd->setTemplate('dashboard','tile');
             $cmd->setTemplate('mobile','tile');
             $cmd->setUnite('kWh');
@@ -657,7 +657,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setType('info');
             $cmd->setSubType('numeric');
             $cmd->setIsHistorized(1);
-            $vmd->setIsVisible(0);
+            $cmd->setIsVisible(0);
             $cmd->setTemplate('dashboard','tile');
             $cmd->setTemplate('mobile','tile');
             $cmd->setUnite('kWh');
@@ -673,7 +673,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setType('info');
             $cmd->setSubType('numeric');
             $cmd->setIsHistorized(1);
-            $vmd->setIsVisible(0);
+            $cmd->setIsVisible(0);
             $cmd->setTemplate('dashboard','tile');
             $cmd->setTemplate('mobile','tile');
             $cmd->setUnite('kWh');
