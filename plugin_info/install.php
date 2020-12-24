@@ -83,7 +83,9 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $eqLogic->save();
     }
+    
   }
 
 // Fonction exécutée automatiquement après la suppression du plugin

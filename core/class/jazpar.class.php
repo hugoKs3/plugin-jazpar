@@ -632,7 +632,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $cmd->save();
       }
       
-        $cmd = $eqLogic->getCmd(null, 'localmax');
+        $cmd = $this->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
             $cmd = new jazparCmd();
             $cmd->setName('Conso max locale');
@@ -648,7 +648,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
-        $cmd = $eqLogic->getCmd(null, 'localmin');
+        $cmd = $this->getCmd(null, 'localmin');
         if ( ! is_object($cmd)) {
             $cmd = new jazparCmd();
             $cmd->setName('Conso min locale');
@@ -664,7 +664,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
-        $cmd = $eqLogic->getCmd(null, 'localavg');
+        $cmd = $this->getCmd(null, 'localavg');
         if ( ! is_object($cmd)) {
             $cmd = new jazparCmd();
             $cmd->setName('Conso moyenne locale');
