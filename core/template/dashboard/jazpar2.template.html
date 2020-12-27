@@ -32,7 +32,7 @@
         <span class="switch">kWh/m3</span>
     </div>
 	<script>
-        var unit = "khw";
+        var unit = "kwh";
         setUnit(unit, false);
 		if ('#refresh_id#' != ''){
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
@@ -57,9 +57,9 @@
             var toUnset = "";
             if (theUnit == "m3") {
                 toSet = "m3";
-                toUnset = "khw";
+                toUnset = "kwh";
             } else {
-                toSet = "khw";
+                toSet = "kwh";
                 toUnset = "m3";
             }
             if (isSwitch) {
