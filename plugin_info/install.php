@@ -38,6 +38,8 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
+        $eqLogic->setDisplay('height','270px');
+        $eqLogic->setDisplay('width', '380px');
         
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
