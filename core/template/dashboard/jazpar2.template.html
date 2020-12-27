@@ -33,7 +33,7 @@
     </div>
 	<script>
         var unit = "khw";
-        switchUnit(unit);
+        setUnit(unit, false);
 		if ('#refresh_id#' != ''){
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
 				jeedom.cmd.execute({id: '#refresh_id#'});
@@ -42,7 +42,7 @@
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
 		}
         $('.eqLogic[data-eqLogic_uid=#uid#] .switch').on('click', function () {
-            switchUnit(unit);
+            setUnit(unit, true);
         });
         var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
         var eqlogic_width = eqLogic.width();
@@ -52,16 +52,24 @@
         eqLogic.find('.jazparValue').css('font-size', (LinkyScreen_width*0.12)+'px');
         eqLogic.find('.jazparUnite').css('font-size', (LinkyScreen_width*0.08)+'px');
         
-        function switchUnit(myCurrentUnit) {
-            if (myCurrentUnit == "m3") {
-                $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').show();
-                $('.eqLogic[data-eqLogic_uid=#uid#] .m3').hide();
-                unit = "kwh";
+        function setUnit(theUnit, isSwitch) {
+            var toSet = "";
+            var toUnset = "";
+            if (theUnit == "m3") {
+                toSet = "m3";
+                toUnset = "khw";
             } else {
-                $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').hide();
-                $('.eqLogic[data-eqLogic_uid=#uid#] .m3').show();
-                unit = "m3";
+                toSet = "khw";
+                toUnset = "m3";
             }
+            if (isSwitch) {
+                var temp = toSet;
+                toSet = toUnset;
+                toUnset = temp;
+            }
+            $('.eqLogic[data-eqLogic_uid=#uid#] .' + toSet).show();
+            $('.eqLogic[data-eqLogic_uid=#uid#] .' + toUnset).hide();
+            unit = toSet;
         }
     </script> 
  </div>
