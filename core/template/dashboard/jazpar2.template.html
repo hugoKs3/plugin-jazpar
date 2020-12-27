@@ -11,25 +11,25 @@
 		<a href="#eqLink#" class="reportModeHidden">#name_display# <span class="object_name">#object_name#</span></a>
 	</center>
       <div class="jazpar_template text-center">
-           <div class="history cursor" data-cmd_id="#consom_id#" title="#consom_collect#" style="padding-top:25%;">
+           <div class="history cursor kwh" data-cmd_id="#consom_id#" title="#consom_collect#" style="padding-top:25%;">
                 <div class="jazparCdc">MOIS EN COURS</div>
                 <div class="jazparValueUnite"><span class="jazparValue">#consom#</span><span class="jazparUnite"> kWh</span></div>
            </div>
-           <div class="history cursor" data-cmd_id="#consom3_id#" title="#consom3_collect#" style="display: none;">
+           <div class="history cursor m3" data-cmd_id="#consom3_id#" title="#consom3_collect#" style="display: none;">
               <div class="jazparCdc">MOIS EN COURS</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consom3#</span><span class="jazparUnite"> m3</span></div>
           </div>
-          <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#">
+          <div class="history cursor kwh" data-cmd_id="#consod_id#" title="#consod_collect#">
               <div class="jazparCdc">VEILLE</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consod#</span><span class="jazparUnite" > kWh</span></div>
           </div>
-          <div class="history cursor" data-cmd_id="#consod3_id#" title="#consod3_collect#" style="display: none;">
+          <div class="history cursor m3" data-cmd_id="#consod3_id#" title="#consod3_collect#" style="display: none;">
               <div class="jazparCdc">VEILLE</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consod3#</span><span class="jazparUnite"> m3</span></div>
           </div>
      </div>
      <div>
-        
+        <span class="switch">kWh/m3</span>
     </div>
 	<script>
 		if ('#refresh_id#' != ''){
@@ -39,6 +39,10 @@
 		}else{
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
 		}
+        $('.eqLogic[data-eqLogic_uid=#uid#] .switch').on('click', function () {
+            $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').hide();
+            $('.eqLogic[data-eqLogic_uid=#uid#] .m3').show();
+        });
         var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
         var eqlogic_width = eqLogic.width();
         var LinkyScreen_width = eqLogic.find('.jazpar_template').width();
