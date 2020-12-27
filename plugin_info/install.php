@@ -35,6 +35,10 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       config::save('cronMinute', $randMinute, 'jazpar');
     }
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
+        if (empty($eqLogic->getConfiguration('defaultUnit'))) {
+            $eqLogic->setConfiguration('defaultUnit', 'kwh');
+        }
+        
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
             $cmd = new jazparCmd();

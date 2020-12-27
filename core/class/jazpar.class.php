@@ -582,6 +582,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $this->setDisplay('height','332px');
       $this->setDisplay('width', '192px');
       $this->setConfiguration('forceRefresh', 0);
+      $this->setConfiguration('defaultUnit', 'kwh');
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -700,6 +701,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
       }
+      $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
 
       $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);

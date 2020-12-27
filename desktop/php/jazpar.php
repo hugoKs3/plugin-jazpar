@@ -119,6 +119,13 @@ foreach (jeeObject::all() as $object) {
 		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate"/>
  	 </div>
 	</div>
+ <div class="form-group">
+	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut dans le widget}}">{{Unité préférée}}</label>
+	 <div class="col-sm-3">
+         <label class="checkbox-inline"><input type="radio" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit" value="kwh"/>kWh</label>
+         <label class="checkbox-inline"><input type="radio" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit" value="m3"/>m3</label>
+ 	 </div>
+	</div>
 </fieldset>
 </form>
 </div>
