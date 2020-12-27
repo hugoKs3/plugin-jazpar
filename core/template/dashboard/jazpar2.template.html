@@ -15,7 +15,7 @@
                 <div class="jazparCdc">MOIS EN COURS</div>
                 <div class="jazparValueUnite"><span class="jazparValue">#consom#</span><span class="jazparUnite"> kWh</span></div>
            </div>
-           <div class="history cursor m3" data-cmd_id="#consom3_id#" title="#consom3_collect#" style="display: none;">
+           <div class="history cursor m3" data-cmd_id="#consom3_id#" title="#consom3_collect#" style="display: none; padding-top:25%;">
               <div class="jazparCdc">MOIS EN COURS</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consom3#</span><span class="jazparUnite"> m3</span></div>
           </div>
@@ -29,10 +29,11 @@
           </div>
      </div>
      <div>
-         gfdigfdi gofi gfod giofd gifod gfd
         <span class="switch">kWh/m3</span>
     </div>
 	<script>
+        var unit = "khw";
+        switchUnit(unit);
 		if ('#refresh_id#' != ''){
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
 				jeedom.cmd.execute({id: '#refresh_id#'});
@@ -41,8 +42,7 @@
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').remove();
 		}
         $('.eqLogic[data-eqLogic_uid=#uid#] .switch').on('click', function () {
-            $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').hide();
-            $('.eqLogic[data-eqLogic_uid=#uid#] .m3').show();
+            switchUnit(unit);
         });
         var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
         var eqlogic_width = eqLogic.width();
@@ -51,6 +51,18 @@
         eqLogic.find('.jazparCdc').css('font-size', (LinkyScreen_width*0.10)+'px');
         eqLogic.find('.jazparValue').css('font-size', (LinkyScreen_width*0.12)+'px');
         eqLogic.find('.jazparUnite').css('font-size', (LinkyScreen_width*0.08)+'px');
+        
+        function switchUnit(var myCurrentUnit) {
+            if (myCurrentUnit == "m3") {
+                $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').show();
+                $('.eqLogic[data-eqLogic_uid=#uid#] .m3').hide();
+                unit = "kwh";
+            } else {
+                $('.eqLogic[data-eqLogic_uid=#uid#] .kwh').hide();
+                $('.eqLogic[data-eqLogic_uid=#uid#] .m3').show();
+                unit = "m3";
+            }
+        }
     </script> 
  </div>
 
