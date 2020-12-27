@@ -1,5 +1,5 @@
 <div class="eqLogic eqLogic-widget allowResize #eqType#" style="width: #width#;height: #height#;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-eqType="#eqType#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" >
-    <link rel="stylesheet" href="plugins/jazpar/data/css/jazpar.template.css"/>
+    <link rel="stylesheet" href="plugins/jazpar/data/css/jazpar2.template.css"/>
 	<center class="widget-name">
 		<span class="warning" title="#alert_name#">
 			<i class='#alert_icon#'></i>
@@ -15,19 +15,22 @@
                 <div class="jazparCdc">MOIS EN COURS</div>
                 <div class="jazparValueUnite"><span class="jazparValue">#consom#</span><span class="jazparUnite"> kWh</span></div>
            </div>
-           <div class="history cursor" data-cmd_id="#consom3_id#" title="#consom3_collect#">
+           <div class="history cursor" data-cmd_id="#consom3_id#" title="#consom3_collect#" style="display: none;">
               <div class="jazparCdc">MOIS EN COURS</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consom3#</span><span class="jazparUnite"> m3</span></div>
           </div>
-          <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#">
+          <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#" style="display: none;">
               <div class="jazparCdc">VEILLE</div>
-              <div class="jazparValueUnite"><span class="jazparValue">#consod#</span><span class="jazparUnite"> kWh</span></div>
+              <div class="jazparValueUnite"><span class="jazparValue">#consod#</span><span class="jazparUnite" > kWh</span></div>
           </div>
           <div class="history cursor" data-cmd_id="#consod3_id#" title="#consod3_collect#">
               <div class="jazparCdc">VEILLE</div>
               <div class="jazparValueUnite"><span class="jazparValue">#consod3#</span><span class="jazparUnite"> m3</span></div>
           </div>
      </div>
+     <div>
+        
+    </div>
 	<script>
 		if ('#refresh_id#' != ''){
 			$('.eqLogic[data-eqLogic_uid=#uid#] .refresh').on('click', function () {
