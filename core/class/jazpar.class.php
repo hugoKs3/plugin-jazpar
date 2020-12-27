@@ -455,57 +455,59 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
      $periods = explode(",", $matches[1][0]);
        
      $this->recordData($measures, $periods, $resource_id, '3'); 
-       
-    
-     log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données de comparaison');
+     
+     if ($resource_id == 'mois') {
+         
+         log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des données de comparaison');
 
-     $curl = curl_init();
-     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://monespace.grdf.fr/monespace/particulier/consommation/comparaison",
-        CURLOPT_HEADER  => true,
-        CURLOPT_SSL_VERIFYPEER => false,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => "",
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => false,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-                "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36",
-                "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6",
-                "Accept-Encoding: gzip, deflate, br", 
-                "Accept: application/xml, application/json, text/javascript, */*; q=0.01",
-                "Faces-Request: partial/ajax",
-				"Host: monespace.grdf.fr",
-                "Origin: https://monespace.grdf.fr",
-                "Referer: https://monespace.grdf.fr/monespace/particulier/consommation/consommation",
-				"Sec-Fetch-Mode: cors",
-				"Sec-Fetch-Site: same-origin",
-                "X-Requested-With: XMLHttpRequest",
-                "Cookie: connectedLUser=0; COOKIE_SUPPORT=true; GUEST_LANGUAGE_ID=fr_FR; ROUTEID_EP=.1; JSESSIONID_EP=".$cookies[0]."; GRDF_EP=".$cookies[1]."; KPISavedRef=https://monespace.grdf.fr/monespace/connexion;")
-     ));
-     $response = curl_exec($curl);
-     curl_close($curl);
-     
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (comparison): ' . $response);
-     
-     preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
-     $dateDebutStr = $matches[1][0];
-     preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
-     $averages = explode(",", $matches[1][0]);
-     preg_match_all('/^.*conso_haute:parseData\(\"(.*?)\".*?/mi', $response, $matches);
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data max : ' . $matches[1][0]);
-     $maximums = explode(",", $matches[1][0]);
-     preg_match_all('/^.*conso_basse:parseData\(\"(.*?)\".*?/mi', $response, $matches);
-     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
-     $minimums = explode(",", $matches[1][0]);
-       
-     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
-     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $maximums, $this->getCmd(null, 'localmax'));
-     $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
+         $curl = curl_init();
+         curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://monespace.grdf.fr/monespace/particulier/consommation/comparaison",
+            CURLOPT_HEADER  => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                    "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36",
+                    "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6",
+                    "Accept-Encoding: gzip, deflate, br", 
+                    "Accept: application/xml, application/json, text/javascript, */*; q=0.01",
+                    "Faces-Request: partial/ajax",
+                    "Host: monespace.grdf.fr",
+                    "Origin: https://monespace.grdf.fr",
+                    "Referer: https://monespace.grdf.fr/monespace/particulier/consommation/consommation",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "X-Requested-With: XMLHttpRequest",
+                    "Cookie: connectedLUser=0; COOKIE_SUPPORT=true; GUEST_LANGUAGE_ID=fr_FR; ROUTEID_EP=.1; JSESSIONID_EP=".$cookies[0]."; GRDF_EP=".$cookies[1]."; KPISavedRef=https://monespace.grdf.fr/monespace/connexion;")
+         ));
+         $response = curl_exec($curl);
+         curl_close($curl);
+
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (comparison): ' . $response);
+
+         preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
+         $dateDebutStr = $matches[1][0];
+         preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
+         $averages = explode(",", $matches[1][0]);
+         preg_match_all('/^.*conso_haute:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data max : ' . $matches[1][0]);
+         $maximums = explode(",", $matches[1][0]);
+         preg_match_all('/^.*conso_basse:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
+         $minimums = explode(",", $matches[1][0]);
+
+         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
+         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $maximums, $this->getCmd(null, 'localmax'));
+         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
+     }
        
    }
    
@@ -679,11 +681,6 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
-
-		  if ($this->getIsEnable() == 1) {
-        $this->pullJazpar();
-      }
-
     }
     
     public function toHtml($_version = 'dashboard') {
@@ -704,7 +701,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
       }
 
-      $html = template_replace($replace, getTemplate('core', $version, 'jazpar.template', __CLASS__));
+      $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
       return $html;
     }
