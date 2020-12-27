@@ -1,0 +1,33 @@
+@font-face {
+	font-family: "Digital-7";
+	src:  url("../fonts/digital-7.ttf") format("truetype");
+}
+.jazparEqlogicName {
+	font-family:"Comic Sans MS", "Comic Sans", cursive;
+	text-shadow: 1px -1px 1px rgba(0,0,0,0.4), -1px 1px 0 rgba(255,255,255,0.6);
+	color:#FF9849!important;
+}
+.jazpar_template {
+	height:100%;
+	background-image:url("../images/GazparScreen_small.png");
+	background-size: 90%;
+	background-repeat: no-repeat;
+	background-position: center 0%;
+	font-family: "Digital-7";
+	color: black!important;
+	letter-spacing: 1px;
+}
+.jazpar_template div.jazparCdc{
+	color:#505050;
+	line-height:1;
+	margin-top:2%;
+}
+.jazpar_template div.jazparUnite{
+	color:#505050;
+}
+.jazparValue {
+	font-weight:bold;
+}
+.jazparValueUnite {
+	line-height:1;
+}
