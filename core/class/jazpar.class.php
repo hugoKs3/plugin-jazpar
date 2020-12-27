@@ -580,7 +580,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
  // Fonction exécutée automatiquement avant la création de l'équipement
     public function preInsert() {
       $this->setDisplay('height','270px');
-      $this->setDisplay('width', '380px');
+      $this->setDisplay('width', '392px');
       $this->setConfiguration('forceRefresh', 0);
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setCategory('energy', 1);
