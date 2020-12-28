@@ -17,6 +17,12 @@
 	color: black!important;
 	letter-spacing: 1px;
 }
+.compare_div {
+	background-image:url("../images/compare_bkg.png");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center 0%;
+}
 .jazpar_template div.jazparCdc{
 	color:#505050;
 	line-height:1;
