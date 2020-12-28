@@ -18,6 +18,7 @@
 	letter-spacing: 1px;
 }
 .compare_div {
+    float: left;
 	background-image:url("../images/compare_bkg.png");
 	background-size: 100%;
 	background-repeat: no-repeat;
