@@ -1,4 +1,4 @@
-<div class="eqLogic eqLogic-widget #eqType#" style="width: 392px;height: 300px;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-eqType="#eqType#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" >
+<div class="eqLogic eqLogic-widget #eqType#" style="width: 392px;height: 290px;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-eqType="#eqType#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" >
     <link rel="stylesheet" href="plugins/jazpar/data/css/jazpar2.template.css"/>
 	<center class="widget-name">
 		<span class="warning" title="#alert_name#">
@@ -10,7 +10,7 @@
 		<span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
 		<a href="#eqLink#" class="reportModeHidden">#name_display# <span class="object_name">#object_name#</span></a>
 	</center>
-    <div style="width: 192px; margin: 0">
+    <div style="width: 192px; display:inline-block;">
       <div class="jazpar_template text-center">
            <div class="history cursor kwh" data-cmd_id="#consom_id#" title="#consom_collect#" style="padding-top:25%;">
                 <div class="jazparCdc">MOIS EN COURS</div>
@@ -36,7 +36,14 @@
         </center>
     </div>
     </div>
-    <div class="compare_div" style="width: 192px">fd</div>
+    <div stye="width: 192px; float: right;">
+        <div>
+            <center>
+                <span>Compairson du mois dernier</span>
+            </center>
+        </div>
+        <div class="compare_div">fd</div>
+    </div>
 	<script>
         var unit = "#default_unit#";
         setUnit(unit, false);
