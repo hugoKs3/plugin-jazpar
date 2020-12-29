@@ -708,23 +708,47 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
     
       $cmd = $this->getCmd(null, 'localavg');
+      $min, $max, $avg = 0;
       $month = "?";
       $value = "?";
+      $padding = 45;
       if (is_object($cmd)) {
-        $cmd->execCmd();
+        $avg = $cmd->execCmd();
         $dateCompare = $cmd->getCollectDate();
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' $dateCompare : '.$dateCompare);
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' strtotime($dateCompare) : '.strtotime($dateCompare));
         $month = strftime("%b", strtotime($dateCompare));
         $cmdMonth =  $this->getCmd(null, 'consom');
         $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
         if (is_object($cmdHistory)) {
-            $value = $cmdHistory->getValue();
+            $value = round($cmdHistory->getValue(), 0);
+            $cmd = $this->getCmd(null, 'localmin');
+            if (is_object($cmd)) {
+                $min = $cmd->execCmd();
+            }
+            $cmd = $this->getCmd(null, 'localmax');
+            if (is_object($cmd)) {
+                $max = $cmd->execCmd();
+            }
+            if ($value == $avg) {
+                $padding = 45;
+            }
+            if ($value > $avg) {
+                $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
+            }
+            if ($value < $avg) {
+                $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
+            }
+            if ($padding > 90) {
+               $padding = 90;
+            }
+            if ($padding < 0) {
+               $padding = 0;
+            }
         }
       }
       
       $replace['#past_month#'] = $month;
       $replace['#past_month_conso#'] = $value;
+      $replace['#padding_compare#'] = $padding;
 
       $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
