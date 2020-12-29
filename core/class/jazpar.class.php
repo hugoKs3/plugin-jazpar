@@ -698,10 +698,30 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
-        $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
+        $value = $cmd->execCmd();
+        if (strpos($cmd->getLogicalId(), "local") == 0) {
+            $value = round($value, 0);
+        }
+        $replace['#' . $cmd->getLogicalId() . '#'] = $value;
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
       }
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
+    
+      $cmd = $this->getCmd(null, 'localavg');
+      $month = "?";
+      $value = "?";
+      if (is_object($cmd)) {
+        $dateCompare = $cmd->getCollectDate();
+        $month = strftime("%b", strtotime($dateCompare));
+        $cmdMonth =  $this->getCmd(null, 'consom');
+        $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
+        if (is_object($cmdHistory)) {
+            $value = $cmdHistory->getValue();
+        }
+      }
+      
+      $replace['#past_month#'] = $month;
+      $replace['#past_month_conso#'] = $value;
 
       $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
