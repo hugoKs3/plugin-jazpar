@@ -712,6 +712,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $value = "?";
       if (is_object($cmd)) {
         $dateCompare = $cmd->getCollectDate();
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' $dateCompare : '.$dateCompare);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' strtotime($dateCompare) : '.strtotime($dateCompare));
         $month = strftime("%b", strtotime($dateCompare));
         $cmdMonth =  $this->getCmd(null, 'consom');
         $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), strtotime($dateCompare));
