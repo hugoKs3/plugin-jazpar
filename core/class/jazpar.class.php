@@ -753,7 +753,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       
       $replace['#past_month#'] = $month;
       $replace['#past_month_conso#'] = $value;
-      $replace['#padding_compare#'] = $padding;
+      $replace['#cursor_compare#'] = $padding;
 
       $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
