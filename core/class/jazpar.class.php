@@ -730,6 +730,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             if (is_object($cmd)) {
                 $max = round($cmd->execCmd(), 0);
             }
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' values : '.$min.' '.$max.' '.$avg);
             if ($value == $avg) {
                 $padding = 45;
             }
@@ -739,6 +740,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             if ($value < $avg) {
                 $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
             }
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' padding : '.$padding);
             if ($padding > 90) {
                $padding = 90;
             }
