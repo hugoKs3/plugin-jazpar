@@ -715,7 +715,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $value = "?";
       $padding = 45;
       if (is_object($cmd)) {
-        $avg = $cmd->execCmd();
+        $avg = round($cmd->execCmd(), 0);
         $dateCompare = $cmd->getCollectDate();
         $month = strftime("%b", strtotime($dateCompare));
         $cmdMonth =  $this->getCmd(null, 'consom');
@@ -724,11 +724,11 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $value = round($cmdHistory->getValue(), 0);
             $cmd = $this->getCmd(null, 'localmin');
             if (is_object($cmd)) {
-                $min = $cmd->execCmd();
+                $min = round($cmd->execCmd(), 0);
             }
             $cmd = $this->getCmd(null, 'localmax');
             if (is_object($cmd)) {
-                $max = $cmd->execCmd();
+                $max = round($cmd->execCmd(), 0);
             }
             if ($value == $avg) {
                 $padding = 45;
