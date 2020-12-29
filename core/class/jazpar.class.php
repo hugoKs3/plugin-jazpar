@@ -747,6 +747,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             if ($padding < 0) {
                $padding = 0;
             }
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' padding 2 : '.$padding);
         }
       }
       
