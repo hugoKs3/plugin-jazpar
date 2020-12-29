@@ -708,7 +708,9 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
     
       $cmd = $this->getCmd(null, 'localavg');
-      $min, $max, $avg = 0;
+      $min = 1;
+      $max = 1;
+      $avg = 1;
       $month = "?";
       $value = "?";
       $padding = 45;
