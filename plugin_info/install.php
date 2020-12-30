@@ -29,7 +29,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
   function jazpar_update() {
-    log::add('jazpar', 'info', '0');
     $cronMinute = config::byKey('cronMinute', 'jazpar');
     if (empty($cronMinute)) {
       $randMinute = rand(3, 59);
