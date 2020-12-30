@@ -41,11 +41,11 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
         log::add('jazpar', 'info', $eqLogic->getConfiguration('widgetTemplate'));
-        if ($eqLogic->getConfiguration('widgetTemplate') == 1) {
+        if ($eqLogic->getConfiguration('widgetTemplate') === 1) {
             log::add('jazpar', 'info', '3');
             $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
         }
-        if ($eqLogic->getConfiguration('widgetTemplate') == 0) {
+        if ($eqLogic->getConfiguration('widgetTemplate') === 0) {
             log::add('jazpar', 'info', '4');
             $eqLogic->setConfiguration('widgetTemplate', 'none');
         }
