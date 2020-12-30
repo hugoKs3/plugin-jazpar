@@ -40,14 +40,17 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             log::add('jazpar', 'info', '2');
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
-        log::add('jazpar', 'info', $eqLogic->getConfiguration('widgetTemplate'));
-        if ($eqLogic->getConfiguration('widgetTemplate') === 1) {
+        
+        $template = $eqLogic->getConfiguration('widgetTemplate');
+        log::add('jazpar', 'info', $template);
+        if (is_int($template)) {
             log::add('jazpar', 'info', '3');
-            $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
-        }
-        if ($eqLogic->getConfiguration('widgetTemplate') === 0) {
-            log::add('jazpar', 'info', '4');
-            $eqLogic->setConfiguration('widgetTemplate', 'none');
+            if ($template == 1) {
+                log::add('jazpar', 'info', '4');
+                $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
+            } else {
+                $eqLogic->setConfiguration('widgetTemplate', 'none');
+            }                
         }
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
