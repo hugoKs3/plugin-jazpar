@@ -35,18 +35,14 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       config::save('cronMinute', $randMinute, 'jazpar');
     }
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
-        log::add('jazpar', 'info', '1');
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
-            log::add('jazpar', 'info', '2');
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
-        log::add('jazpar', 'info', $template);
+        log::add('jazpar', 'info', 'update template : ' . $template);
         if (is_int($template)) {
-            log::add('jazpar', 'info', '3');
             if ($template == 1) {
-                log::add('jazpar', 'info', '4');
                 $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
             } else {
                 $eqLogic->setConfiguration('widgetTemplate', 'none');
@@ -54,7 +50,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
-            log::add('jazpar', 'info', '5');
             $cmd = new jazparCmd();
             $cmd->setName('Conso max locale');
             $cmd->setEqLogic_id($eqLogic->getId());
@@ -71,7 +66,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         $cmd = $eqLogic->getCmd(null, 'localmin');
         if ( ! is_object($cmd)) {
-            log::add('jazpar', 'info', '6');
             $cmd = new jazparCmd();
             $cmd->setName('Conso min locale');
             $cmd->setEqLogic_id($eqLogic->getId());
@@ -88,7 +82,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         $cmd = $eqLogic->getCmd(null, 'localavg');
         if ( ! is_object($cmd)) {
-            log::add('jazpar', 'info', '7');
             $cmd = new jazparCmd();
             $cmd->setName('Conso moyenne locale');
             $cmd->setEqLogic_id($eqLogic->getId());
@@ -103,7 +96,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
-        log::add('jazpar', 'info', '8');
         $eqLogic->save();
     }
     
