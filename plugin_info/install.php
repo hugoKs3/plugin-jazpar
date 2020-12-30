@@ -40,6 +40,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             log::add('jazpar', 'info', '2');
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
+        log::add('jazpar', 'info', $eqLogic->getConfiguration('widgetTemplate'));
         if ($eqLogic->getConfiguration('widgetTemplate') == 1) {
             log::add('jazpar', 'info', '3');
             $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
