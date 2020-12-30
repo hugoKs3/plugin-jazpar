@@ -29,7 +29,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
   function jazpar_update() {
-      log::add('jazpar', 'info', '0');
+    log::add('jazpar', 'info', '0');
     $cronMinute = config::byKey('cronMinute', 'jazpar');
     if (empty($cronMinute)) {
       $randMinute = rand(3, 59);
@@ -41,16 +41,14 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             log::add('jazpar', 'info', '2');
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
-        if ($eqLogic->getConfiguration('widgetTemplate') == 1)) {
+        if ($eqLogic->getConfiguration('widgetTemplate') == 1) {
             log::add('jazpar', 'info', '3');
             $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
         }
-        if ($eqLogic->getConfiguration('widgetTemplate') == 0)) {
+        if ($eqLogic->getConfiguration('widgetTemplate') == 0) {
             log::add('jazpar', 'info', '4');
             $eqLogic->setConfiguration('widgetTemplate', 'none');
         }
-        $eqLogic->setDisplay('height','332px');
-        $eqLogic->setDisplay('width', '192px');
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {
             log::add('jazpar', 'info', '5');
