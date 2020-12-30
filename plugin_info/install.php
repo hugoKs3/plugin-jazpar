@@ -38,8 +38,12 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
-        $eqLogic->setDisplay('height','270px');
-        $eqLogic->setDisplay('width', '392px');
+        if ($eqLogic->getConfiguration('widgetTemplate') == 1)) {
+            $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
+        }
+        if ($eqLogic->getConfiguration('widgetTemplate') == 0)) {
+            $eqLogic->setConfiguration('widgetTemplate', 'none');
+        }
         
         $cmd = $eqLogic->getCmd(null, 'localmax');
         if ( ! is_object($cmd)) {

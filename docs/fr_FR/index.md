@@ -30,10 +30,10 @@ L'option **Forcer la récupération des données** permet de récupérer les inf
 
 Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et insérer en historique :
 - **consommation journalière** : les 10 derniers jours,
-- **consommation mensuelle** : les 12 derniers mois.
+- **consommation mensuelle** : les 12 derniers mois,
+- **consommation mensuelles maximum, minimum et médiane des foyers similaires**
 
->**Astuce**     
->En version desktop, les informations affichées sur le widget s'adaptent en taille lors du redimensionnement de la tuile.
+Deux templates de widget sont disponibles. Celui avec comparaison vous informe comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
 
 # Remarques
 

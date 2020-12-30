@@ -579,10 +579,11 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
  // Fonction exécutée automatiquement avant la création de l'équipement
     public function preInsert() {
-      $this->setDisplay('height','270px');
-      $this->setDisplay('width', '392px');
+      $this->setDisplay('height','332px');
+      $this->setDisplay('width', '192px');
       $this->setConfiguration('forceRefresh', 0);
       $this->setConfiguration('defaultUnit', 'kwh');
+      $this->setConfiguration('widgetTemplate', 'jazpar2');
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -685,7 +686,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
     }
     
     public function toHtml($_version = 'dashboard') {
-      if ($this->getConfiguration('widgetTemplate') != 1)
+      $template = $this->getConfiguration('widgetTemplate');
+      if ($template == "none")
     	{
     		return parent::toHtml($_version);
     	}
@@ -706,56 +708,57 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
       }
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
-    
-      $cmd = $this->getCmd(null, 'localavg');
-      $min = 1;
-      $max = 1;
-      $avg = 1;
-      $month = "?";
-      $value = "?";
-      $padding = 45;
-      if (is_object($cmd)) {
-        $avg = round($cmd->execCmd(), 0);
-        $dateCompare = $cmd->getCollectDate();
-        $month = strftime("%b", strtotime($dateCompare));
-        $cmdMonth =  $this->getCmd(null, 'consom');
-        $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
-        if (is_object($cmdHistory)) {
-            $value = round($cmdHistory->getValue(), 0);
-            $cmd = $this->getCmd(null, 'localmin');
-            if (is_object($cmd)) {
-                $min = round($cmd->execCmd(), 0);
-            }
-            $cmd = $this->getCmd(null, 'localmax');
-            if (is_object($cmd)) {
-                $max = round($cmd->execCmd(), 0);
-            }
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' values : '.$min.' '.$max.' '.$avg);
-            if ($value == $avg) {
-                $padding = 45;
-            }
-            if ($value > $avg) {
-                $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
-            }
-            if ($value < $avg) {
-                $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
-            }
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' padding : '.$padding);
-            if ($padding > 90) {
-               $padding = 90;
-            }
-            if ($padding < 0) {
-               $padding = 0;
-            }
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' padding 2 : '.$padding);
-        }
-      }
       
-      $replace['#past_month#'] = $month;
-      $replace['#past_month_conso#'] = $value;
-      $replace['#cursor_compare#'] = $padding;
+      if ($template == "jazpar2") {
+          $cmd = $this->getCmd(null, 'localavg');
+          $min = 1;
+          $max = 1;
+          $avg = 1;
+          $month = "?";
+          $value = "?";
+          $padding = 45;
+          if (is_object($cmd)) {
+            $avg = round($cmd->execCmd(), 0);
+            $dateCompare = $cmd->getCollectDate();
+            $month = strftime("%B %Y", strtotime($dateCompare));
+            $cmdMonth =  $this->getCmd(null, 'consom');
+            $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
+            if (is_object($cmdHistory)) {
+                $value = round($cmdHistory->getValue(), 0);
+                $cmd = $this->getCmd(null, 'localmin');
+                if (is_object($cmd)) {
+                    $min = round($cmd->execCmd(), 0);
+                }
+                $cmd = $this->getCmd(null, 'localmax');
+                if (is_object($cmd)) {
+                    $max = round($cmd->execCmd(), 0);
+                }
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
+                if ($value == $avg) {
+                    $padding = 45;
+                }
+                if ($value > $avg) {
+                    $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
+                }
+                if ($value < $avg) {
+                    $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
+                }
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+                if ($padding > 90) {
+                   $padding = 90;
+                }
+                if ($padding < 0) {
+                   $padding = 0;
+                }
+            }
+          }
 
-      $html = template_replace($replace, getTemplate('core', $version, 'jazpar2.template', __CLASS__));
+          $replace['#past_month#'] = $month;
+          $replace['#past_month_conso#'] = $value;
+          $replace['#cursor_compare#'] = $padding;
+      }
+
+      $html = template_replace($replace, getTemplate('core', $version, $template.'.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
       return $html;
     }

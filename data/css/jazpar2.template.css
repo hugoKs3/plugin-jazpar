@@ -17,7 +17,7 @@
 	color: black!important;
 	letter-spacing: 1px;
 }
-.compare_div {
+.jazpar_compare_div {
     height:100%;
 	background-image:url("../images/compare_bkg.png");
 	background-size: 78%;
@@ -37,4 +37,19 @@
 }
 .jazparValueUnite {
 	line-height:1;
+}
+.jazpar_localmax {
+    height:33%; 
+    padding-top:0%; 
+    padding-left:40%;
+}
+.jazpar_localavg {
+    height:34%; 
+    padding-top:17%; 
+    padding-left:40%;
+}
+.jazpar_localmin {
+    height:33%; 
+    padding-top:35%; 
+    padding-left:40%;
 }

@@ -114,13 +114,19 @@ foreach (jeeObject::all() as $object) {
  	 </div>
 	</div>
  <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Cocher la case pour utiliser le template de widget aux couleurs du compteur Gazpar}}">{{Template de widget}}</label>
+	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez le template de widget à utiliser}}">{{Template de widget}}</label>
 	 <div class="col-sm-3">
-		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate"/>
+         
+        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
+            <option value="none">{{Aucun}}</option>
+            <option value="jazpar">{{Compteur GRDF}}</option>
+            <option value="jazpar2">{{Compteur GRDF avec comparaison}}</option>
+        </select>
+
  	 </div>
 	</div>
  <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut dans le widget}}">{{Unité préférée}}</label>
+	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)}}">{{Unité préférée}}</label>
 	 <div class="col-sm-3">
          
         <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">
