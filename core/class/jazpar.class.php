@@ -494,19 +494,23 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
          preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
          $dateDebutStr = $matches[1][0];
-         preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
-         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
-         $averages = explode(",", $matches[1][0]);
-         preg_match_all('/^.*conso_haute:parseData\(\"(.*?)\".*?/mi', $response, $matches);
-         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data max : ' . $matches[1][0]);
-         $maximums = explode(",", $matches[1][0]);
-         preg_match_all('/^.*conso_basse:parseData\(\"(.*?)\".*?/mi', $response, $matches);
-         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
-         $minimums = explode(",", $matches[1][0]);
+         if ($dateDebutStr == '') {
+             log::add(__CLASS__, 'error', $this->getHumanName() . ' Aucune donnée de comparaison');
+         } else {
+             preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
+             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
+             $averages = explode(",", $matches[1][0]);
+             preg_match_all('/^.*conso_haute:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data max : ' . $matches[1][0]);
+             $maximums = explode(",", $matches[1][0]);
+             preg_match_all('/^.*conso_basse:parseData\(\"(.*?)\".*?/mi', $response, $matches);
+             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data min : ' . $matches[1][0]);
+             $minimums = explode(",", $matches[1][0]);
+             $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
+             $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $maximums, $this->getCmd(null, 'localmax'));
+             $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
+         }
 
-         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $averages, $this->getCmd(null, 'localavg'));
-         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $maximums, $this->getCmd(null, 'localmax'));
-         $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
      }
        
    }
@@ -711,44 +715,46 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       
       if ($template == "jazpar2") {
           $cmd = $this->getCmd(null, 'localavg');
-          $min = 1;
-          $max = 1;
-          $avg = 1;
+          $min = 0;
+          $max = 0;
+          $avg = 0;
           $month = "?";
           $value = "?";
           $padding = 45;
           if (is_object($cmd)) {
             $avg = round($cmd->execCmd(), 0);
-            $dateCompare = $cmd->getCollectDate();
-            $month = strftime("%B %Y", strtotime($dateCompare));
-            $cmdMonth =  $this->getCmd(null, 'consom');
-            $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
-            if (is_object($cmdHistory)) {
-                $value = round($cmdHistory->getValue(), 0);
-                $cmd = $this->getCmd(null, 'localmin');
-                if (is_object($cmd)) {
-                    $min = round($cmd->execCmd(), 0);
-                }
-                $cmd = $this->getCmd(null, 'localmax');
-                if (is_object($cmd)) {
-                    $max = round($cmd->execCmd(), 0);
-                }
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
-                if ($value == $avg) {
-                    $padding = 45;
-                }
-                if ($value > $avg) {
-                    $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
-                }
-                if ($value < $avg) {
-                    $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
-                }
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
-                if ($padding > 90) {
-                   $padding = 90;
-                }
-                if ($padding < 0) {
-                   $padding = 0;
+            if ($avg > 0) {
+                $dateCompare = $cmd->getCollectDate();
+                $month = strftime("%B %Y", strtotime($dateCompare));
+                $cmdMonth =  $this->getCmd(null, 'consom');
+                $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
+                if (is_object($cmdHistory)) {
+                    $value = round($cmdHistory->getValue(), 0);
+                    $cmd = $this->getCmd(null, 'localmin');
+                    if (is_object($cmd)) {
+                        $min = round($cmd->execCmd(), 0);
+                    }
+                    $cmd = $this->getCmd(null, 'localmax');
+                    if (is_object($cmd)) {
+                        $max = round($cmd->execCmd(), 0);
+                    }
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
+                    if ($value == $avg) {
+                        $padding = 45;
+                    }
+                    if ($value > $avg) {
+                        $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
+                    }
+                    if ($value < $avg) {
+                        $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
+                    }
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+                    if ($padding > 90) {
+                       $padding = 90;
+                    }
+                    if ($padding < 0) {
+                       $padding = 0;
+                    }
                 }
             }
           }
