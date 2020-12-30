@@ -1,10 +1,7 @@
 {
     "id": "jazpar",
     "name": "GRDF Gazpar",
-    "description": {
-        "fr_FR": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.",
-        "en_US": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."
-    },
+    "description": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.",
     "utilization": "Sur la page de l'équipement renseignez l'identifiant ainsi que le mot de passe de votre compte-client GRDF puis cliquez sur le bouton Sauvegarder.",
     "licence": "AGPL",
     "author": "hugoKs3",
