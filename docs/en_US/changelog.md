@@ -6,6 +6,7 @@
 
 # 01/01/2021
 - Arrow icon for comparison
+- Changing logs level
 
 # 30/12/2020
 - New data fetched from GRDF website: local maximum, minimum and average cosumptions

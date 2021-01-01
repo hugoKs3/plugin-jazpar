@@ -6,6 +6,7 @@
 
 # 01/01/2021
 - Icône flêche pour comparaison
+- Niveaux de logs modifiés
 
 # 30/12/2020
 - Nouvelles données récupérées du site GRDF : consommations minimum maximum et moyenne des foyers similaires.
