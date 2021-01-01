@@ -730,6 +730,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
                 if (is_object($cmdHistory)) {
                     $value = round($cmdHistory->getValue(), 0);
+                    $value = 2000;
                     $cmd = $this->getCmd(null, 'localmin');
                     if (is_object($cmd)) {
                         $min = round($cmd->execCmd(), 0);
