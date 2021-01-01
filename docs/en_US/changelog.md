@@ -4,6 +4,10 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# 01/01/2021
+- Arrow icon for comparison
+- Changing logs level
+
 # 30/12/2020
 - New data fetched from GRDF website: local maximum, minimum and average cosumptions
 - New widget's template available to visulalize the comparison with similar profiles

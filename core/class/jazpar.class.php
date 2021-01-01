@@ -41,8 +41,7 @@ class jazpar extends eqLogic {
     {
       if (date('G') < 4 || date('G') >= 22)
       {
-        if ($eqLogic->getCache('getJazparData') == 'done')
-    		{
+        if ($eqLogic->getCache('getJazparData') == 'done') {
           $eqLogic->setCache('getJazparData', null);
         }
         return;
@@ -92,7 +91,7 @@ class jazpar extends eqLogic {
               $end = date('d/m/Y', strtotime('-1 day'));
               $start = date('d/m/Y', strtotime('-31 days'));
               $resource_id = 'jour';
-              $this->getJazparData($cookies, $resource_id, $start, $end);
+              $resultDay = $this->getJazparData($cookies, $resource_id, $start, $end);
             }
 
             $consoMonth = $this->getCmd(null, 'consom');
@@ -101,11 +100,17 @@ class jazpar extends eqLogic {
               $end = date('d/m/Y', strtotime('-1 day'));
               $start = date('d/m/Y', strtotime('-11 months'));
               $resource_id = 'mois';
-              $this->getJazparData($cookies, $resource_id, $start, $end);
+              $resultMonth = $this->getJazparData($cookies, $resource_id, $start, $end);
+            }
+            
+            if (!$resultDay || !resultMonth) {
+                if (date('G') >= 21) {
+                    log::add(__CLASS__, 'error', $this->getHumanName() . ' Impossible de récupérer les données aujourd\'hui - Prochain essai demain');
+                }
             }
         }
         else {
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Erreur connexion - Abandon');
+          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain essai dans 1 heure');
         }
       }
       else
@@ -269,7 +274,7 @@ class jazpar extends eqLogic {
       }
       else
       {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des informations de session - Abandon');
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur lors de la récupération des informations de session - Abandon - Prochain essai dans 1 heure');
         return null;
       }
 
@@ -320,9 +325,9 @@ class jazpar extends eqLogic {
      log::add(__CLASS__, 'debug', $this->getHumanName() . "JVWS=". $jvws);
 
      if ($jvws == '') {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur lors de la récupération des données (1/4) - Abandon');
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur lors de la récupération des données (1/4) - Abandon - Prochain essai dans 1 heure');
 	    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (1/4): ' . $response);
-        return;
+        return false;
      }
      
      preg_match_all('/.*process:\'(_eConsoconsoDetaille_WAR_eConsoportlet_:idFormConsoDetaille:.*)\'/miU', $response, $output_array);
@@ -495,7 +500,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
          $dateDebutStr = $matches[1][0];
          if ($dateDebutStr == '') {
-             log::add(__CLASS__, 'error', $this->getHumanName() . ' Aucune donnée de comparaison');
+             log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune donnée de comparaison');
          } else {
              preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
@@ -512,6 +517,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
          }
 
      }
+     
+     return true;
        
    }
    
@@ -758,7 +765,6 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 }
             }
           }
-
           $replace['#past_month#'] = $month;
           $replace['#past_month_conso#'] = $value;
           $replace['#cursor_compare#'] = $padding;
