@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       foreach ($this->getCmd('info') as $eqLogicCmd)
       {
-        if (!strpos($eqLogicCmd->getLogicalId(), "local")) {
+        if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
             $eqLogicCmd->execCmd();
             if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
             {
