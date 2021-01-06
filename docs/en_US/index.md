@@ -31,9 +31,9 @@ The option **Force data retrieval** to force data retrieval even if data is alre
 The plugin will then check the correct connection to the site *GRDF* and retrieve and insert in history :
 - **daily consumption** : the last 10 days,
 - **monthly consumption** : the last 12 months,
+- **maximum, minimum and average monthly consumptions of similar profiles**
 
->**TRICK**     
->In desktop version, the information displayed on the widget adapts in size when resizing the tile.
+Two widget's tmplates are available. The one with comparison informs you how your previous month consumption compares with similar profiles.
 
 # Remarks
 

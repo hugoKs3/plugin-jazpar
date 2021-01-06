@@ -34,7 +34,71 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       $randMinute = rand(3, 59);
       config::save('cronMinute', $randMinute, 'jazpar');
     }
-
+    foreach (eqLogic::byType('jazpar') as $eqLogic) {
+        if (empty($eqLogic->getConfiguration('defaultUnit'))) {
+            $eqLogic->setConfiguration('defaultUnit', 'kwh');
+        }
+        
+        $template = $eqLogic->getConfiguration('widgetTemplate');
+        log::add('jazpar', 'info', 'update template : ' . $template);
+        if (is_int($template)) {
+            if ($template == 1) {
+                $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
+            } else {
+                $eqLogic->setConfiguration('widgetTemplate', 'none');
+            }                
+        }
+        $cmd = $eqLogic->getCmd(null, 'localmax');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Conso max locale');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setLogicalId('localmax');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $cmd = $eqLogic->getCmd(null, 'localmin');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Conso min locale');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setLogicalId('localmin');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $cmd = $eqLogic->getCmd(null, 'localavg');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Conso moyenne locale');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setLogicalId('localavg');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $eqLogic->save();
+    }
+    
   }
 
 // Fonction exécutée automatiquement après la suppression du plugin

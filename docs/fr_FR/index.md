@@ -31,9 +31,9 @@ L'option **Forcer la récupération des données** permet de récupérer les inf
 Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et insérer en historique :
 - **consommation journalière** : les 10 derniers jours,
 - **consommation mensuelle** : les 12 derniers mois,
+- **consommation mensuelles maximum, minimum et médiane des foyers similaires**
 
->**Astuce**     
->En version desktop, les informations affichées sur le widget s'adaptent en taille lors du redimensionnement de la tuile.
+Deux templates de widget sont disponibles. Celui avec comparaison vous informe comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
 
 # Remarques
 
@@ -43,19 +43,19 @@ Le plugin se repose sur la manière dont le site GRDF est structuré. Tout chang
 
 # Contributions
 
-Ce plugin gratuit est ouvert à contributions (améliorations et/ou corrections). N'hésitez pas à soumettre vos pull-requests sur <a href="https://github.com/hugoKs3/plugin-jazpar" target="_blank">Github</a>
+Ce plugin gratuit est ouvert à contributions (améliorations et/ou corrections). N'hésitez pas à soumettre vos pull-requests sur <a href="https://github.com/hugoKs3/plugin-jazpar" target="_blank">Github</a>.
 
-# Credits
+# Crédits
 
 Ce plugin s'est inspiré des travaux suivants :
 
--   [Jeedom](https://github.com/jeedom) via leur plugin Enedis :  [plugin-enedis](https://github.com/jeedom/plugin-enedis)
--   [empierre](https://github.com/empierre)  via son travail similaire pour Domoticz:  [domoticz_gaspar](https://github.com/empierre/domoticz_gaspar)
+-   [Jeedom](https://github.com/jeedom) via leur plugin Enedis : [plugin-enedis](https://github.com/jeedom/plugin-enedis)
+-   [empierre](https://github.com/empierre) via son travail similaire pour Domoticz : [domoticz_gaspar](https://github.com/empierre/domoticz_gaspar)
 
 # Disclaimer
 
 -   Ce plugin ne prétend pas être exempt de bugs.
--   Ce plugin vous est fourni sans aucune garantie. Bien que peu probable, si il venait à corrompre votre installation Jeedom,l'auteur ne pourrait en être tenu pour responsable.
+-   Ce plugin vous est fourni sans aucune garantie. Bien que peu probable, si il venait à corrompre votre installation Jeedom, l'auteur ne pourrait en être tenu pour responsable.
 
 # ChangeLog
 Disponible [ici](./changelog.html).
