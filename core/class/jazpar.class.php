@@ -62,20 +62,22 @@ class jazpar extends eqLogic {
 
       foreach ($this->getCmd('info') as $eqLogicCmd)
       {
-        $eqLogicCmd->execCmd();
-        if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
-        {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
-        }
-        else
-        {
-          $need_refresh = true;
-          if ($this->getConfiguration('forceRefresh') == 1) {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName() . ' mais Force Refresh activé');
-          }
-          else {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
-          }
+        if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
+            $eqLogicCmd->execCmd();
+            if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
+            {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
+            }
+            else
+            {
+              $need_refresh = true;
+              if ($this->getConfiguration('forceRefresh') == 1) {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName() . ' mais Force Refresh activé');
+              }
+              else {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
+              }
+            }
         }
       }
 
