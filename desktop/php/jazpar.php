@@ -118,7 +118,7 @@ foreach (jeeObject::all() as $object) {
 	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez le template de widget à utiliser}}">{{Template de widget}}</label>
 	 <div class="col-sm-6">
          
-        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
+        <select id="sel_object_template" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
             <option value="none">{{Aucun}}</option>
             <option value="jazpar">{{Compteur GRDF}}</option>
             <option value="jazpar2">{{Compteur GRDF avec comparaison}}</option>
@@ -131,7 +131,7 @@ foreach (jeeObject::all() as $object) {
 	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)}}">{{Unité préférée}}</label>
 	 <div class="col-sm-6">
          
-        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">
+        <select id="sel_object_unit" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">
             <option value="kwh">kWh</option>
             <option value="m3">m3</option>
         </select>
@@ -145,7 +145,13 @@ foreach (jeeObject::all() as $object) {
     {{Exemple de rendu avec le template de widget sélectionné :}}
     <br/>
     <br/>
-    <img src="../../data/images/GazparScreen.png">
+    <img id="screenshot_none" src="plugins/jazpar/data/images/screenshot_none.png" style="display: none;">
+    <br/>
+    <img id="screenshot_jazpar" src="plugins/jazpar/data/images/screenshot_jazpar.png" style="display: none;">
+    <br/>
+    <img id="screenshot_jazpar2" src="plugins/jazpar/data/images/screenshot_jazpar2.png" style="display: none;">
+    <br/>
+    <img id="screenshot_jazpar3" src="plugins/jazpar/data/images/screenshot_jazpar3.png" style="display: none;">
 </div>
 </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
@@ -169,6 +175,15 @@ foreach (jeeObject::all() as $object) {
 </div>
 
 </div>
+    <script>           
+        $('sel_object_template').on('change', function() {
+          $('screenshot_none').hide();
+          $('screenshot_jazpar').hide();
+          $('screenshot_jazpar2').hide();
+          $('screenshot_jazpar3').hide();
+          $('screenshot_' + this.value).show();
+        });    
+    </script> 
 </div>
 
 <!-- Inclusion du fichier javascript du plugin (dossier, nom_du_fichier, extension_du_fichier, nom_du_plugin) -->
