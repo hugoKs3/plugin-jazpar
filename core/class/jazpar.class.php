@@ -769,7 +769,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 }
             }
           }
-          $replace['#past_month#'] = $month;
+          $replace['#past_month#'] = __($month);
           $replace['#past_year#'] = $year;
           $replace['#past_month_conso#'] = $value;
           $replace['#cursor_compare#'] = $padding;
