@@ -121,6 +121,7 @@ foreach (jeeObject::all() as $object) {
             <option value="none">{{Aucun}}</option>
             <option value="jazpar">{{Compteur GRDF}}</option>
             <option value="jazpar2">{{Compteur GRDF avec comparaison}}</option>
+            <option value="jazpar3">{{new}}</option>
         </select>
 
  	 </div>

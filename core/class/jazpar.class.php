@@ -722,7 +722,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       }
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
       
-      if ($template == "jazpar2") {
+      if ($template != "jazpar") {
           $cmd = $this->getCmd(null, 'localavg');
           $min = 0;
           $max = 0;
