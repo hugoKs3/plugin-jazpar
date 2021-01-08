@@ -146,11 +146,8 @@ foreach (jeeObject::all() as $object) {
     <br/>
     <br/>
     <img id="screenshot_none" src="plugins/jazpar/data/images/screenshot_none.png" style="display: none;">
-    <br/>
     <img id="screenshot_jazpar" src="plugins/jazpar/data/images/screenshot_jazpar.png" style="display: none;">
-    <br/>
     <img id="screenshot_jazpar2" src="plugins/jazpar/data/images/screenshot_jazpar2.png" style="display: none;">
-    <br/>
     <img id="screenshot_jazpar3" src="plugins/jazpar/data/images/screenshot_jazpar3.png" style="display: none;">
 </div>
 </div>
