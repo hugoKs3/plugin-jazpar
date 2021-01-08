@@ -49,7 +49,31 @@
     "plugins\/jazpar\/core\/class\/jazpar.class.php": {
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Authentication error: check the validity of the username and password",
         "L\\'identifiant du compte GRDF doit être renseigné": "The identifier of the GRDF account must be entered",
-        "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered"
+        "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered",
+        "January": "January",
+        "February": "February",
+        "March": "March",
+        "April": "April",
+        "May": "May",
+        "June": "June",
+        "July": "July",
+        "August": "August",
+        "September": "September",
+        "October": "October",
+        "November": "November",
+        "December": "December",
+        "Janvier": "January",
+        "Février": "FévFebruaryier",
+        "Mars": "March",
+        "Avril": "April",
+        "Mai": "May",
+        "Juin": "June",
+        "Juillet": "July",
+        "Août": "August",
+        "Septembre": "September",
+        "Octobre": "October",
+        "Novembre": "November",
+        "Décembre": "December"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."
