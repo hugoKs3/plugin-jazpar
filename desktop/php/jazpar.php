@@ -120,15 +120,15 @@ foreach (jeeObject::all() as $object) {
          
         <select id="sel_object_template" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
             <option value="none">{{Aucun}}</option>
-            <option value="jazpar">{{Compteur GRDF}}</option>
-            <option value="jazpar2">{{Compteur GRDF avec comparaison}}</option>
-            <option value="jazpar3">{{new}}</option>
+            <option value="jazpar">Jazpar 1</option>
+            <option value="jazpar2">Jazpar 2</option>
+            <option value="jazpar3">Jazpar 3</option>
         </select>
 
  	 </div>
 	</div>
  <div class="form-group">
-	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)}}">{{Unité préférée}}</label>
+	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)}}">{{Unité préférée}}</label>
 	 <div class="col-sm-6">
          
         <select id="sel_object_unit" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">

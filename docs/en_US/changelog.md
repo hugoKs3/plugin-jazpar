@@ -4,6 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# 08/01/2021
+- New widget's template
+
 # 01/01/2021
 - Arrow icon for comparison
 - Changing logs level
