@@ -176,12 +176,12 @@ foreach (jeeObject::all() as $object) {
 
 </div>
     <script>           
-        $('sel_object_template').on('change', function() {
-          $('screenshot_none').hide();
-          $('screenshot_jazpar').hide();
-          $('screenshot_jazpar2').hide();
-          $('screenshot_jazpar3').hide();
-          $('screenshot_' + this.value).show();
+        $('#sel_object_template').on('change', function() {
+          $('#screenshot_none').hide();
+          $('#screenshot_jazpar').hide();
+          $('#screenshot_jazpar2').hide();
+          $('#screenshot_jazpar3').hide();
+          $('#screenshot_' + this.value).show();
         });    
     </script> 
 </div>
