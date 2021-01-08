@@ -142,7 +142,10 @@ foreach (jeeObject::all() as $object) {
 </form>
 </div>
 <div style="width: 50%; float: right; text-align: center;">
-    test test
+    {{Exemple de rendu avec le template de widget sélectionné :}}
+    <br/>
+    <br/>
+    <img src="../../data/images/GazparScreen.png">
 </div>
 </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
