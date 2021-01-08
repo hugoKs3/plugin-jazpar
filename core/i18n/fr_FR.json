@@ -46,6 +46,20 @@
         "Historiser": "Historiser",
         "Tester": "Tester"
     },
+    "plugins\/jazpar\/core\/template\/dashboard\/jazpar3.template.html": {
+        "January": "Janvier",
+        "February": "Février",
+        "March": "Mars",
+        "April": "Avril",
+        "May": "Mai",
+        "June": "Juin",
+        "July": "Juillet",
+        "August": "Août",
+        "September": "Septembre",
+        "October": "Octobre",
+        "November": "Novembre",
+        "December": "Décembre"
+    },
     "plugins\/jazpar\/core\/class\/jazpar.class.php": {
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe",
         "L\\'identifiant du compte GRDF doit être renseigné": "L\\'identifiant du compte GRDF doit être renseigné",

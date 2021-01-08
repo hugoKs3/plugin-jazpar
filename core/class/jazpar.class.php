@@ -728,13 +728,15 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
           $max = 0;
           $avg = 0;
           $month = "?";
+          $year = "?";
           $value = "?";
           $padding = 45;
           if (is_object($cmd)) {
             $avg = round($cmd->execCmd(), 0);
             if ($avg > 0) {
                 $dateCompare = $cmd->getCollectDate();
-                $month = strftime("%B %Y", strtotime($dateCompare));
+                $month = strftime("%B", strtotime($dateCompare));
+                $year = strftime("%Y", strtotime($dateCompare));
                 $cmdMonth =  $this->getCmd(null, 'consom');
                 $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
                 if (is_object($cmdHistory)) {
@@ -768,6 +770,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             }
           }
           $replace['#past_month#'] = $month;
+          $replace['#past_year#'] = $year;
           $replace['#past_month_conso#'] = $value;
           $replace['#cursor_compare#'] = $padding;
       }
