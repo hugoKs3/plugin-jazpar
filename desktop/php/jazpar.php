@@ -53,18 +53,19 @@ foreach ($eqLogics as $eqLogic) {
   <div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
     <div role="tabpanel" class="tab-pane active" id="eqlogictab">
       <br/>
+     <div style="width: 50%; display:inline-block;">
     <form class="form-horizontal">
         <fieldset>
             <div class="form-group">
-                <label class="col-sm-3 control-label">{{Nom de l'équipement GRDF}}</label>
-                <div class="col-sm-3">
+                <label class="col-sm-6 control-label">{{Nom de l'équipement GRDF}}</label>
+                <div class="col-sm-6">
                     <input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
                     <input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement GRDF}}"/>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-3 control-label" >{{Objet parent}}</label>
-                <div class="col-sm-3">
+                <label class="col-sm-6 control-label" >{{Objet parent}}</label>
+                <div class="col-sm-6">
                     <select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
                         <option value="">{{Aucun}}</option>
                         <?php
@@ -76,8 +77,8 @@ foreach (jeeObject::all() as $object) {
                </div>
            </div>
 	   <div class="form-group">
-                <label class="col-sm-3 control-label">{{Catégorie}}</label>
-                <div class="col-sm-3">
+                <label class="col-sm-6 control-label">{{Catégorie}}</label>
+                <div class="col-sm-6">
                  <?php
                     foreach (jeedom::getConfiguration('eqLogic:category') as $key => $value) {
                     echo '<label class="checkbox-inline">';
@@ -88,48 +89,49 @@ foreach (jeeObject::all() as $object) {
                </div>
            </div>
 	<div class="form-group">
-		<label class="col-sm-3 control-label">{{Options}}</label>
-		<div class="col-sm-3">
+		<label class="col-sm-6 control-label">{{Options}}</label>
+		<div class="col-sm-6">
 			<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 			<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 		</div>
 	</div>
 	<br>
 	<div class="form-group">
-	 <label class="col-sm-3 control-label">{{Identifiant GRDF}}</label>
-	 <div class="col-sm-3">
+	 <label class="col-sm-6 control-label">{{Identifiant GRDF}}</label>
+	 <div class="col-sm-6">
 			 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="login" placeholder="Identifiant du compte GRDF"/>
 	 </div>
 </div>
 		<div class="form-group">
-		 <label class="col-sm-3 control-label">{{Mot de passe GRDF}}</label>
-		 <div class="col-sm-3">
+		 <label class="col-sm-6 control-label">{{Mot de passe GRDF}}</label>
+		 <div class="col-sm-6">
 				 <input type="password" autocomplete="new-password" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="password" placeholder="Mot de passe du compte GRDF"/>
 		 </div>
  </div>
  <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la répcupération des données}}</label>
-	 <div class="col-sm-3">
+	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la répcupération des données}}</label>
+	 <div class="col-sm-6">
 		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="forceRefresh"/>
  	 </div>
 	</div>
  <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez le template de widget à utiliser}}">{{Template de widget}}</label>
-	 <div class="col-sm-3">
+	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez le template de widget à utiliser}}">{{Template de widget}}</label>
+	 <div class="col-sm-6">
          
-        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
+        <select id="sel_object_template" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="widgetTemplate">
             <option value="none">{{Aucun}}</option>
-            <option value="jazpar">{{Compteur GRDF}}</option>
-            <option value="jazpar2">{{Compteur GRDF avec comparaison}}</option>
+            <option value="jazpar">Jazpar 1</option>
+            <option value="jazpar2">Jazpar 2</option>
+            <option value="jazpar3">Jazpar 3</option>
         </select>
 
  	 </div>
 	</div>
  <div class="form-group">
-	 <label class="col-sm-3 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)}}">{{Unité préférée}}</label>
-	 <div class="col-sm-3">
+	 <label class="col-sm-6 control-label help" data-help="{{Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)}}">{{Unité préférée}}</label>
+	 <div class="col-sm-6">
          
-        <select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">
+        <select id="sel_object_unit" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="defaultUnit">
             <option value="kwh">kWh</option>
             <option value="m3">m3</option>
         </select>
@@ -138,6 +140,16 @@ foreach (jeeObject::all() as $object) {
 	</div>
 </fieldset>
 </form>
+</div>
+<div style="width: 50%; float: right; text-align: center;">
+    {{Exemple de rendu avec le template de widget sélectionné :}}
+    <br/>
+    <br/>
+    <img id="screenshot_none" src="plugins/jazpar/data/images/screenshot_none.png" style="display: none;">
+    <img id="screenshot_jazpar" src="plugins/jazpar/data/images/screenshot_jazpar.png" style="display: none;">
+    <img id="screenshot_jazpar2" src="plugins/jazpar/data/images/screenshot_jazpar2.png" style="display: none;">
+    <img id="screenshot_jazpar3" src="plugins/jazpar/data/images/screenshot_jazpar3.png" style="display: none;">
+</div>
 </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
 <!--<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;">
@@ -160,6 +172,15 @@ foreach (jeeObject::all() as $object) {
 </div>
 
 </div>
+    <script>           
+        $('#sel_object_template').on('change', function() {
+          $('#screenshot_none').hide();
+          $('#screenshot_jazpar').hide();
+          $('#screenshot_jazpar2').hide();
+          $('#screenshot_jazpar3').hide();
+          $('#screenshot_' + this.value).show();
+        });    
+    </script> 
 </div>
 
 <!-- Inclusion du fichier javascript du plugin (dossier, nom_du_fichier, extension_du_fichier, nom_du_plugin) -->
