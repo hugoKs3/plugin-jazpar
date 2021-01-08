@@ -6,6 +6,7 @@
 
 # 08/01/2021
 - New widget's template
+- Better i18n
 
 # 01/01/2021
 - Arrow icon for comparison

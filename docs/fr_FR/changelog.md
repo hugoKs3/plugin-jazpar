@@ -6,6 +6,7 @@
 
 # 08/01/2021
 - Nouveau template de widget 
+- Meilleure i18n
 
 # 01/01/2021
 - Icône flêche pour comparaison
