@@ -30,10 +30,9 @@
         "Template de widget": "Widget template",
         "Sélectionnez le template de widget à utiliser": "Choose the widget's template to use",
         "Aucun": "None",
-        "Compteur GRDF": "GRDF Counter",
-        "Compteur GRDF avec comparaison": "GRDF Counter with comparison",
+        "Exemple de rendu avec le template de widget sélectionné :": "Example of display with selected widget's template:",
         "Unité préférée": "Prefered unit",
-        "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)": "Choose the unit to use by default (only for widget with comparison)",
+        "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)": "Choose the unit to use by default (only for widget Jazpar 2)",
         "Id": "ID",
         "Nom": "Name",
         "Type": "Type",
@@ -50,7 +49,19 @@
     "plugins\/jazpar\/core\/class\/jazpar.class.php": {
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Authentication error: check the validity of the username and password",
         "L\\'identifiant du compte GRDF doit être renseigné": "The identifier of the GRDF account must be entered",
-        "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered"
+        "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered",
+        "Janvier": "January",
+        "Février": "February",
+        "Mars": "March",
+        "Avril": "April",
+        "Mai": "May",
+        "Juin": "June",
+        "Juillet": "July",
+        "Août": "August",
+        "Septembre": "September",
+        "Octobre": "October",
+        "Novembre": "November",
+        "Décembre": "December"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."

@@ -533,7 +533,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure de comparaison en historique - Aucune action : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
             }
             else {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
+                log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
                 $cmdComp->event($value, $period);
             }
            $startDate->modify('+1 month');
@@ -583,7 +583,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
                     history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
                 }
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
+                log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
                 $cmd->event($measure, $dateReal);
             }
         }
@@ -722,19 +722,21 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       }
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
       
-      if ($template == "jazpar2") {
+      if ($template != "jazpar") {
           $cmd = $this->getCmd(null, 'localavg');
           $min = 0;
           $max = 0;
           $avg = 0;
           $month = "?";
+          $year = "?";
           $value = "?";
           $padding = 45;
           if (is_object($cmd)) {
             $avg = round($cmd->execCmd(), 0);
             if ($avg > 0) {
                 $dateCompare = $cmd->getCollectDate();
-                $month = strftime("%B %Y", strtotime($dateCompare));
+                $month = date_fr(date('F', strtotime($dateCompare)));
+                $year = strftime("%Y", strtotime($dateCompare));
                 $cmdMonth =  $this->getCmd(null, 'consom');
                 $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
                 if (is_object($cmdHistory)) {
@@ -767,7 +769,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 }
             }
           }
-          $replace['#past_month#'] = $month;
+          $replace['#past_month#'] = __($month,__FILE__);
+          $replace['#past_year#'] = $year;
           $replace['#past_month_conso#'] = $value;
           $replace['#cursor_compare#'] = $padding;
       }

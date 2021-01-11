@@ -30,10 +30,9 @@
         "Template de widget": "Template de widget",
         "Sélectionnez le template de widget à utiliser": "Sélectionnez le template de widget à utiliser",
         "Aucun": "Aucun",
-        "Compteur GRDF": "Compteur GRDF",
-        "Compteur GRDF avec comparaison": "Compteur GRDF avec comparaison",
+        "Exemple de rendu avec le template de widget sélectionné :": "Exemple de rendu avec le template de widget sélectionné :",
         "Unité préférée": "Unité préférée",
-        "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)": "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget avec comparaison)",
+        "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)": "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)",
         "Id": "Id",
         "Nom": "Nom",
         "Type": "Type",
@@ -50,7 +49,19 @@
     "plugins\/jazpar\/core\/class\/jazpar.class.php": {
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe",
         "L\\'identifiant du compte GRDF doit être renseigné": "L\\'identifiant du compte GRDF doit être renseigné",
-        "Le mot de passe du compte GRDF doit être renseigné": "Le mot de passe du compte GRDF doit être renseigné"
+        "Le mot de passe du compte GRDF doit être renseigné": "Le mot de passe du compte GRDF doit être renseigné",
+        "Janvier": "Janvier",
+        "Février": "Février",
+        "Mars": "Mars",
+        "Avril": "Avril",
+        "Mai": "Mai",
+        "Juin": "Juin",
+        "Juillet": "Juillet",
+        "Août": "Août",
+        "Septembre": "Septembre",
+        "Octobre": "Octobre",
+        "Novembre": "Novembre",
+        "Décembre": "Décembre"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."
