@@ -533,7 +533,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure de comparaison en historique - Aucune action : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
             }
             else {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
+                log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $period . ' => Mesure = ' . $value);
                 $cmdComp->event($value, $period);
             }
            $startDate->modify('+1 month');
@@ -583,7 +583,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                     log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $dateReal);
                     history::removes($cmdId, $dt->format('Y-m-d'), $dateReal);
                 }
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
+                log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
                 $cmd->event($measure, $dateReal);
             }
         }
