@@ -498,12 +498,13 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (comparison): ' . $response);
 
-         preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
+         preg_match_all('/^.*dateDebut=new Date\(\"(.*?)\".*?/mi', $response, $matches);
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
          $dateDebutStr = $matches[1][0];
          if ($dateDebutStr == '') {
              log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune donnée de comparaison');
          } else {
+             $dateDebutStr = substr($dateDebutStr, 0, 10);
              preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
              $averages = explode(",", $matches[1][0]);
