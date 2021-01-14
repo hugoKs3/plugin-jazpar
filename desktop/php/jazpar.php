@@ -150,6 +150,7 @@ foreach (jeeObject::all() as $object) {
     <img id="screenshot_jazpar" src="plugins/jazpar/data/images/screenshot_jazpar.png" style="display: none;">
     <img id="screenshot_jazpar2" src="plugins/jazpar/data/images/screenshot_jazpar2.png" style="display: none;">
     <img id="screenshot_jazpar3" src="plugins/jazpar/data/images/screenshot_jazpar3.png" style="display: none;">
+    <img id="screenshot_jazpar4" src="plugins/jazpar/data/images/screenshot_jazpar4.png" style="display: none;">
 </div>
 </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
@@ -179,6 +180,7 @@ foreach (jeeObject::all() as $object) {
           $('#screenshot_jazpar').hide();
           $('#screenshot_jazpar2').hide();
           $('#screenshot_jazpar3').hide();
+          $('#screenshot_jazpar4').hide();
           $('#screenshot_' + this.value).show();
         });    
     </script> 
