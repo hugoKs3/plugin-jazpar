@@ -4,8 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
-# 13/01/2021
+# 14/01/2021
 - Regular expression fix for comparison data
+- New widget's template (Jazpar 4)
 
 # 08/01/2021
 - New widget's template
