@@ -123,6 +123,7 @@ foreach (jeeObject::all() as $object) {
             <option value="jazpar">Jazpar 1</option>
             <option value="jazpar2">Jazpar 2</option>
             <option value="jazpar3">Jazpar 3</option>
+            <option value="jazpar4">Jazpar 4</option>
         </select>
 
  	 </div>

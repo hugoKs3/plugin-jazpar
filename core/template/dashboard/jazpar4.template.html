@@ -1,0 +1,70 @@
+<div class="eqLogic eqLogic-widget #eqType#" style="width: 450px;height: 300px;#style#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-eqType="#eqType#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" >
+    <link rel="stylesheet" href="plugins/jazpar/data/css/jazpar4.template.css"/>
+	<center class="widget-name">
+		<span class="warning" title="#alert_name#">
+			<i class='#alert_icon#'></i>
+		</span>
+		<span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
+		<a href="#eqLink#" class="reportModeHidden">#name_display# <span class="object_name">#object_name#</span></a>
+	</center>   
+    <div class="width: 192px; display:inline-block;">
+		<center>
+			<div class="cmd cmd-widget history cursor tooltipstered" data-type="info" data-subtype="numeric" data-template="tile" data-cmd_id="#consom3_id#" title="#consom_collect#" >
+                <div class="title ">
+                    <div class="cmdName">Conso mois en cours</div>
+                </div>
+                <div class="content-sm">
+                    <span class="pull-right">kWh</span>
+                    <span class="pull-right state">#consom#</span>
+                </div>
+            </div>
+            <div class="cmd cmd-widget history cursor tooltipstered" data-type="info" data-subtype="numeric" data-template="tile" data-cmd_id="#consom3_id#" title="#consom3_collect#" >
+                <div class="title ">
+                    <div class="cmdName">Conso mois en cours (m3)</div>
+                </div>
+                <div class="content-sm">
+                    <span class="pull-right">m3</span>
+                    <span class="pull-right state">#consom3#</span>
+                </div>
+            </div>
+            <div class="cmd cmd-widget history cursor tooltipstered" data-type="info" data-subtype="numeric" data-template="tile" data-cmd_id="#consod_id#" title="#consod_collect#" >
+                <div class="title ">
+                    <div class="cmdName">Conso veille</div>
+                </div>
+                <div class="content-sm">
+                    <span class="pull-right">kWh</span>
+                    <span class="pull-right state">#consod#</span>
+                </div>
+            </div>
+            <div class="cmd cmd-widget history cursor tooltipstered" data-type="info" data-subtype="numeric" data-template="tile" data-cmd_id="#consod3_id#" title="#consod3_collect#" >
+                <div class="title ">
+                    <div class="cmdName">Conso veille (m3)</div>
+                </div>
+                <div class="content-sm">
+                    <span class="pull-right">kWh</span>
+                    <span class="pull-right state">#consod#</span>
+                </div>
+            </div>
+		</center>
+	</div>
+    <div style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span>Comparaison de #past_month# #past_year#</span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div style="width: 129px; display:inline-block; height: 100%; padding-top: #cursor_compare#%; text-align: right;">
+                Vous (#past_month_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#localmax_id#" title="#localmax_collect#">Maximum<br/><span style="color: #dc0404;">#localmax#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#localavg_id#" title="#localavg_collect#">Moyenne<br/><span style="color: #5cccfc;">#localavg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#localmin_id#" title="#localmin_collect#">Minimum<br/><span style="color: #4ccc5c;">#localmin#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+
+
