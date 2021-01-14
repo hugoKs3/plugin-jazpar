@@ -33,7 +33,7 @@ Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et
 - **consommation mensuelle** : les 12 derniers mois,
 - **consommation mensuelles maximum, minimum et médiane des foyers similaires**
 
-Deux templates de widget sont disponibles. Celui avec comparaison vous informe comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
+Quatre templates de widget sont disponibles. Ceux avec comparaison vous informent comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
 
 # Remarques
 
