@@ -72,7 +72,7 @@ class jazpar extends eqLogic {
             }
         }
       }
-      if ($this->getConfiguration('forceRefresh') != 1) {
+      if ($this->getConfiguration('forceRefresh') == 1) {
         log::add(__CLASS__, 'debug', 'Mode Force Refresh activé');
         $need_refresh = true;
       }
