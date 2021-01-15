@@ -747,8 +747,9 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             if ($useDates != 1) {
                 $replace['#' . $cmd->getLogicalId() . '_name#'] = "VEILLE";
             } else {
-                $day = date_fr(date('j F', strtotime($cmd->getCollectDate())));
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = $day;
+                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+                $day = date('j', strtotime($cmd->getCollectDate()));
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = $day . ' ' . $month;
             }
         } 
       }
