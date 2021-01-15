@@ -43,7 +43,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
-        log::add('jazpar', 'info', 'update template : ' . $template);
+        log::add('jazpar', 'debug', 'update template : ' . $template);
         if (is_int($template)) {
             if ($template == 1) {
                 $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
