@@ -108,7 +108,11 @@ class jazpar extends eqLogic {
             }
         }
         else {
-          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain essai dans 1 heure');
+          if (date('G') >= 21) {
+            log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain demain');
+          } else {
+            log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain essai dans 1 heure');
+          }
         }
       }
       else
