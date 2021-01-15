@@ -8,6 +8,7 @@
 - Regular expression fix for comparison data
 - New widget's template (Jazpar 4)
 - New action to refresh data by querying the website (outside of the cron)
+- Option to use dates in widgets instead of command names
 
 # 08/01/2021
 - New widget's template

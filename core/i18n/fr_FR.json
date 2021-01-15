@@ -36,7 +36,9 @@
         "Id": "Id",
         "Nom": "Nom",
         "Type": "Type",
-        "Action": "Action"
+        "Action": "Action",
+        "Utiliser des dates dans les widgets": "Utiliser des dates dans les widgets",
+        "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
@@ -61,7 +63,9 @@
         "Septembre": "Septembre",
         "Octobre": "Octobre",
         "Novembre": "Novembre",
-        "Décembre": "Décembre"
+        "Décembre": "Décembre",
+        "MOIS EN COURS": "MOIS EN COURS",
+        "VEILLE": "VEILLE"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."

@@ -737,7 +737,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
         if (substr($cmd->getLogicalId(), 0, 6) === "consom") {
             if ($useDates != 1) {
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = "MOIS EN COURS"; 
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("MOIS EN COURS",__FILE__);
             } else {
                 $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
                 $replace['#' . $cmd->getLogicalId() . '_name#'] = $month;
@@ -745,7 +745,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         } 
         if (substr($cmd->getLogicalId(), 0, 6) === "consod") {
             if ($useDates != 1) {
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = "VEILLE";
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("VEILLE",__FILE__);
             } else {
                 $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
                 $day = date('j', strtotime($cmd->getCollectDate()));

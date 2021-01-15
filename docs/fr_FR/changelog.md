@@ -8,6 +8,7 @@
 - Correction de l'expression régulière pour les données de comparaison
 - Nouveau template de widget (Jazpar 4)
 - Nouvelle action pour rafraichir les données en interrogeant le site (hors cron)
+- Nouvelle option pour utiliser des dates plutôt que les noms des commandes dans les widgets
 
 # 08/01/2021
 - Nouveau template de widget 
