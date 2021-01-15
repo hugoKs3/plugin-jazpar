@@ -96,7 +96,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
-        $cmd = $this->getCmd(null, 'refresh');
+        $cmd = $eqLogic->getCmd(null, 'refresh');
         if (!is_object($cmd)) {
             $cmd = new jazparCmd();
             $cmd->setLogicalId('refresh');
