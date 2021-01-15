@@ -599,6 +599,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $this->setConfiguration('forceRefresh', 0);
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setConfiguration('widgetTemplate', 'jazpar2');
+      $this->setConfiguration('useDates', 0);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -723,6 +724,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         return $replace;
       }
       $version = jeedom::versionAlias($_version);
+        
+      $useDates = $this->getConfiguration('useDates');
 
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
@@ -732,7 +735,24 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
+        if (substr($cmd->getLogicalId(), 0, 6) === "consom") {
+            if ($useDates != 1) {
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = "MOIS EN COURS"; 
+            } else {
+                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = $month;
+            }
+        } 
+        if (substr($cmd->getLogicalId(), 0, 6) === "consod") {
+            if ($useDates != 1) {
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = "VEILLE";
+            } else {
+                $day = date_fr(date('j F', strtotime($cmd->getCollectDate())));
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = $day;
+            }
+        } 
       }
+        
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
       
       if ($template != "jazpar") {

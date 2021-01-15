@@ -38,6 +38,9 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
+        if (empty($eqLogic->getConfiguration('useDates'))) {
+            $eqLogic->setConfiguration('useDates', 0);
+        }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
         log::add('jazpar', 'info', 'update template : ' . $template);
