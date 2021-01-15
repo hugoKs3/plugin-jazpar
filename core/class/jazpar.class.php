@@ -698,6 +698,17 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $cmd = $this->getCmd(null, 'refresh');
+        if (!is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setLogicalId('refresh');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setName('Rafraichir');
+            $cmd->setType('action');
+            $cmd->setSubType('other');
+            $cmd->setEventOnly(1);
+            $cmd->save();
+        }
     }
     
     public function toHtml($_version = 'dashboard') {
@@ -802,3 +813,4 @@ class jazparCmd extends cmd {
                 break;
         }
     }
+}
