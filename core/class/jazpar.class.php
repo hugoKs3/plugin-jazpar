@@ -49,36 +49,37 @@ class jazpar extends eqLogic {
 
       if ($eqLogic->getCache('getJazparData') != 'done')
       {
-        $eqLogic->pullJazpar();
+        $eqLogic->pullJazpar(false);
       }
     }
   }
 
     /*     * *********************Méthodes d'instance************************* */
 
-    public function pullJazpar()
+    public function pullJazpar($force)
     {
       $need_refresh = false;
-
-      foreach ($this->getCmd('info') as $eqLogicCmd)
-      {
-        if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
-            $eqLogicCmd->execCmd();
-            if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
-            {
-              log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
+        
+      if ($force) {
+          $need_refresh = true;
+          log::add(__CLASS__, 'debug', 'Manual data refresh triggered');
+      } else {
+          foreach ($this->getCmd('info') as $eqLogicCmd)
+          {
+            if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
+                $eqLogicCmd->execCmd();
+                if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
+                } else {
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
+                    $need_refresh = true;
+                }
+                if ($this->getConfiguration('forceRefresh') != 1) {
+                    log::add(__CLASS__, 'debug', 'Mode Force Refresh activé');
+                    $need_refresh = true;
+                }
             }
-            else
-            {
-              $need_refresh = true;
-              if ($this->getConfiguration('forceRefresh') == 1) {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName() . ' mais Force Refresh activé');
-              }
-              else {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
-              }
-            }
-        }
+          }
       }
 
       if ($need_refresh == true)
@@ -784,20 +785,20 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 }
 
 class jazparCmd extends cmd {
-    /*     * *************************Attributs****************************** */
-
-    /*
-      public static $_widgetPossibility = array();
-    */
-
-    /*     * ***********************Methode static*************************** */
-
-
-    /*     * *********************Methode d'instance************************* */
-
-  // Exécution d'une commande
-     public function execute($_options = array()) {
-     }
-
-    /*     * **********************Getteur Setteur*************************** */
-}
+    
+    public function dontRemoveCmd() {
+		return true;
+	}
+    
+	public function execute($_options = null) {
+        $eqLogic = $this->getEqLogic();
+        if (!is_object($eqLogic) || $eqLogic->getIsEnable() != 1) {
+            throw new Exception(__('Equipement desactivé impossible d\éxecuter la commande : ' . $this->getHumanName(), __FILE__));
+        }
+        log::add('jazpar', 'debug', 'Execution de la commande ' . $this->getLogicalId());
+        switch ($this->getLogicalId()) {
+            case "refresh":
+                $eqLogic->pullJazpar(true);
+                break;
+        }
+    }

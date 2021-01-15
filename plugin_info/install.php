@@ -96,6 +96,17 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $cmd = $this->getCmd(null, 'refresh');
+        if (!is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setLogicalId('refresh');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setName('Rafraichir');
+            $cmd->setType('action');
+            $cmd->setSubType('other');
+            $cmd->setEventOnly(1);
+            $cmd->save();
+        }
         $eqLogic->save();
     }
     
