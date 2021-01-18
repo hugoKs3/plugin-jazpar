@@ -123,6 +123,7 @@ foreach (jeeObject::all() as $object) {
             <option value="jazpar">Jazpar 1</option>
             <option value="jazpar2">Jazpar 2</option>
             <option value="jazpar3">Jazpar 3</option>
+            <option value="jazpar4">Jazpar 4</option>
         </select>
 
  	 </div>
@@ -138,6 +139,12 @@ foreach (jeeObject::all() as $object) {
 
  	 </div>
 	</div>
+ <div class="form-group">
+	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets}}">{{Utiliser des dates dans les widgets}}</label>
+	 <div class="col-sm-6">
+		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="useDates"/>
+ 	 </div>
+	</div>
 </fieldset>
 </form>
 </div>
@@ -149,6 +156,7 @@ foreach (jeeObject::all() as $object) {
     <img id="screenshot_jazpar" src="plugins/jazpar/data/images/screenshot_jazpar.png" style="display: none;">
     <img id="screenshot_jazpar2" src="plugins/jazpar/data/images/screenshot_jazpar2.png" style="display: none;">
     <img id="screenshot_jazpar3" src="plugins/jazpar/data/images/screenshot_jazpar3.png" style="display: none;">
+    <img id="screenshot_jazpar4" src="plugins/jazpar/data/images/screenshot_jazpar4.png" style="display: none;">
 </div>
 </div>
       <div role="tabpanel" class="tab-pane" id="commandtab">
@@ -178,6 +186,7 @@ foreach (jeeObject::all() as $object) {
           $('#screenshot_jazpar').hide();
           $('#screenshot_jazpar2').hide();
           $('#screenshot_jazpar3').hide();
+          $('#screenshot_jazpar4').hide();
           $('#screenshot_' + this.value).show();
         });    
     </script> 

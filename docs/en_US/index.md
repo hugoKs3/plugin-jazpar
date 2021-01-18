@@ -33,7 +33,7 @@ The plugin will then check the correct connection to the site *GRDF* and retriev
 - **monthly consumption** : the last 12 months,
 - **maximum, minimum and average monthly consumptions of similar profiles**
 
-Two widget's tmplates are available. The one with comparison informs you how your previous month consumption compares with similar profiles.
+Four widget's tmplates are available. The ones with comparison inform you how your previous month consumption compares with similar profiles.
 
 # Remarks
 

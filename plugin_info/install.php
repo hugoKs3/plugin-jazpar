@@ -38,9 +38,12 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
+        if (empty($eqLogic->getConfiguration('useDates'))) {
+            $eqLogic->setConfiguration('useDates', 0);
+        }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
-        log::add('jazpar', 'info', 'update template : ' . $template);
+        log::add('jazpar', 'debug', 'update template : ' . $template);
         if (is_int($template)) {
             if ($template == 1) {
                 $eqLogic->setConfiguration('widgetTemplate', 'jazpar');
@@ -94,6 +97,17 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setTemplate('mobile','tile');
             $cmd->setUnite('kWh');
             $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
+        $cmd = $eqLogic->getCmd(null, 'refresh');
+        if (!is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setLogicalId('refresh');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setName('Rafraichir');
+            $cmd->setType('action');
+            $cmd->setSubType('other');
+            $cmd->setEventOnly(1);
             $cmd->save();
         }
         $eqLogic->save();

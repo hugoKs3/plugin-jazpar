@@ -64,21 +64,17 @@ class jazpar extends eqLogic {
       {
         if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
             $eqLogicCmd->execCmd();
-            if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day')) && $this->getConfiguration('forceRefresh') != 1)
-            {
-              log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
-            }
-            else
-            {
-              $need_refresh = true;
-              if ($this->getConfiguration('forceRefresh') == 1) {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName() . ' mais Force Refresh activé');
-              }
-              else {
+            if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
+            } else {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
-              }
+                $need_refresh = true;
             }
         }
+      }
+      if ($this->getConfiguration('forceRefresh') == 1) {
+        log::add(__CLASS__, 'info', 'Mode Force Refresh activé');
+        $need_refresh = true;
       }
 
       if ($need_refresh == true)
@@ -112,7 +108,11 @@ class jazpar extends eqLogic {
             }
         }
         else {
-          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain essai dans 1 heure');
+          if (date('G') >= 21) {
+            log::add(__CLASS__, 'error', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain demain');
+          } else {
+            log::add(__CLASS__, 'warning', $this->getHumanName() . ' Erreur connexion - Abandon - Prochain essai dans 1 heure');
+          }
         }
       }
       else
@@ -498,12 +498,13 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (comparison): ' . $response);
 
-         preg_match_all('/^.*dateDebut=new Date\(\"(.*?)T.*?/mi', $response, $matches);
+         preg_match_all('/^.*dateDebut=new Date\(\"(.*?)\".*?/mi', $response, $matches);
          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Date debut comparison : ' . $matches[1][0]);
          $dateDebutStr = $matches[1][0];
          if ($dateDebutStr == '') {
              log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune donnée de comparaison');
          } else {
+             $dateDebutStr = substr($dateDebutStr, 0, 10);
              preg_match_all('/^.*conso_median:parseData\(\"(.*?)\".*?/mi', $response, $matches);   
              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Local data median : ' . $matches[1][0]);
              $averages = explode(",", $matches[1][0]);
@@ -597,6 +598,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $this->setConfiguration('forceRefresh', 0);
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setConfiguration('widgetTemplate', 'jazpar2');
+      $this->setConfiguration('useDates', 0);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -696,6 +698,17 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $cmd = $this->getCmd(null, 'refresh');
+        if (!is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setLogicalId('refresh');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setName('Rafraichir');
+            $cmd->setType('action');
+            $cmd->setSubType('other');
+            $cmd->setEventOnly(1);
+            $cmd->save();
+        }
     }
     
     public function toHtml($_version = 'dashboard') {
@@ -710,6 +723,8 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         return $replace;
       }
       $version = jeedom::versionAlias($_version);
+        
+      $useDates = $this->getConfiguration('useDates');
 
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
@@ -719,7 +734,25 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
+        if (substr($cmd->getLogicalId(), 0, 6) === "consom") {
+            if ($useDates != 1) {
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("MOIS EN COURS",__FILE__);
+            } else {
+                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = $month;
+            }
+        } 
+        if (substr($cmd->getLogicalId(), 0, 6) === "consod") {
+            if ($useDates != 1) {
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("VEILLE",__FILE__);
+            } else {
+                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+                $day = date('j', strtotime($cmd->getCollectDate()));
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = $day . ' ' . $month;
+            }
+        } 
       }
+        
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
       
       if ($template != "jazpar") {
@@ -783,20 +816,21 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 }
 
 class jazparCmd extends cmd {
-    /*     * *************************Attributs****************************** */
-
-    /*
-      public static $_widgetPossibility = array();
-    */
-
-    /*     * ***********************Methode static*************************** */
-
-
-    /*     * *********************Methode d'instance************************* */
-
-  // Exécution d'une commande
-     public function execute($_options = array()) {
-     }
-
-    /*     * **********************Getteur Setteur*************************** */
+    
+    public function dontRemoveCmd() {
+		return true;
+	}
+    
+	public function execute($_options = null) {
+        $eqLogic = $this->getEqLogic();
+        if (!is_object($eqLogic) || $eqLogic->getIsEnable() != 1) {
+            throw new Exception(__('Equipement desactivé impossible d\éxecuter la commande : ' . $this->getHumanName(), __FILE__));
+        }
+        log::add('jazpar', 'debug', 'Execution de la commande ' . $this->getLogicalId());
+        switch ($this->getLogicalId()) {
+            case "refresh":
+                $eqLogic->pullJazpar();
+                break;
+        }
+    }
 }
