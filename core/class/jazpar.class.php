@@ -586,6 +586,12 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 }
                 log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
                 $cmd->event($measure, $dateReal);
+                if ($timeframe == 'jour' && $suffix == '3') {
+                    $cmdIndex = $this->getCmd(null, 'index');
+                    $index = $cmdIndex->execCmd();
+                    $index = $index + round($measure, 0);
+                    $cmdIndex->event($index, $dateReal);
+                }
             }
         }
      }
@@ -707,6 +713,22 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setType('action');
             $cmd->setSubType('other');
             $cmd->setEventOnly(1);
+            $cmd->save();
+        }
+        $cmd = $this->getCmd(null, 'index');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Index');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('index');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('m3');
+            $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
     }
