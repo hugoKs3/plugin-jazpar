@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       foreach ($this->getCmd('info') as $eqLogicCmd)
       {
-        if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
+        if (strpos($eqLogicCmd->getLogicalId(), "consod") === 0) {
             $eqLogicCmd->execCmd();
             if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
@@ -588,9 +588,10 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 $cmd->event($measure, $dateReal);
                 if ($timeframe == 'jour' && $suffix == '3') {
                     $cmdIndex = $this->getCmd(null, 'index');
-                    $index = $cmdIndex->execCmd();
-                    $index = $index + round($measure, 0);
+                    $indexOld = $cmdIndex->execCmd();
+                    $index = $indexOld + round($measure, 0);
                     $cmdIndex->event($index, $dateReal);
+                    log::add(__CLASS__, 'info', $this->getHumanName() . ' Increase Index command from ' . $indexOld . ' to ' . $index);
                 }
             }
         }
