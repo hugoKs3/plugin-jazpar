@@ -110,6 +110,22 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setEventOnly(1);
             $cmd->save();
         }
+        $cmd = $eqLogic->getCmd(null, 'index');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Index');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setLogicalId('index');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('m3');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
         $eqLogic->save();
     }
     

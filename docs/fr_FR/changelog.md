@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# 23/01/2021
+- Nouvelle commande index qui cumule les consommations journalières en m3 (pour compatibilité plugin suivi conso)
+
 # 15/01/2021
 - Correction de l'expression régulière pour les données de comparaison
 - Nouveau template de widget (Jazpar 4)

@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       foreach ($this->getCmd('info') as $eqLogicCmd)
       {
-        if (strpos($eqLogicCmd->getLogicalId(), "local") === FALSE) {
+        if (strpos($eqLogicCmd->getLogicalId(), "consod") === 0) {
             $eqLogicCmd->execCmd();
             if ($eqLogicCmd->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
@@ -586,6 +586,13 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
                 }
                 log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $dateReal . ' => Mesure = ' . $measure);
                 $cmd->event($measure, $dateReal);
+                if ($timeframe == 'jour' && $suffix == '3') {
+                    $cmdIndex = $this->getCmd(null, 'index');
+                    $indexOld = $cmdIndex->execCmd();
+                    $index = $indexOld + round($measure, 0);
+                    $cmdIndex->event($index, $dateReal);
+                    log::add(__CLASS__, 'info', $this->getHumanName() . ' Increase Index command from ' . $indexOld . ' to ' . $index);
+                }
             }
         }
      }
@@ -707,6 +714,22 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setType('action');
             $cmd->setSubType('other');
             $cmd->setEventOnly(1);
+            $cmd->save();
+        }
+        $cmd = $this->getCmd(null, 'index');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Index');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('index');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('m3');
+            $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
     }
