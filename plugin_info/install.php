@@ -41,6 +41,9 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('useDates'))) {
             $eqLogic->setConfiguration('useDates', 0);
         }
+        if (empty($eqLogic->getConfiguration('roundValues'))) {
+            $eqLogic->setConfiguration('roundValues', 1);
+        }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
         log::add('jazpar', 'debug', 'update template : ' . $template);
