@@ -751,10 +751,13 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $useDates = $this->getConfiguration('useDates');
       $roundValues = $this->getConfiguration('roundValues');
 
+      log::add(__CLASS__, 'debug', "roundValues: " . $roundValues);
+        
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
         $value = $cmd->execCmd();
         if (strpos($cmd->getLogicalId(), "local") == 0 || $roundValues == 1) {
+            log::add(__CLASS__, 'debug', "command rounded: " . $cmd->getLogicalId());
             $value = round($value, 0);
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
