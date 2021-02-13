@@ -39,7 +39,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
         if (empty($eqLogic->getConfiguration('useDates'))) {
-            $eqLogic->setConfiguration('useDates', 0);
+            $eqLogic->setConfiguration('useDates', 1);
         }
         if (empty($eqLogic->getConfiguration('roundValues'))) {
             $eqLogic->setConfiguration('roundValues', 1);
