@@ -46,6 +46,11 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if ($eqLogic->getConfiguration('roundValues', 'unset') === 'unset') {
             $eqLogic->setConfiguration('roundValues', 1);
         }
+        log::add('jazpar', 'debug', 'testWrong : ' . $eqLogic->getConfiguration('testWrong'));
+        if ($eqLogic->getConfiguration('testWrong', 'unset') === 'unset') {
+            log::add('jazpar', 'debug', 'in tesWrong If');
+            $eqLogic->setConfiguration('testWrong', 1);
+        }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');
         log::add('jazpar', 'debug', 'update template : ' . $template);
