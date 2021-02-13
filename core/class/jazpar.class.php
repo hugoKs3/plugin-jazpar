@@ -754,7 +754,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
         $value = $cmd->execCmd();
-        if (strpos($cmd->getLogicalId(), "local") == 0 && $roundValues == 1) {
+        if (strpos($cmd->getLogicalId(), "local") == 0 || $roundValues == 1) {
             $value = round($value, 0);
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
