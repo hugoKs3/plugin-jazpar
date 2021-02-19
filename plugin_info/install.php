@@ -38,8 +38,11 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
         }
-        if (empty($eqLogic->getConfiguration('useDates'))) {
+        if ($eqLogic->getConfiguration('useDates', 'unset') === 'unset') {
             $eqLogic->setConfiguration('useDates', 0);
+        }
+        if ($eqLogic->getConfiguration('roundValues', 'unset') === 'unset') {
+            $eqLogic->setConfiguration('roundValues', 1);
         }
         
         $template = $eqLogic->getConfiguration('widgetTemplate');

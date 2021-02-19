@@ -606,6 +606,7 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setConfiguration('widgetTemplate', 'jazpar2');
       $this->setConfiguration('useDates', 0);
+      $this->setConfiguration('roundValues', 1);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -748,11 +749,12 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
       $version = jeedom::versionAlias($_version);
         
       $useDates = $this->getConfiguration('useDates');
-
+      $roundValues = $this->getConfiguration('roundValues');
+        
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
         $value = $cmd->execCmd();
-        if (strpos($cmd->getLogicalId(), "local") == 0) {
+        if (substr($cmd->getLogicalId(), 0, 5) === "local" || $roundValues == 1) {
             $value = round($value, 0);
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;

@@ -4,6 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# 19/02/2021
+- Option to round or not values in widgets
+
 # 23/01/2021
 - New index command which adds daily m3 consumptions (for suivi conso plugin compatibility)
 

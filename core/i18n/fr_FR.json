@@ -38,7 +38,9 @@
         "Type": "Type",
         "Action": "Action",
         "Utiliser des dates dans les widgets": "Utiliser des dates dans les widgets",
-        "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets"
+        "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets",
+        "Cocher la case pour arrondir les valeurs dans les widgets": "Cocher la case pour arrondir les valeurs dans les widgets",
+        "Arrondir les valeurs": "Arrondir les valeurs"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
