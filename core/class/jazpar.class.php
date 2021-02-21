@@ -842,9 +842,11 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
 class jazparCmd extends cmd {
     
+    /*
     public function dontRemoveCmd() {
 		return true;
 	}
+    */
     
 	public function execute($_options = null) {
         $eqLogic = $this->getEqLogic();
