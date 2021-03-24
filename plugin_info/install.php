@@ -129,6 +129,22 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $cmd = $eqLogic->getCmd(null, 'threshold');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Seuil du mois en cours');
+            $cmd->setEqLogic_id($eqLogic->getId());
+            $cmd->setLogicalId('threshold');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
         $eqLogic->save();
     }
     
