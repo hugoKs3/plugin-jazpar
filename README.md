@@ -3,6 +3,10 @@ This is a plugin for Jeedom aimed at retrieveing gaz consumptions metrics from G
 
 This implies to have a communicating gaz meter provided by GRDF called Gazpar and a proper local Jeedom installation.
 
+You like this plugin? You can, if you wish, encourage its developer:
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/hugoKs3)
+
 # Credits
 This plugin has been inspired by the work done by:
 - [Jeedom](https://github.com/jeedom) through their Enedis plugin: [plugin-enedis](https://github.com/jeedom/plugin-enedis)
