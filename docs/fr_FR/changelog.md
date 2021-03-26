@@ -4,9 +4,8 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
-# BETA en cours
+# Stable - 26/03/2021
 - Seuil pour le mois en cours récupéré depuis le site et stocké dans une nouvelle commande
-- Threshold for current month gathered from website and stored in new command
 
 # Stable - 19/02/2021
 - Option pour arrondir ou non les valeurs dans les widgets

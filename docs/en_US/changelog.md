@@ -4,6 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# Stable - 26/03/2021
+- Threshold for current month gathered from website and stored in new command
+
 # Stable - 19/02/2021
 - Option to round or not values in widgets
 
