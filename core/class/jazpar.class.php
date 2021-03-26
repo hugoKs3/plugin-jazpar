@@ -519,6 +519,49 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
              $this->recordComparison(DateTime::createFromFormat('Y-m-d', $dateDebutStr), $minimums, $this->getCmd(null, 'localmin'));
          }
 
+         log::add(__CLASS__, 'info', $this->getHumanName() . ' Récupération des valeurs de seuil');
+
+         $curl = curl_init();
+         curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://monespace.grdf.fr/monespace/particulier/consommation/seuils",
+            CURLOPT_HEADER  => true,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => false,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                    "User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36",
+                    "Accept-Language: fr,fr-FR;q=0.8,en;q=0.6",
+                    "Accept-Encoding: gzip, deflate, br", 
+                    "Accept: application/xml, application/json, text/javascript, */*; q=0.01",
+                    "Faces-Request: partial/ajax",
+                    "Host: monespace.grdf.fr",
+                    "Origin: https://monespace.grdf.fr",
+                    "Referer: https://monespace.grdf.fr/monespace/particulier/consommation/comparaison",
+                    "Sec-Fetch-Mode: cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "X-Requested-With: XMLHttpRequest",
+                    "Cookie: connectedLUser=0; COOKIE_SUPPORT=true; GUEST_LANGUAGE_ID=fr_FR; ROUTEID_EP=.1; JSESSIONID_EP=".$cookies[0]."; GRDF_EP=".$cookies[1]."; KPISavedRef=https://monespace.grdf.fr/monespace/connexion;")
+         ));
+         $response = curl_exec($curl);
+         curl_close($curl);
+
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Output data (seuils): ' . $response);
+
+         preg_match_all('/^.*chartMois1\",0,(.*?),.*?/mi', $response, $matches);
+         log::add(__CLASS__, 'debug', $this->getHumanName() . ' Seuil mois en cours : ' . $matches[1][0]);
+         $seuil = $matches[1][0];
+         if ($seuil == '') {
+          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucun seuil trouvé');
+         } else {
+          $cmdSeuil = $this->getCmd(null, 'threshold');
+          $cmdSeuil->event($seuil);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Set current month threshold to ' . $seuil);
+         }
      }
      
      return true;
@@ -733,6 +776,22 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
         }
+        $cmd = $this->getCmd(null, 'threshold');
+        if ( ! is_object($cmd)) {
+            $cmd = new jazparCmd();
+            $cmd->setName('Seuil du mois en cours');
+            $cmd->setEqLogic_id($this->getId());
+            $cmd->setLogicalId('threshold');
+            $cmd->setType('info');
+            $cmd->setSubType('numeric');
+            $cmd->setIsHistorized(1);
+            $cmd->setIsVisible(0);
+            $cmd->setTemplate('dashboard','tile');
+            $cmd->setTemplate('mobile','tile');
+            $cmd->setUnite('kWh');
+            $cmd->setGeneric_type('CONSUMPTION');
+            $cmd->save();
+        }
     }
     
     public function toHtml($_version = 'dashboard') {
@@ -842,9 +901,11 @@ $postfields = "javax.faces.partial.ajax=true&javax.faces.source=_eConsoconsoDeta
 
 class jazparCmd extends cmd {
     
+    /*
     public function dontRemoveCmd() {
 		return true;
 	}
+    */
     
 	public function execute($_options = null) {
         $eqLogic = $this->getEqLogic();

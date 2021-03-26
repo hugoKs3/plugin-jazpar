@@ -111,7 +111,7 @@ foreach ($eqLogics as $eqLogic) {
 		 </div>
  </div>
  <div class="form-group">
-	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la répcupération des données}}</label>
+	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la récupération des données}}</label>
 	 <div class="col-sm-6">
 		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="forceRefresh"/>
  	 </div>

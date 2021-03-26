@@ -9,6 +9,10 @@ Plugin allowing the recovery of consumption of the communicating meter *Gazpar* 
 >**Important**      
 >You must have a GRDF customer account. The plugin retrieves information from the game *my space* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">of the GRDF website</a>, you must therefore check that you have access to it with your usual identifiers and that the data is visible there. Otherwise, the plugin will not work.
 
+You like this plugin? You can, if you wish, encourage its developer:
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/hugoKs3)
+
 # Configuration
 
 ## Plugin configuration
@@ -32,6 +36,7 @@ The plugin will then check the correct connection to the site *GRDF* and retriev
 - **daily consumption** : the last 10 days,
 - **monthly consumption** : the last 12 months,
 - **maximum, minimum and average monthly consumptions of similar profiles**
+- **current month threshold** as defined on the website
 
 Four widget's tmplates are available. The ones with comparison inform you how your previous month consumption compares with similar profiles.
 

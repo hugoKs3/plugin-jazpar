@@ -25,7 +25,7 @@
         "Visible": "Visible",
         "Identifiant GRDF": "GRDF ID",
         "Mot de passe GRDF": "GRDF password",
-        "Forcer la répcupération des données": "Force data retrieval",
+        "Forcer la récupération des données": "Force data retrieval",
         "Cocher la case pour forcer la récupération des données même si déjà présentes": "Check this option to force data retrieval even if data already present for concerned periods",
         "Template de widget": "Widget template",
         "Sélectionnez le template de widget à utiliser": "Choose the widget's template to use",
