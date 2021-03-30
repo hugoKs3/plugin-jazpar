@@ -9,10 +9,6 @@ Plugin permettant la récupération des consommations du compteur communicant *G
 >**Important**      
 >Il est nécessaire d'être en possession d'un compte-client GRDF. Le plugin récupère les informations à partir de la partie *mon espace* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">du site GRDF</a>, il faut donc vérifier que vous y avez bien accès avec vos identifiants habituels et que les données y sont visibles. Dans le cas contraire, le plugin ne fonctionnera pas.
 
-Ce plugin vous plait ? Vous pouvez, si vous le souhaitez, encourager son développeur :
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/hugoKs3)
-
 # Configuration
 
 ## Configuration du plugin
