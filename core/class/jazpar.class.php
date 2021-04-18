@@ -101,7 +101,7 @@ class jazpar extends eqLogic {
               $resultMonth = $this->getJazparData($cookies, $resource_id, $start, $end);
             }
             
-            if (!$resultDay || !resultMonth) {
+            if (!$resultDay || !$resultMonth) {
                 if (date('G') >= 21) {
                     log::add(__CLASS__, 'error', $this->getHumanName() . ' Impossible de récupérer les données aujourd\'hui - Prochain essai demain');
                 }
