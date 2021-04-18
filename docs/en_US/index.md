@@ -9,10 +9,6 @@ Plugin allowing the recovery of consumption of the communicating meter *Gazpar* 
 >**Important**      
 >You must have a GRDF customer account. The plugin retrieves information from the game *my space* <a href="https://monespace.grdf.fr/monespace/particulier/accueil" target="_blank">of the GRDF website</a>, you must therefore check that you have access to it with your usual identifiers and that the data is visible there. Otherwise, the plugin will not work.
 
-You like this plugin? You can, if you wish, encourage its developer:
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/hugoKs3)
-
 # Configuration
 
 ## Plugin configuration
