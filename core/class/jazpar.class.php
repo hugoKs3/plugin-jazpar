@@ -266,10 +266,9 @@ class jazpar extends eqLogic {
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');
       $end = date('Y-m-d', strtotime('-1 day'));
-      $start = date('Y-m-d', strtotime('-1 year'));
+      $start = date('Y-m-d', strtotime('-2 month'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso_url: ' . curl_getinfo($curl, CURLOPT_URL));
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
@@ -285,6 +284,7 @@ class jazpar extends eqLogic {
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get comparison data...');
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/consommation-anuelle-reference");
       $response = curl_exec($curl);
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' comparison: ' . $response);
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
