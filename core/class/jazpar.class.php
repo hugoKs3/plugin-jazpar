@@ -89,6 +89,9 @@ class jazpar extends eqLogic {
           $conso = $data[1];
           $compare = $data[2];
 
+          $monthValues = array();
+          $monthValues3 = array();
+
           foreach ($conso->$thePce->releves as $measure) {
             $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
             $dateDay = $dt->format('Y-m-d 23:55:00'); 
@@ -107,8 +110,8 @@ class jazpar extends eqLogic {
             $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
           }
 
-          $this->recordMonths($consoMonth3, $monthValues3);
-          $this->recordMonths($consoMonth, $monthValues);
+          $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 23:55:00');
+          $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 23:55:00');
 
           $this->recordIndex(end($conso->$thePce->releves));
 
@@ -158,7 +161,7 @@ class jazpar extends eqLogic {
       $theValue = $measure->indexFin;
       $cmd = $this->getCmd(null, 'index');
       $cmdId = $cmd->getId();
-      $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
+      $cmdHistory = history::byCmdIdDatetime($cmdId, $theValue);
       if (is_object($cmdHistory) && $cmdHistory->getValue() == $theDate) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
@@ -176,16 +179,19 @@ class jazpar extends eqLogic {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (jour '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
       }
     }
 
-    public function recordMonths($cmd, $records) 
+    public function recordMonths($cmd, $records, $lastDate) 
     {
       $cmdId = $cmd->getId();
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
+        if (DateTime::createFromFormat('Y-m-d H:m:i', $theDate) > DateTime::createFromFormat('Y-m-d H:m:i', $lastDate)) {
+          $theDate = $lastDate;
+        }
         $theValue = $records[$theDate];
         $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
@@ -194,7 +200,7 @@ class jazpar extends eqLogic {
           $dt = DateTime::createFromFormat('Y-m-d H:i:s', $theDate);
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $theDate);
           history::removes($cmdId, $dt->format('Y-m-d'), $theDate);
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (mois '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
         }
       }
