@@ -63,9 +63,9 @@ class jazpar extends eqLogic {
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
       if ($consoDay->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes pour la commande ' . $eqLogicCmd->getName());
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes');
       } else {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données pour la commande ' . $eqLogicCmd->getName());
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données');
         $need_refresh = true;
       }
 
