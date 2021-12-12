@@ -161,8 +161,8 @@ class jazpar extends eqLogic {
       $theValue = $measure->indexFin;
       $cmd = $this->getCmd(null, 'index');
       $cmdId = $cmd->getId();
-      $cmdHistory = history::byCmdIdDatetime($cmdId, $theValue);
-      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theDate) {
+      $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
+      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
@@ -191,6 +191,7 @@ class jazpar extends eqLogic {
         $theDate = $array_key;
         $theValue = $records[$theDate];
         if (DateTime::createFromFormat('Y-m-d H:m:i', $theDate) > DateTime::createFromFormat('Y-m-d H:m:i', $lastDate)) {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . DateTime::createFromFormat('Y-m-d H:m:i', $theDate) . ' is after ' . DateTime::createFromFormat('Y-m-d H:m:i', $lastDate));
           $theDate = $lastDate;
         }
         $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
