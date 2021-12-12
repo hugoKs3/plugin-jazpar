@@ -86,7 +86,7 @@ class jazpar extends eqLogic {
           $consoMonth3 = $this->getCmd(null, 'consom3');
 
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE ' . $data[0]);
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . $data[1]);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . json_decode($data[1]));
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' comparison ' . $data[2]);
 
           foreach ($data[1]->$data[0]->releves as $measure) {
@@ -266,7 +266,7 @@ class jazpar extends eqLogic {
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');
       $end = date('Y-m-d', strtotime('-1 day'));
-      $start = date('Y-m-d', strtotime('-2 month'));
+      $start = date('Y-m-d', strtotime('-1 year'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);
