@@ -86,7 +86,7 @@ class jazpar extends eqLogic {
           $consoMonth3 = $this->getCmd(null, 'consom3');
 
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE ' . $data[0]);
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . $data[1]->$data[0]->idPce);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . $data[1]->strval($data[0])->idPce);
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' comparison ' . $data[2]);
 
           foreach ($data[1]->$data[0]->releves as $measure) {
