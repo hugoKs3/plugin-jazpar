@@ -269,6 +269,8 @@ class jazpar extends eqLogic {
       $start = date('Y-m-d', strtotime('-1 year'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso_url: ' . curl_getinfo($curl, CURLOPT_URL));
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
