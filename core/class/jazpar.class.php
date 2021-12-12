@@ -190,7 +190,7 @@ class jazpar extends eqLogic {
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
         $theValue = $records[$theDate];
-        if (DateTime::createFromFormat('Y-m-d H:m:i', $theDate) > DateTime::createFromFormat('Y-m-d H:m:i', $lastDate)) {
+        if (new DateTime($theDate) > new DateTime($lastDate)) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' test: ' . $theDate . ' is after ' . $lastDate);
           $theDate = $lastDate;
         }
