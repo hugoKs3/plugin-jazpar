@@ -85,7 +85,7 @@ class jazpar extends eqLogic {
           $consoMonth = $this->getCmd(null, 'consom');
           $consoMonth3 = $this->getCmd(null, 'consom3');
 
-          foreach ($measure as $data[1]->$data[0]->releves) {
+          foreach ($data[1]->$data[0]->releves as $measure) {
             $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
             $dateDay = $dt->format('Y-m-d 23:55:00'); 
             $dateMonth = $dt->format('Y-m-t 23:55:00'); 
@@ -202,7 +202,7 @@ class jazpar extends eqLogic {
       curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://login.monespace.grdf.fr/sofit-account-api/api/v1/auth',
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HEADER  => true,
+        //CURLOPT_HEADER  => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 0,
@@ -272,7 +272,7 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
         return null;
       } else {
-        $conso = json_decode($response);;
+        $conso = json_decode($response);
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...consumption data retrieved!');
       }
 
@@ -286,7 +286,7 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
         return null;
       } else {
-        $comparison = json_decode($response);;
+        $comparison = json_decode($response);
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');
       }
 
