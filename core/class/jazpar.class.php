@@ -85,11 +85,11 @@ class jazpar extends eqLogic {
           $consoMonth = $this->getCmd(null, 'consom');
           $consoMonth3 = $this->getCmd(null, 'consom3');
 
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE ' . $data[0]);
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . $data[1]->strval($data[0])->idPce);
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' comparison ' . $data[2]);
+          $thePce = $data[0];
+          $conso = $data[1];
+          $compare = $data[2];
 
-          foreach ($data[1]->$data[0]->releves as $measure) {
+          foreach ($conso->$thePce->releves as $measure) {
             $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
             $dateDay = $dt->format('Y-m-d 23:55:00'); 
             $dateMonth = $dt->format('Y-m-t 23:55:00'); 
@@ -105,7 +105,7 @@ class jazpar extends eqLogic {
           $this->recordIndex(end($data[1]->$data[0]->releves));
 
           /*
-          foreach ($measure as $data[2]) {
+          foreach ($measure as $compare) {
             $cmd = null;
             switch($measure->consommationType)
             {
