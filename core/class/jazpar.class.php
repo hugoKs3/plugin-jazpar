@@ -95,8 +95,16 @@ class jazpar extends eqLogic {
             $dateMonth = $dt->format('Y-m-t 23:55:00'); 
             $this->recordDay($consoDay3, $dateDay, $measure->volumeBrutConsomme);
             $this->recordDay($consoDay, $dateDay, $measure->energieConsomme);
-            $monthValues[$dateMonth] = $monthValues[$dateMonth] + $measure->energieConsomme;
-            $monthValues3[$dateMonth] = $monthValues3[$dateMonth] + $measure->volumeBrutConsomme;
+            $month = 0;
+            $month3 = 0;
+            if (array_key_exists($dateMonth, $monthValues)) {
+              $month = $monthValues[$dateMonth];
+            }
+            if (array_key_exists($dateMonth, $monthValues3)) {
+              $month3 = $monthValues3[$dateMonth];
+            }
+            $monthValues[$dateMonth] = $month + $measure->energieConsomme;
+            $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
           }
 
           $this->recordMonths($consoMonth3, $monthValues3);
@@ -152,10 +160,10 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
       if (is_object($cmdHistory) && $cmdHistory->getValue() == $theDate) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement index : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
       }
     }
@@ -164,7 +172,7 @@ class jazpar extends eqLogic {
     {
       $cmdId = $cmd->getId();
       $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
-      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theDate) {
+      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
@@ -178,7 +186,7 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
-        $theValue = $record[$theDate];
+        $theValue = $records[$theDate];
         $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
