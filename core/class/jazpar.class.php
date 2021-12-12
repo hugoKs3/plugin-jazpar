@@ -85,6 +85,10 @@ class jazpar extends eqLogic {
           $consoMonth = $this->getCmd(null, 'consom');
           $consoMonth3 = $this->getCmd(null, 'consom3');
 
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE ' . $data[0]);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso ' . $data[1]);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' comparison ' . $data[2]);
+
           foreach ($data[1]->$data[0]->releves as $measure) {
             $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
             $dateDay = $dt->format('Y-m-d 23:55:00'); 
