@@ -102,7 +102,7 @@ class jazpar extends eqLogic {
           $this->recordMonths($consoMonth3, $monthValues3);
           $this->recordMonths($consoMonth, $monthValues);
 
-          $this->recordIndex(end($data[1]->$data[0]->releves));
+          $this->recordIndex(end($conso->$thePce->releves));
 
           /*
           foreach ($measure as $compare) {
