@@ -245,6 +245,7 @@ class jazpar extends eqLogic {
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Retrieve PCE...');
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-connexion/users/pce/historique-consultation");
       $response = curl_exec($curl);
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE: ' . $response);
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
