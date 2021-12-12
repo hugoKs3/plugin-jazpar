@@ -279,6 +279,7 @@ class jazpar extends eqLogic {
       } else {
         $conso = json_decode($response);
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...consumption data retrieved!');
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso decode ' . json_decode($conso));
       }
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get comparison data...');
