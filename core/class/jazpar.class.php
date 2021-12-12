@@ -163,7 +163,7 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       $cmdHistory = history::byCmdIdDatetime($cmdId, $theValue);
       if (is_object($cmdHistory) && $cmdHistory->getValue() == $theDate) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
           log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement index : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
@@ -176,7 +176,7 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
       if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure (jour '. $cmd->getUnite() . ') déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
       }
       else {      
           log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (jour '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
@@ -189,13 +189,13 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
+        $theValue = $records[$theDate];
         if (DateTime::createFromFormat('Y-m-d H:m:i', $theDate) > DateTime::createFromFormat('Y-m-d H:m:i', $lastDate)) {
           $theDate = $lastDate;
         }
-        $theValue = $records[$theDate];
         $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure (mois '. $cmd->getUnite() . ') déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
         } else {
           $dt = DateTime::createFromFormat('Y-m-d H:i:s', $theDate);
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $theDate);
