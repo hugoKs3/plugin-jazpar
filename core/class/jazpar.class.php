@@ -271,7 +271,7 @@ class jazpar extends eqLogic {
         return null;
       } else {
         $obj = json_decode($response);
-        if ($obj->state !== "SUCCESS") {
+        if ($obj->state != "SUCCESS") {
           log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error');
           return null;
         } else {
