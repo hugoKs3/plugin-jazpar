@@ -236,7 +236,6 @@ class jazpar extends eqLogic {
         $theDate = $array_key;
         $theValue = $records[$theDate];
         if (new DateTime($theDate) > new DateTime($lastDate)) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' test: ' . $theDate . ' is after ' . $lastDate);
           $theDate = $lastDate;
         }
         $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);

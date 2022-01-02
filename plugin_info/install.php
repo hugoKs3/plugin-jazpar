@@ -144,6 +144,8 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setUnite('kWh');
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
+        } else {
+          $cmd->setName('Seuil mensuel');
         }
         $eqLogic->save();
     }
