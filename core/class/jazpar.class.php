@@ -346,7 +346,7 @@ class jazpar extends eqLogic {
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setConfiguration('widgetTemplate', 'jazpar2');
       $this->setConfiguration('useDates', 0);
-      $this->setConfiguration('roundValues', 1);
+      //$this->setConfiguration('roundValues', 1);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -510,7 +510,7 @@ class jazpar extends eqLogic {
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
         $value = $cmd->execCmd();
-        if (substr($cmd->getLogicalId(), 0, 5) === "local" || $roundValues == 1) {
+        if (substr($cmd->getLogicalId(), 0, 5) === "local") {
             $value = round($value, 0);
         }
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
