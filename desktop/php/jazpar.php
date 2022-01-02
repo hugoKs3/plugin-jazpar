@@ -111,6 +111,12 @@ foreach ($eqLogics as $eqLogic) {
 		 </div>
  </div>
  <div class="form-group">
+	 <label class="col-sm-6 control-label help" data-help="{{Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)}}">{{Numéro PCE}}</label>
+	 <div class="col-sm-6">
+			 <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="pce" placeholder="Identifiant du compteur (PCE)"/>
+	 </div>
+</div>
+ <div class="form-group">
 	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour forcer la récupération des données même si déjà présentes}}">{{Forcer la récupération des données}}</label>
 	 <div class="col-sm-6">
 		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="forceRefresh"/>

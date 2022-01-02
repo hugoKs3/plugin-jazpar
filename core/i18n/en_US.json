@@ -40,7 +40,10 @@
         "Utiliser des dates dans les widgets": "Use dates in widgets",
         "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Check this option to use dates instead of command names in widgets",
         "Cocher la case pour arrondir les valeurs dans les widgets": "Check this option to round values in widgets",
-        "Arrondir les valeurs": "Round values"
+        "Arrondir les valeurs": "Round values",
+        "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)": "Specify the PCE number if you own several gas meters (optional)",
+        "Numéro PCE": "PCE number",
+        "Identifiant du compteur (PCE)": "Gas meter identifier (PCE)"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",

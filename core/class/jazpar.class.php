@@ -279,22 +279,27 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...authenticated!');
       }
 
-      log::add(__CLASS__, 'info', $this->getHumanName() . ' Retrieve PCE...');
-      curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-connexion/users/pce/historique-consultation");
-      $response = curl_exec($curl);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE: ' . $response);
-      $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      if (empty($this->getConfiguration('pce'))) {
+        log::add(__CLASS__, 'info', $this->getHumanName() . ' Retrieve PCE...');
+        curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-connexion/users/pce/historique-consultation");
+        $response = curl_exec($curl);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' PCE: ' . $response);
+        $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-      if ($responseStatus != "200") {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve PCE');
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
-        return null;
-      } else {
-        $obj = json_decode($response);
-        foreach ($obj as $pce) {
-          $mypce = $pce->numPce;
+        if ($responseStatus != "200") {
+          log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve PCE');
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
+          return null;
+        } else {
+          $obj = json_decode($response);
+          foreach ($obj as $pce) {
+            $mypce = $pce->numPce;
+          }
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' ...PCE retrieved: '.$mypce);
         }
-        log::add(__CLASS__, 'info', $this->getHumanName() . ' ...PCE retrieved: '.$mypce);
+      } else {
+        log::add(__CLASS__, 'info', $this->getHumanName() . ' PCE provided as input: ' . $this->getConfiguration('pce'));
+        $mypce = $this->getConfiguration('pce');
       }
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');

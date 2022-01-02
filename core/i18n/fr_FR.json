@@ -40,7 +40,10 @@
         "Utiliser des dates dans les widgets": "Utiliser des dates dans les widgets",
         "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets",
         "Cocher la case pour arrondir les valeurs dans les widgets": "Cocher la case pour arrondir les valeurs dans les widgets",
-        "Arrondir les valeurs": "Arrondir les valeurs"
+        "Arrondir les valeurs": "Arrondir les valeurs",
+        "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)": "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)",
+        "Numéro PCE": "Numéro PCE",
+        "Identifiant du compteur (PCE)": "Identifiant du compteur (PCE)"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
