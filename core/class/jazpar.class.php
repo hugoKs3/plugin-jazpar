@@ -272,7 +272,7 @@ class jazpar extends eqLogic {
       } else {
         $obj = json_decode($response);
         if ($obj->state != "SUCCESS") {
-          log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error');
+          log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, state = ' . $obj->state);
           return null;
         } else {
           log::add(__CLASS__, 'info', $this->getHumanName() . ' ...authenticated!');
