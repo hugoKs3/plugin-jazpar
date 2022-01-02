@@ -270,7 +270,13 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error');
         return null;
       } else {
-        log::add(__CLASS__, 'info', $this->getHumanName() . ' ...authenticated!');
+        $obj = json_decode($response);
+        if ($obj->state !== "SUCCESS") {
+          log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error');
+          return null;
+        } else {
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' ...authenticated!');
+        }
       }
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Retrieve PCE...');
