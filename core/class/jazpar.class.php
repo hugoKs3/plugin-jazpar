@@ -412,10 +412,10 @@ class jazpar extends eqLogic {
  // Fonction exécutée automatiquement après la mise à jour de l'équipement
     public function postUpdate() {
       $cmdInfos = [
-    		'consod' => 'Conso veille',
-    		'consom' => 'Conso mois en cours',
-            'consod3' => 'Conso veille (m3)',
-            'consom3' => 'Conso mois en cours (m3)'
+    		'consod' => 'Conso jour',
+    		'consom' => 'Conso mois',
+            'consod3' => 'Conso jour (m3)',
+            'consom3' => 'Conso mois (m3)'
     	];
 
       foreach ($cmdInfos as $logicalId => $name)
