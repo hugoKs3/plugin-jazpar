@@ -119,7 +119,7 @@ class jazpar extends eqLogic {
           $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
           $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
 
-          $this->recordIndex(end($thresholdCmd, $conso->$thePce->releves));
+          $this->recordIndex(end($conso->$thePce->releves));
 
           /*
           foreach ($measure as $compare) {
@@ -142,7 +142,7 @@ class jazpar extends eqLogic {
 
           if (!is_null($thresholds)) {
             foreach ($thresholds->seuils as $seuil) {
-              $this->recordThreshold($seuil);
+              $this->recordThreshold($thresholdCmd, $seuil);
             }
           }
 
