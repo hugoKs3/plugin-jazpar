@@ -170,7 +170,7 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       if (!is_null($threshold)) {
         $themonth = "";
-        if (substr($threshold->mois, 0, 1) === "0") {
+        if (strlen($threshold->mois) == 2) {
           $themonth = $threshold->mois;
         } else {
           $themonth = "0".$threshold->mois;
