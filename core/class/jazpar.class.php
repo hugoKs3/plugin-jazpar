@@ -106,8 +106,12 @@ class jazpar extends eqLogic {
             if (array_key_exists($dateMonth, $monthValues3)) {
               $month3 = $monthValues3[$dateMonth];
             }
-            $monthValues[$dateMonth] = $month + $measure->energieConsomme;
-            $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
+            if (!is_null($measure->energieConsomme)) {
+              $monthValues[$dateMonth] = $month + $measure->energieConsomme;
+            }
+            if (!is_null($measure->volumeBrutConsomme)) {
+              $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
+            }
           }
 
           $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 23:55:00');
@@ -156,31 +160,39 @@ class jazpar extends eqLogic {
 
     public function recordIndex($measure)
     {
-      $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
-      $theDate = $dt->format('Y-m-d 23:55:00'); 
-      $theValue = $measure->indexFin;
-      $cmd = $this->getCmd(null, 'index');
-      $cmdId = $cmd->getId();
-      $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
-      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
-      }
-      else {      
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement index : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
-          $cmd->event($theValue, $theDate);
+      if (!is_null($measure)) {
+        $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
+        $theDate = $dt->format('Y-m-d 23:55:00'); 
+        $theValue = $measure->indexFin;
+        $cmd = $this->getCmd(null, 'index');
+        $cmdId = $cmd->getId();
+        $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
+        if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Index déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+        }
+        else {      
+            log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement index : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+            $cmd->event($theValue, $theDate);
+        }
+      } else {
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Mesure est null pour index, Date = ' . $theDate);
       }
     }
 
     public function recordDay($cmd, $theDate, $theValue)
     {
-      $cmdId = $cmd->getId();
-      $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
-      if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure (jour '. $cmd->getUnite() . ') déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
-      }
-      else {      
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (jour '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
-          $cmd->event($theValue, $theDate);
+      if (!is_null($theValue)) {
+        $cmdId = $cmd->getId();
+        $cmdHistory = history::byCmdIdDatetime($cmdId, $theDate);
+        if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Mesure (jour '. $cmd->getUnite() . ') déjà en historique - Aucune action : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+        }
+        else {      
+            log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (jour '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
+            $cmd->event($theValue, $theDate);
+        }
+      } else {
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Mesure est null pour jour ('. $cmd->getUnite() . '), Date = ' . $theDate);
       }
     }
 
