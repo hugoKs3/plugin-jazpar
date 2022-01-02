@@ -449,7 +449,7 @@ class jazpar extends eqLogic {
             $cmd->setName('Rafraichir');
             $cmd->setType('action');
             $cmd->setSubType('other');
-            $cmd->setEventOnly(1);
+            //$cmd->setEventOnly(1);
             $cmd->save();
         }
         $cmd = $this->getCmd(null, 'index');
