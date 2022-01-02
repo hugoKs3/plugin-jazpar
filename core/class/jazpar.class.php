@@ -525,7 +525,7 @@ class jazpar extends eqLogic {
         } 
         if (substr($cmd->getLogicalId(), 0, 6) === "consod") {
             if ($useDates != 1) {
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("VEILLE",__FILE__);
+                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("DERNIER JOUR",__FILE__);
             } else {
                 $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
                 $day = date('j', strtotime($cmd->getCollectDate()));

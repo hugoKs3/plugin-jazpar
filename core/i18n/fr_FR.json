@@ -69,7 +69,7 @@
         "Novembre": "Novembre",
         "Décembre": "Décembre",
         "MOIS EN COURS": "MOIS EN COURS",
-        "VEILLE": "VEILLE"
+        "DERNIER JOUR": "DERNIER JOUR"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."
