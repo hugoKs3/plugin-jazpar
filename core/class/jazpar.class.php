@@ -84,10 +84,12 @@ class jazpar extends eqLogic {
           $consoDay3 = $this->getCmd(null, 'consod3');
           $consoMonth = $this->getCmd(null, 'consom');
           $consoMonth3 = $this->getCmd(null, 'consom3');
+          $thresholdCmd = $this->getCmd(null, 'threshold');
 
           $thePce = $data[0];
           $conso = $data[1];
           $compare = $data[2];
+          $thresholds = $data[3];
 
           $monthValues = array();
           $monthValues3 = array();
@@ -117,7 +119,7 @@ class jazpar extends eqLogic {
           $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
           $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
 
-          $this->recordIndex(end($conso->$thePce->releves));
+          $this->recordIndex(end($thresholdCmd, $conso->$thePce->releves));
 
           /*
           foreach ($measure as $compare) {
@@ -138,6 +140,12 @@ class jazpar extends eqLogic {
           }
           */
 
+          if (!is_null($thresholds)) {
+            foreach ($thresholds->seuils as $seuil) {
+              $this->recordThreshold($seuil);
+            }
+          }
+
         }
         else {
           if (date('G') >= 21) {
@@ -156,6 +164,31 @@ class jazpar extends eqLogic {
         }
       }
 
+    }
+
+    public function recordThreshold($cmd, $threshold) {
+      $cmdId = $cmd->getId();
+      if (!is_null($threshold)) {
+        $themonth = "";
+        if (substr($threshold->mois, 0, 1) === "0") {
+          $themonth = $threshold->mois;
+        } else {
+          $themonth = "0".$threshold->mois;
+        }
+        $theDate = $threshold->annee."-".$themonth."-01";
+        $dt = DateTime::createFromFormat('Y-m-d', $theDate);
+        $dateToRecord = $dt->format('Y-m-t 00:00:00'); 
+        $cmdHistory = history::byCmdIdDatetime($cmdId, $dateToRecord);
+        if (is_object($cmdHistory) && $cmdHistory->getValue() == $threshold->valeur) {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Seuil mensuel déjà en historique - Aucune action : ' . ' Date = ' . $dateToRecord . ' => Mesure = ' . $threshold->valeur);
+        } else {
+          $dt = DateTime::createFromFormat('Y-m-d H:i:s', $dateToRecord);
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean threshold history from ' . $dt->format('Y-m-01') . ' to ' . $dateToRecord);
+          history::removes($cmdId, $dt->format('Y-m-01'), $dateToRecord);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement seuil mensuel : Date = ' . $dateToRecord . ' => Valeur = ' . $threshold->valeur);
+          $cmd->event($threshold->valeur, $dateToRecord);
+        }
+      }
     }
 
     public function recordIndex($measure)
@@ -212,7 +245,7 @@ class jazpar extends eqLogic {
         } else {
           $dt = DateTime::createFromFormat('Y-m-d H:i:s', $theDate);
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean history from ' . $dt->format('Y-m-01') . ' to ' . $theDate);
-          history::removes($cmdId, $dt->format('Y-m-d'), $theDate);
+          history::removes($cmdId, $dt->format('Y-m-01'), $theDate);
           log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (mois '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
         }
@@ -226,6 +259,7 @@ class jazpar extends eqLogic {
       $mypce = null;
       $conso = null;
       $comparison = null;
+      $thresholds = null;
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Authentication in progress..');
 
@@ -334,8 +368,22 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');
       }
 
+      log::add(__CLASS__, 'info', $this->getHumanName() . ' Get monthly threshold datas...');
+      curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/seuils?frequence=Mensuel");
+      $response = curl_exec($curl);
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' thresholds: ' . $response);
+      $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+      if ($responseStatus != "200") {
+        log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
+      } else {
+        $thresholds = json_decode($response);
+        log::add(__CLASS__, 'info', $this->getHumanName() . ' ...monthly thresholds data retrieved!');
+      }
+
       curl_close($curl);
-      return array($mypce, $conso, $comparison);
+      return array($mypce, $conso, $comparison, $thresholds);
    }
 
  // Fonction exécutée automatiquement avant la création de l'équipement
