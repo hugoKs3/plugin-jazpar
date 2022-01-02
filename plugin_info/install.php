@@ -146,6 +146,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->save();
         } else {
           $cmd->setName('Seuil mensuel');
+          $cmd->save();
         }
         $eqLogic->save();
     }
