@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
-      if ($consoDay->getCollectDate() == date('Y-m-d 23:55:00', strtotime('-1 day'))) {
+      if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-1 day'))) {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes');
       } else {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données');
@@ -94,8 +94,8 @@ class jazpar extends eqLogic {
 
           foreach ($conso->$thePce->releves as $measure) {
             $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
-            $dateDay = $dt->format('Y-m-d 23:55:00'); 
-            $dateMonth = $dt->format('Y-m-t 23:55:00'); 
+            $dateDay = $dt->format('Y-m-d 00:00:00'); 
+            $dateMonth = $dt->format('Y-m-t 00:00:00'); 
             $this->recordDay($consoDay3, $dateDay, $measure->volumeBrutConsomme);
             $this->recordDay($consoDay, $dateDay, $measure->energieConsomme);
             $month = 0;
@@ -114,8 +114,8 @@ class jazpar extends eqLogic {
             }
           }
 
-          $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 23:55:00');
-          $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 23:55:00');
+          $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
+          $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
 
           $this->recordIndex(end($conso->$thePce->releves));
 
@@ -162,7 +162,7 @@ class jazpar extends eqLogic {
     {
       if (!is_null($measure)) {
         $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
-        $theDate = $dt->format('Y-m-d 23:55:00'); 
+        $theDate = $dt->format('Y-m-d 00:00:00'); 
         $theValue = $measure->indexFin;
         $cmd = $this->getCmd(null, 'index');
         $cmdId = $cmd->getId();
