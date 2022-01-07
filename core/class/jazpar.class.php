@@ -385,7 +385,7 @@ class jazpar extends eqLogic {
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
       } else {
         $thresholds = json_decode($response);
