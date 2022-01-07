@@ -173,7 +173,7 @@ class jazpar extends eqLogic {
         $month = "mois".$date->format('n');
         $pieces = explode(",", $measure->$month);
         $theValue = $pieces[0];
-        $fullDate = $dt->format('Y-m-t 00:00:00');
+        $fullDate = $date->format('Y-m-t 00:00:00');
         $cmdHistory = history::byCmdIdDatetime($cmdId, $fullDate);
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Comparaison ('.$measure->consommationType.') déjà en historique - Aucune action : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
