@@ -270,6 +270,8 @@ class jazpar extends eqLogic {
         'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%253A%252F%252Fmonespace.grdf.fr%252F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
       );
       
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Post fields: ' . http_build_query($postdata));
+
       $curl = curl_init();
       curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://login.monespace.grdf.fr/sofit-account-api/api/v1/auth',
