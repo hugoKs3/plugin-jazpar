@@ -267,7 +267,8 @@ class jazpar extends eqLogic {
         'password' => $password,
         'email' => $login,
         'capp' => 'meg',
-        'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%253A%252F%252Fmonespace.grdf.fr%252F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
+        'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%20profile%20email%20infotravaux%20%2Fv1%2Faccreditation%20%2Fv1%2Faccreditations%20%2Fdigiconso%2Fv1%20%2Fdigiconso%2Fv1%2Fconsommations%20new_meg%20%2FDemande.read%20%2FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%3A%2F%2Fmonespace.grdf.fr%2F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
+        //'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%253A%252F%252Fmonespace.grdf.fr%252F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
       );
       
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' Post fields: ' . http_build_query($postdata));
