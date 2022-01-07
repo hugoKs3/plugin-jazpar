@@ -268,7 +268,7 @@ class jazpar extends eqLogic {
         'password' => $password,
         'email' => $login,
         'capp' => 'meg',
-        'goto' => 'https%3A%2F%2Fsofa-connexion.grdf.fr%3A443%2Fopenam%2Foauth2%2FexterneGrdf%2Fauthorize%3Fresponse_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write%26client_id%3Dprod_espaceclient%26state%3D0%26redirect_uri%3Dhttps%253A%252F%252Fmonespace.grdf.fr%252F_codexch%26nonce%3D7cV89oGyWnw28DYdI-702Gjy9f%26by_pass_okta%3D1%26capp%3Dmeg'
+        'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%253A%252F%252Fmonespace.grdf.fr%252F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
       );
 
       $curl = curl_init();
