@@ -121,8 +121,8 @@ class jazpar extends eqLogic {
 
           $this->recordIndex(end($conso->$thePce->releves));
 
-          /*
-          foreach ($measure as $compare) {
+          
+          foreach ($compare as $measure) {
             $cmd = null;
             switch($measure->consommationType)
             {
@@ -138,7 +138,6 @@ class jazpar extends eqLogic {
             }
             $this->recordComparison($cmd, $measure);
           }
-          */
 
           if (!is_null($thresholds)) {
             foreach ($thresholds->seuils as $seuil) {
@@ -164,6 +163,27 @@ class jazpar extends eqLogic {
         }
       }
 
+    }
+
+    public function recordComparison($cmd, $measure) {
+      $cmdId = $cmd->getId();
+      $date = new DateTime();
+      $date->setTimestamp(strtotime('-1 year'));
+      for ($i = 1; $i <= 12; $i++) {
+        $month = "mois".$date->format('n');
+        $pieces = explode(",", $measure->$month);
+        $theValue = $pieces[0];
+        $fullDate = $dt->format('Y-m-t 00:00:00');
+        $cmdHistory = history::byCmdIdDatetime($cmdId, $fullDate);
+        if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Comparaison ('.$measure->consommationType.') déjà en historique - Aucune action : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
+        }
+        else {      
+            log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement comparaison ('.$measure->consommationType.') : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
+            $cmd->event($theValue, $fullDate);
+        }
+        $date->modify('+1 month');
+      }
     }
 
     public function recordThreshold($cmd, $threshold) {
