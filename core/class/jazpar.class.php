@@ -169,7 +169,7 @@ class jazpar extends eqLogic {
       $cmdId = $cmd->getId();
       $date = new DateTime();
       $date->setTimestamp(strtotime('-1 year'));
-      for ($i = 1; $i <= 12; $i++) {
+      for ($i = 1; $i <= 13; $i++) {
         $month = "mois".$date->format('n');
         $pieces = explode(",", $measure->$month);
         $theValue = $pieces[0];
