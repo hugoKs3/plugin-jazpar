@@ -268,10 +268,7 @@ class jazpar extends eqLogic {
         'email' => $login,
         'capp' => 'meg',
         'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%20profile%20email%20infotravaux%20%2Fv1%2Faccreditation%20%2Fv1%2Faccreditations%20%2Fdigiconso%2Fv1%20%2Fdigiconso%2Fv1%2Fconsommations%20new_meg%20%2FDemande.read%20%2FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%3A%2F%2Fmonespace.grdf.fr%2F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
-        //'goto' => 'https://sofa-connexion.grdf.fr:443/openam/oauth2/externeGrdf/authorize?response_type=code&scope=openid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write&client_id=prod_espaceclient&state=0&redirect_uri=https%253A%252F%252Fmonespace.grdf.fr%252F_codexch&nonce=7cV89oGyWnw28DYdI-702Gjy9f&by_pass_okta=1&capp=meg'
       );
-      
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' Post fields: ' . http_build_query($postdata));
 
       $curl = curl_init();
       curl_setopt_array($curl, array(
@@ -285,11 +282,9 @@ class jazpar extends eqLogic {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_COOKIEFILE => '',
-        //CURLOPT_POSTFIELDS => 'password='.$password.'&email='.$login.'&capp=meg&goto=https%3A%2F%2Fsofa-connexion.grdf.fr%3A443%2Fopenam%2Foauth2%2FexterneGrdf%2Fauthorize%3Fresponse_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write%26client_id%3Dprod_espaceclient%26state%3D0%26redirect_uri%3Dhttps%253A%252F%252Fmonespace.grdf.fr%252F_codexch%26nonce%3D7cV89oGyWnw28DYdI-702Gjy9f%26by_pass_okta%3D1%26capp%3Dmeg',
         CURLOPT_POSTFIELDS => http_build_query($postdata),
         CURLOPT_HTTPHEADER => array(
           'Content-type: application/x-www-form-urlencoded; charset=UTF-8',
-          //'Content-type: multipart/form-data; charset=UTF-8',
           'Referer: https://login.monespace.grdf.fr/mire/connexion?goto=https:%2F%2Fsofa-connexion.grdf.fr:443%2Fopenam%2Foauth2%2FexterneGrdf%2Fauthorize%3Fresponse_type%3Dcode%26scope%3Dopenid%2520profile%2520email%2520infotravaux%2520%252Fv1%252Faccreditation%2520%252Fv1%252Faccreditations%2520%252Fdigiconso%252Fv1%2520%252Fdigiconso%252Fv1%252Fconsommations%2520new_meg%2520%252FDemande.read%2520%252FDemande.write%26client_id%3Dprod_espaceclient%26state%3D0%26redirect_uri%3Dhttps%253A%252F%252Fmonespace.grdf.fr%252F_codexch%26nonce%3D7cV89oGyWnw28DYdI-702Gjy9f'
       ),));
 
@@ -304,7 +299,10 @@ class jazpar extends eqLogic {
       } else {
         $obj = json_decode($response);
         if ($obj->state != "SUCCESS") {
-          log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, state = ' . $obj->state);
+          log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, state = ' . $obj->state . ', captcha = ' . $obj->displayCaptcha);
+          if ($obj->displayCaptcha == true) {
+            log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, a captcha needs to be entered on the website');
+          }
           return null;
         }
       }
