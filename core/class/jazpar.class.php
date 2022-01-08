@@ -657,16 +657,16 @@ class jazpar extends eqLogic {
       if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory)) {
         $month = date_fr($date->format('F'));
         $year = $date->format('Y');
-        $avg = $cmdAvgHistory->getValue();
+        $avg = round($cmdAvgHistory->getValue(), 0);
         $avg_collect = $cmdAvgHistory->getDatetime();
         $avg_id = $cmdAvgHistory->getCmd_id();
-        $min = $cmdMinHistory->getValue();
+        $min = round($cmdMinHistory->getValue(), 0);
         $min_collect = $cmdMinHistory->getDatetime();
         $min_id = $cmdMinHistory->getCmd_id();
-        $max = $cmdMaxHistory->getValue();
+        $max = round($cmdMaxHistory->getValue(), 0);
         $max_collect = $cmdMaxHistory->getDatetime();
         $max_id = $cmdMaxHistory->getCmd_id();
-        $conso = $cmdMonthHistory->getValue();
+        $conso = round($cmdMonthHistory->getValue(), 0);
         $conso_collect = $cmdMonthHistory->getDatetime();
         $conso_id = $cmdMonthHistory->getCmd_id();
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
