@@ -260,13 +260,13 @@
     </div>
 	<script>
         var compare = 0;
+        var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
         setComparison(compare);
         var unit = "#default_unit#";
         setUnit(unit, false);
         $('.eqLogic[data-eqLogic_uid=#uid#] .switch').on('click', function () {
             setUnit(unit, true);
         });
-        var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
         var eqlogic_width = eqLogic.width();
         var LinkyScreen_width = eqLogic.find('.jazpar_template').width();
         eqLogic.find('.jazparCdc').css('font-size', (LinkyScreen_width*0.10)+'px');

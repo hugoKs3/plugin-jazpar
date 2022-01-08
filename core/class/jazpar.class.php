@@ -616,7 +616,7 @@ class jazpar extends eqLogic {
       
       if ($template != "jazpar") {
         for ($i = 0; $i <= 12; $i++) { 
-          array_merge($replace, $this->computePadding($i));
+          $replace = array_merge($replace, $this->computePadding($i));
         }
       }
 
