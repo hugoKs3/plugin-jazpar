@@ -615,89 +615,91 @@ class jazpar extends eqLogic {
       $replace['#default_unit#'] = $this->getConfiguration('defaultUnit', 'kwh');
       
       if ($template != "jazpar") {
-          $cmd = $this->getCmd(null, 'localavg');
-          $min = 0;
-          $max = 0;
-          $avg = 0;
-          $month = "?";
-          $year = "?";
-          $value = "?";
-          $padding = 45;
-          if (is_object($cmd)) {
-            $avg = $cmd->execCmd();
-            if ($avg > 0) {
-                $dateCompare = $cmd->getCollectDate();
-                $month = date_fr(date('F', strtotime($dateCompare)));
-                $year = strftime("%Y", strtotime($dateCompare));
-                $cmdMonth =  $this->getCmd(null, 'consom');
-                $value = $cmdMonth->execCmd();
-                $valueDate = $cmdMonth->getCollectDate();
-                if ($month != date_fr(date('F', strtotime($valueDate))) || $year != strftime("%Y", strtotime($valueDate))) {
-                  $value = 0;
-                }
-                $cmd = $this->getCmd(null, 'localmin');
-                $min = $cmd->execCmd();
-                $cmd = $this->getCmd(null, 'localmax');
-                $max = $cmd->execCmd();
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
-                if ($value == $avg) {
-                  $padding = 45;
-                }
-                if ($value > $avg) {
-                    $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
-                }
-                if ($value < $avg) {
-                    $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
-                }
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
-                if ($padding > 90) {
-                  $padding = 90;
-                }
-                if ($padding < 0) {
-                  $padding = 0;
-                }
-                /*
-                $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
-                if (is_object($cmdHistory)) {
-                    $value = round($cmdHistory->getValue(), 0);
-                    $cmd = $this->getCmd(null, 'localmin');
-                    if (is_object($cmd)) {
-                        $min = round($cmd->execCmd(), 0);
-                    }
-                    $cmd = $this->getCmd(null, 'localmax');
-                    if (is_object($cmd)) {
-                        $max = round($cmd->execCmd(), 0);
-                    }
-                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
-                    if ($value == $avg) {
-                        $padding = 45;
-                    }
-                    if ($value > $avg) {
-                        $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
-                    }
-                    if ($value < $avg) {
-                        $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
-                    }
-                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
-                    if ($padding > 90) {
-                       $padding = 90;
-                    }
-                    if ($padding < 0) {
-                       $padding = 0;
-                    }
-                }
-                */
-            }
-          }
-          $replace['#past_month#'] = __($month,__FILE__);
-          $replace['#past_year#'] = $year;
-          $replace['#past_month_conso#'] = $value;
-          $replace['#cursor_compare#'] = $padding;
+        for ($i = 0; $i <= 12; $i++) { 
+          array_merge($replace, computePadding($i));
+        }
       }
 
       $html = template_replace($replace, getTemplate('core', $version, $template.'.template', __CLASS__));
       cache::set('widgetHtml' . $_version . $this->getId(), $html, 0);
       return $html;
+    }
+
+    public function computePadding($theMonth) {
+      $cmdAvg = $this->getCmd(null, 'localavg');
+      $cmdMin = $this->getCmd(null, 'localmin');
+      $cmdMax = $this->getCmd(null, 'localmax');
+      $cmdMonth = $this->getCmd(null, 'consom');
+      $date = new DateTime();
+      $date->setTimestamp(strtotime('-'.$theMonth.' month'));
+      $startDate = $date->format('Y-m-01 00:00:00');
+      $endDate = $date->format('Y-m-t 00:00:00');
+      $cmdAvgHistory = history::byCmdIdDatetime($cmdAvg->getId(), $startDate, $endDate);
+      $cmdMinHistory = history::byCmdIdDatetime($cmdMin->getId(), $startDate, $endDate);
+      $cmdMaxHistory = history::byCmdIdDatetime($cmdMax->getId(), $startDate, $endDate);
+      $cmdMonthHistory = history::byCmdIdDatetime($cmdMonth->getId(), $startDate, $endDate);
+      $min = 0;
+      $min_collect = "?";
+      $min_id = "?";
+      $max = 0;
+      $max_collect = "?";
+      $max_id = "?";
+      $avg = 0;
+      $avg_collect = "?";
+      $avg_id = "?";
+      $month = "?";
+      $year = "?";
+      $conso = "?";
+      $conso_collect = "?";
+      $conso_id = "?";
+      $padding = 45;
+
+      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory)) {
+        $month = date_fr($date->format('F'));
+        $year = $date->format('Y');
+        $avg = $cmdAvgHistory->getValue();
+        $avg_collect = $cmdAvgHistory->getCollectDate();
+        $min = $cmdMinHistory->getValue();
+        $min_collect = $cmdMinHistory->getCollectDate();
+        $max = $cmdMaxHistory->getValue();
+        $max_collect = $cmdMaxHistory->getCollectDate();
+        $conso = $cmdMonthHistory->getValue();
+        $conso_collect = $cmdMonthHistory->getCollectDate();
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
+        if ($conso == $avg) {
+          $padding = 45;
+        }
+        if ($conso > $avg) {
+            $padding = 45 - round((($conso - $avg) * 45) / ($max - $avg), 0);
+        }
+        if ($conso < $avg) {
+            $padding = 45 + round((($avg - $conso) * 45) / ($avg - $min), 0);
+        }
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+        if ($padding > 90) {
+          $padding = 90;
+        }
+        if ($padding < 0) {
+          $padding = 0;
+        }
+      }
+
+      $compareValues['#'.$theMonth.'_comp_month#'] = __($month,__FILE__);
+      $compareValues['#'.$theMonth.'_comp_year#'] = $year;
+      $compareValues['#'.$theMonth.'_comp_conso#'] = $conso;
+      $compareValues['#'.$theMonth.'_comp_conso_collect#'] = $conso_collect;
+      $compareValues['#'.$theMonth.'_comp_conso_id#'] = $conso_id;
+      $compareValues['#'.$theMonth.'_comp_avg#'] = $avg;
+      $compareValues['#'.$theMonth.'_comp_avg_collect#'] = $avg_collect;
+      $compareValues['#'.$theMonth.'_comp_avg_id#'] = $avg_id;
+      $compareValues['#'.$theMonth.'_comp_min#'] = $min;
+      $compareValues['#'.$theMonth.'_comp_min_collect#'] = $min_collect;
+      $compareValues['#'.$theMonth.'_comp_min_id#'] = $min_id;
+      $compareValues['#'.$theMonth.'_comp_max#'] = $max;
+      $compareValues['#'.$theMonth.'_comp_max_collect#'] = $max_collect;
+      $compareValues['#'.$theMonth.'_comp_max_id#'] = $max_id;
+      $compareValues['#'.$theMonth.'_cursor_compare#'] = $padding;
+      return $compareValues;
     }
 
 }
