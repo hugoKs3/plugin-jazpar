@@ -624,12 +624,39 @@ class jazpar extends eqLogic {
           $value = "?";
           $padding = 45;
           if (is_object($cmd)) {
-            $avg = round($cmd->execCmd(), 0);
+            $avg = $cmd->execCmd();
             if ($avg > 0) {
                 $dateCompare = $cmd->getCollectDate();
                 $month = date_fr(date('F', strtotime($dateCompare)));
                 $year = strftime("%Y", strtotime($dateCompare));
                 $cmdMonth =  $this->getCmd(null, 'consom');
+                $value = $cmdMonth->execCmd();
+                $valueDate = $cmdMonth->getCollectDate();
+                if ($month != date_fr(date('F', strtotime($valueDate))) || $year != strftime("%Y", strtotime($valueDate))) {
+                  $value = 0;
+                }
+                $cmd = $this->getCmd(null, 'localmin');
+                $min = $cmd->execCmd();
+                $cmd = $this->getCmd(null, 'localmax');
+                $max = $cmd->execCmd();
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
+                if ($value == $avg) {
+                  $padding = 45;
+                }
+                if ($value > $avg) {
+                    $padding = 45 - round((($value - $avg) * 45) / ($max - $avg), 0);
+                }
+                if ($value < $avg) {
+                    $padding = 45 + round((($avg - $value) * 45) / ($avg - $min), 0);
+                }
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+                if ($padding > 90) {
+                  $padding = 90;
+                }
+                if ($padding < 0) {
+                  $padding = 0;
+                }
+                /*
                 $cmdHistory = history::byCmdIdDatetime($cmdMonth->getId(), $dateCompare);
                 if (is_object($cmdHistory)) {
                     $value = round($cmdHistory->getValue(), 0);
@@ -659,6 +686,7 @@ class jazpar extends eqLogic {
                        $padding = 0;
                     }
                 }
+                */
             }
           }
           $replace['#past_month#'] = __($month,__FILE__);
