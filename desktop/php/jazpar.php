@@ -147,13 +147,13 @@ foreach ($eqLogics as $eqLogic) {
 
  	 </div>
 	</div>
+  <!--
  <div class="form-group">
 	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets}}">{{Utiliser des dates dans les widgets}}</label>
 	 <div class="col-sm-6">
 		<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="useDates"/>
  	 </div>
 	</div>
-  <!--
  <div class="form-group">
 	 <label class="col-sm-6 control-label help" data-help="{{Cocher la case pour arrondir les valeurs dans les widgets}}">{{Arrondir les valeurs}}</label>
 	 <div class="col-sm-6">

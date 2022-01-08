@@ -423,8 +423,6 @@ class jazpar extends eqLogic {
       $this->setConfiguration('forceRefresh', 0);
       $this->setConfiguration('defaultUnit', 'kwh');
       $this->setConfiguration('widgetTemplate', 'jazpar2');
-      $this->setConfiguration('useDates', 0);
-      //$this->setConfiguration('roundValues', 1);
       $this->setCategory('energy', 1);
       $this->setIsEnable(1);
       $this->setIsVisible(1);
@@ -582,9 +580,6 @@ class jazpar extends eqLogic {
       }
       $version = jeedom::versionAlias($_version);
         
-      $useDates = $this->getConfiguration('useDates');
-      $roundValues = $this->getConfiguration('roundValues');
-        
       foreach ($this->getCmd('info') as $cmd) {
         $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
         $value = $cmd->execCmd();
@@ -594,21 +589,13 @@ class jazpar extends eqLogic {
         $replace['#' . $cmd->getLogicalId() . '#'] = $value;
         $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
         if (substr($cmd->getLogicalId(), 0, 6) === "consom") {
-            if ($useDates != 1) {
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("MOIS EN COURS",__FILE__);
-            } else {
-                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = $month;
-            }
+          $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+          $replace['#' . $cmd->getLogicalId() . '_name#'] = $month;
         } 
         if (substr($cmd->getLogicalId(), 0, 6) === "consod") {
-            if ($useDates != 1) {
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = __("DERNIER JOUR",__FILE__);
-            } else {
-                $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
-                $day = date('j', strtotime($cmd->getCollectDate()));
-                $replace['#' . $cmd->getLogicalId() . '_name#'] = $day . ' ' . $month;
-            }
+          $month = date_fr(date('F', strtotime($cmd->getCollectDate())));
+          $day = date('j', strtotime($cmd->getCollectDate()));
+          $replace['#' . $cmd->getLogicalId() . '_name#'] = $day . ' ' . $month;
         } 
       }
         
