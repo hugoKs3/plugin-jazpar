@@ -4,6 +4,14 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# Beta - 08/01/2022
+>**Important**
+>
+>For this major version, it is highly recommended to delete and recreate equipments in order to not have messy history.
+- Full rework of the plugin to be compatible with the new GRDF website version
+- Support of multiple meters 
+- Possibility to visualize the last 12 months consumption comparison in the widget
+
 # Stable - 26/03/2021
 - Threshold for current month gathered from website and stored in new command
 

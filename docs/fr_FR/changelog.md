@@ -4,6 +4,14 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Beta - 08/01/2022
+>**Important**
+>
+>Pour cette version majeure, il est fortement recommandé de supprimer et recréer les équipements afin de ne pas avoir un historique corrompu.
+- Refonte comlète du plugin pour être compatible avec la nouvelle version du site web de GRDF
+- Support de plusieurs compteurs
+- Possibilité de visualiser les comparaisons de consommation sur les 12 derniers mois dans le widget
+
 # Stable - 26/03/2021
 - Seuil pour le mois en cours récupéré depuis le site et stocké dans une nouvelle commande
 

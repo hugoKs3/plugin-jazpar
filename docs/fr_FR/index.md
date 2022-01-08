@@ -26,13 +26,15 @@ Pour accéder aux différents équipements **GRDF Gazpar**, dirigez-vous vers le
 
 Sur la page de l'équipement, renseignez l'**identifiant** ainsi que le **mot de passe** de votre compte-client *GRDF* puis cliquez sur le bouton **Sauvegarder**.
 
+Vous pouvez également spécifier le numéro PCE de votre compteur si vous en avez plusieurs liés à votre compte.
+
 L'option **Forcer la récupération des données** permet de récupérer les informations de consommation même si elles ont déjà été récupérées pour la période concernée.
 
 Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et insérer en historique :
-- **consommation journalière** : les 10 derniers jours,
+- **consommation journalière** : les 365 derniers jours,
 - **consommation mensuelle** : les 12 derniers mois,
-- **consommation mensuelles maximum, minimum et médiane des foyers similaires**
-- **seuil du mois en cours** comme défini dans votre espace
+- **consommation mensuelles maximum, minimum et médiane des foyers similaires sur les 12 derniers mois**
+- **seuils mensuels** comme définis dans votre espace
 
 Quatre templates de widget sont disponibles. Ceux avec comparaison vous informent comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
 
