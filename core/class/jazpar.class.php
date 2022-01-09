@@ -116,15 +116,15 @@ class jazpar extends eqLogic {
                 $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
               }
             }
+
+            $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
+            $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
+  
+            $this->recordIndex(end($conso->$thePce->releves));
+
           } else {
             log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune information de consommation trouvée');
           }
-
-          $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
-          $this->recordMonths($consoMonth, $monthValues, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
-
-          $this->recordIndex(end($conso->$thePce->releves));
-
           
           foreach ($compare as $measure) {
             $cmd = null;
