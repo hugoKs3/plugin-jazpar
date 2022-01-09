@@ -94,26 +94,30 @@ class jazpar extends eqLogic {
           $monthValues = array();
           $monthValues3 = array();
 
-          foreach ($conso->$thePce->releves as $measure) {
-            $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
-            $dateDay = $dt->format('Y-m-d 00:00:00'); 
-            $dateMonth = $dt->format('Y-m-t 00:00:00'); 
-            $this->recordDay($consoDay3, $dateDay, $measure->volumeBrutConsomme);
-            $this->recordDay($consoDay, $dateDay, $measure->energieConsomme);
-            $month = 0;
-            $month3 = 0;
-            if (array_key_exists($dateMonth, $monthValues)) {
-              $month = $monthValues[$dateMonth];
+          if (!empty($conso->$thePce->releves)) {
+            foreach ($conso->$thePce->releves as $measure) {
+              $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
+              $dateDay = $dt->format('Y-m-d 00:00:00'); 
+              $dateMonth = $dt->format('Y-m-t 00:00:00'); 
+              $this->recordDay($consoDay3, $dateDay, $measure->volumeBrutConsomme);
+              $this->recordDay($consoDay, $dateDay, $measure->energieConsomme);
+              $month = 0;
+              $month3 = 0;
+              if (array_key_exists($dateMonth, $monthValues)) {
+                $month = $monthValues[$dateMonth];
+              }
+              if (array_key_exists($dateMonth, $monthValues3)) {
+                $month3 = $monthValues3[$dateMonth];
+              }
+              if (!is_null($measure->energieConsomme)) {
+                $monthValues[$dateMonth] = $month + $measure->energieConsomme;
+              }
+              if (!is_null($measure->volumeBrutConsomme)) {
+                $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
+              }
             }
-            if (array_key_exists($dateMonth, $monthValues3)) {
-              $month3 = $monthValues3[$dateMonth];
-            }
-            if (!is_null($measure->energieConsomme)) {
-              $monthValues[$dateMonth] = $month + $measure->energieConsomme;
-            }
-            if (!is_null($measure->volumeBrutConsomme)) {
-              $monthValues3[$dateMonth] = $month3 + $measure->volumeBrutConsomme;
-            }
+          } else {
+            log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune information de consommation trouvée');
           }
 
           $this->recordMonths($consoMonth3, $monthValues3, end($conso->$thePce->releves)->journeeGaziere . ' 00:00:00');
