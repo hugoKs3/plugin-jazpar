@@ -645,7 +645,7 @@ class jazpar extends eqLogic {
       $conso_id = "?";
       $padding = 45;
 
-      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory)) {
+      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory) && is_object($cmdMonthHistory)) {
         $month = date_fr($date->format('F'));
         $year = $date->format('Y');
         $avg = round($cmdAvgHistory->getValue(), 0);
