@@ -629,13 +629,13 @@ class jazpar extends eqLogic {
       $cmdMinHistory = history::byCmdIdDatetime($cmdMin->getId(), $startDate, $endDate);
       $cmdMaxHistory = history::byCmdIdDatetime($cmdMax->getId(), $startDate, $endDate);
       $cmdMonthHistory = history::byCmdIdDatetime($cmdMonth->getId(), $startDate, $endDate);
-      $min = 0;
+      $min = "?";
       $min_collect = "?";
       $min_id = "?";
-      $max = 0;
+      $max = "?";
       $max_collect = "?";
       $max_id = "?";
-      $avg = 0;
+      $avg = "?";
       $avg_collect = "?";
       $avg_id = "?";
       $month = "?";
@@ -678,24 +678,24 @@ class jazpar extends eqLogic {
         if ($padding < 0) {
           $padding = 0;
         }
-
-        $compareValues['#'.$theMonth.'_comp_month#'] = __($month,__FILE__);
-        $compareValues['#'.$theMonth.'_comp_year#'] = $year;
-        $compareValues['#'.$theMonth.'_comp_conso#'] = $conso;
-        $compareValues['#'.$theMonth.'_comp_conso_collect#'] = $conso_collect;
-        $compareValues['#'.$theMonth.'_comp_conso_id#'] = $conso_id;
-        $compareValues['#'.$theMonth.'_comp_avg#'] = $avg;
-        $compareValues['#'.$theMonth.'_comp_avg_collect#'] = $avg_collect;
-        $compareValues['#'.$theMonth.'_comp_avg_id#'] = $avg_id;
-        $compareValues['#'.$theMonth.'_comp_min#'] = $min;
-        $compareValues['#'.$theMonth.'_comp_min_collect#'] = $min_collect;
-        $compareValues['#'.$theMonth.'_comp_min_id#'] = $min_id;
-        $compareValues['#'.$theMonth.'_comp_max#'] = $max;
-        $compareValues['#'.$theMonth.'_comp_max_collect#'] = $max_collect;
-        $compareValues['#'.$theMonth.'_comp_max_id#'] = $max_id;
-        $compareValues['#'.$theMonth.'_cursor_compare#'] = $padding;
       }
       
+      $compareValues['#'.$theMonth.'_comp_month#'] = __($month,__FILE__);
+      $compareValues['#'.$theMonth.'_comp_year#'] = $year;
+      $compareValues['#'.$theMonth.'_comp_conso#'] = $conso;
+      $compareValues['#'.$theMonth.'_comp_conso_collect#'] = $conso_collect;
+      $compareValues['#'.$theMonth.'_comp_conso_id#'] = $conso_id;
+      $compareValues['#'.$theMonth.'_comp_avg#'] = $avg;
+      $compareValues['#'.$theMonth.'_comp_avg_collect#'] = $avg_collect;
+      $compareValues['#'.$theMonth.'_comp_avg_id#'] = $avg_id;
+      $compareValues['#'.$theMonth.'_comp_min#'] = $min;
+      $compareValues['#'.$theMonth.'_comp_min_collect#'] = $min_collect;
+      $compareValues['#'.$theMonth.'_comp_min_id#'] = $min_id;
+      $compareValues['#'.$theMonth.'_comp_max#'] = $max;
+      $compareValues['#'.$theMonth.'_comp_max_collect#'] = $max_collect;
+      $compareValues['#'.$theMonth.'_comp_max_id#'] = $max_id;
+      $compareValues['#'.$theMonth.'_cursor_compare#'] = $padding;
+
       return $compareValues;
     }
 
