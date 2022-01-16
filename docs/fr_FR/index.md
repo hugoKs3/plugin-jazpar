@@ -38,6 +38,12 @@ Le plugin va alors vérifier la bonne connexion au site *GRDF* et récupérer et
 
 Quatre templates de widget sont disponibles. Ceux avec comparaison vous informent comment votre consommation du mois précédent se situe par rapport aux foyers similaires.
 
+# Problèmes potentiels
+
+De temps en temps, il se peut que le site demande une résolution de captcha pour se connecter.
+Ce sera indiqué dans les logs du plugin.
+Dans ce cas, vous devez vous connecter "manuellement" au site GRDF afin de résoudre la captcha.
+
 # Remarques
 
 Le site GRDF étant un peu "instable", il se peut que la récupération des données ne marche pas à chaque fois. Pas de panique, le plugin est configuré pour essayer toutes les heures.

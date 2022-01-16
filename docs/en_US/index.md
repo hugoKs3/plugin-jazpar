@@ -38,6 +38,12 @@ The plugin will then check the correct connection to the site *GRDF* and retriev
 
 Four widget's tmplates are available. The ones with comparison inform you how your previous month consumption compares with similar profiles.
 
+# Potential issues
+
+From time to time, a captccha might be required to connect to the website.
+It will be mentioned in the plugin's logs.
+In this case, you need to connect to the website "manually" and resolve the captcha.
+
 # Remarks
 
 During tests, it appeared that the GRDF website is quite "unstable" with direct impacts on the plugin. On Jeedom, the plugin is configured to gather data every hour. It may happen that it does not work each time: no issue, just wait for the next scheduled run.

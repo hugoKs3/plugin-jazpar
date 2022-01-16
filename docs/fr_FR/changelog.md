@@ -4,7 +4,7 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
-# Beta - 08/01/2022
+# Stable - 16/01/2022
 >**Important**
 >
 >Pour cette version majeure, il est fortement recommandé de supprimer et recréer les équipements afin de ne pas avoir un historique corrompu.

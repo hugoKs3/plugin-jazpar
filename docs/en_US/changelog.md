@@ -4,7 +4,7 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
-# Beta - 08/01/2022
+# Stable - 16/01/2022
 >**Important**
 >
 >For this major version, it is highly recommended to delete and recreate equipments in order to not have messy history.
