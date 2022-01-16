@@ -36,30 +36,245 @@
         </center>
     </div>
     </div>
-    <div style="width: 258px; float: right;">
+    <!-- Current month -->
+    <div id="0_jazpar_compare" style="width: 258px; float: right;">
         <div style="margin-bottom: 5%;">
             <center>
-                <span>Comparaison de #past_month# #past_year#</span>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #0_comp_month# #0_comp_year#</span>
             </center>
         </div>
         <div class="jazpar_compare_div" style="height: 250px;">
-            <div style="width: 129px; display:inline-block; height: 100%; padding-top: #cursor_compare#%; text-align: right;">
-                Vous (#past_month_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            <div data-cmd_id="#0_comp_conso_id#" title="#0_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #0_cursor_compare#%; text-align: right;">
+                Vous (#0_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
             </div>
             <div style="width: 129px; float: right; height:100%">
-                <div class="jazpar_localmax history cursor" data-cmd_id="#localmax_id#" title="#localmax_collect#">Maximum<br/><span style="color: #dc0404;">#localmax#</span> kWh</div>
-                <div class="jazpar_localavg history cursor" data-cmd_id="#localavg_id#" title="#localavg_collect#">Moyenne<br/><span style="color: #5cccfc;">#localavg#</span> kWh</div>
-                <div class="jazpar_localmin history cursor" data-cmd_id="#localmin_id#" title="#localmin_collect#">Minimum<br/><span style="color: #4ccc5c;">#localmin#</span> kWh</div>
+                <div class="jazpar_localmax history cursor" data-cmd_id="#0_comp_max_id#" title="#0_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#0_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#0_comp_avg_id#" title="#0_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#0_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#0_comp_min_id#" title="#0_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#0_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="1_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #1_comp_month# #1_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#1_comp_conso_id#" title="#1_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #1_cursor_compare#%; text-align: right;">
+                Vous (#1_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#1_comp_max_id#" title="#1_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#1_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#1_comp_avg_id#" title="#1_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#1_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#1_comp_min_id#" title="#1_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#1_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="2_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #2_comp_month# #2_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#2_comp_conso_id#" title="#2_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #2_cursor_compare#%; text-align: right;">
+                Vous (#2_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#2_comp_max_id#" title="#2_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#2_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#2_comp_avg_id#" title="#2_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#2_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#2_comp_min_id#" title="#2_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#2_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="3_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #3_comp_month# #3_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#3_comp_conso_id#" title="#3_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #3_cursor_compare#%; text-align: right;">
+                Vous (#3_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#3_comp_max_id#" title="#3_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#3_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#3_comp_avg_id#" title="#3_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#3_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#3_comp_min_id#" title="#3_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#3_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="4_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #4_comp_month# #4_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#4_comp_conso_id#" title="#4_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #4_cursor_compare#%; text-align: right;">
+                Vous (#4_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#4_comp_max_id#" title="#4_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#4_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#4_comp_avg_id#" title="#4_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#4_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#4_comp_min_id#" title="#4_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#4_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="5_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #5_comp_month# #5_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#5_comp_conso_id#" title="#5_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #5_cursor_compare#%; text-align: right;">
+                Vous (#5_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#5_comp_max_id#" title="#5_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#5_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#5_comp_avg_id#" title="#5_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#5_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#5_comp_min_id#" title="#5_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#5_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="6_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #6_comp_month# #6_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#6_comp_conso_id#" title="#6_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #6_cursor_compare#%; text-align: right;">
+                Vous (#6_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#6_comp_max_id#" title="#6_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#6_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#6_comp_avg_id#" title="#6_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#6_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#6_comp_min_id#" title="#6_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#6_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="7_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #7_comp_month# #7_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#7_comp_conso_id#" title="#7_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #7_cursor_compare#%; text-align: right;">
+                Vous (#7_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#7_comp_max_id#" title="#7_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#7_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#7_comp_avg_id#" title="#7_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#7_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#7_comp_min_id#" title="#7_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#7_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="8_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #8_comp_month# #8_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#8_comp_conso_id#" title="#8_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #8_cursor_compare#%; text-align: right;">
+                Vous (#8_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#8_comp_max_id#" title="#8_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#8_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#8_comp_avg_id#" title="#8_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#8_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#8_comp_min_id#" title="#8_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#8_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="9_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #9_comp_month# #9_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#9_comp_conso_id#" title="#9_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #9_cursor_compare#%; text-align: right;">
+                Vous (#9_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#9_comp_max_id#" title="#9_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#9_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#9_comp_avg_id#" title="#9_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#9_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#9_comp_min_id#" title="#9_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#9_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="10_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #10_comp_month# #10_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#10_comp_conso_id#" title="#10_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #10_cursor_compare#%; text-align: right;">
+                Vous (#10_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#10_comp_max_id#" title="#10_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#10_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#10_comp_avg_id#" title="#10_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#10_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#10_comp_min_id#" title="#10_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#10_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="11_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span><i class="jazpar_compare_previous cursor fas fa-arrow-left"></i> Comparaison de #11_comp_month# #11_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#11_comp_conso_id#" title="#11_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #11_cursor_compare#%; text-align: right;">
+                Vous (#11_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#11_comp_max_id#" title="#11_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#11_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#11_comp_avg_id#" title="#11_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#11_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#11_comp_min_id#" title="#11_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#11_comp_min#</span> kWh</div>
+            </div>
+        </div>
+    </div>
+    <div id="12_jazpar_compare" style="width: 258px; float: right;">
+        <div style="margin-bottom: 5%;">
+            <center>
+                <span>Comparaison de #12_comp_month# #12_comp_year# <i class="jazpar_compare_next cursor fas fa-arrow-right"></i></span>
+            </center>
+        </div>
+        <div class="jazpar_compare_div" style="height: 250px;">
+            <div data-cmd_id="#12_comp_conso_id#" title="#12_comp_conso_collect#" class="history cursor" style="width: 129px; display:inline-block; height: 100%; padding-top: #12_cursor_compare#%; text-align: right;">
+                Vous (#12_comp_conso# kWh) <i class="fas fa-arrow-right"></i>    
+            </div>
+            <div style="width: 129px; float: right; height:100%">
+                <div class="jazpar_localmax history cursor" data-cmd_id="#12_comp_max_id#" title="#12_comp_max_collect#">Maximum<br/><span style="color: #dc0404;">#12_comp_max#</span> kWh</div>
+                <div class="jazpar_localavg history cursor" data-cmd_id="#12_comp_avg_id#" title="#12_comp_avg_collect#">Moyenne<br/><span style="color: #5cccfc;">#12_comp_avg#</span> kWh</div>
+                <div class="jazpar_localmin history cursor" data-cmd_id="#12_comp_min_id#" title="#12_comp_min_collect#">Minimum<br/><span style="color: #4ccc5c;">#12_comp_min#</span> kWh</div>
             </div>
         </div>
     </div>
 	<script>
-        var unit = "#default_unit#";
-        setUnit(unit, false);
+        var compare = 0;
+        var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
+        setComparison(compare);
         $('.eqLogic[data-eqLogic_uid=#uid#] .switch').on('click', function () {
             setUnit(unit, true);
         });
-        var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
+        var unit = "#default_unit#";
+        setUnit(unit, false);
+        $('.eqLogic[data-eqLogic_uid=#uid#] .jazpar_compare_previous').on('click', function () {
+            compare = compare + 1;
+            setComparison(compare);
+        });
+        $('.eqLogic[data-eqLogic_uid=#uid#] .jazpar_compare_next').on('click', function () {
+            compare = compare - 1;
+            setComparison(compare);
+        });
         var eqlogic_width = eqLogic.width();
         var LinkyScreen_width = eqLogic.find('.jazpar_template').width();
         eqLogic.find('.jazparCdc').css('font-size', (LinkyScreen_width*0.10)+'px');
@@ -92,6 +307,13 @@
             $('.eqLogic[data-eqLogic_uid=#uid#] .' + toSet).show();
             $('.eqLogic[data-eqLogic_uid=#uid#] .' + toUnset).hide();
             unit = toSet;
+        }
+
+        function setComparison(month) {
+            eqLogic.find('[id$=_jazpar_compare]').each(function() {
+                $(this).hide();
+            });
+            eqLogic.find('[id='+month+'_jazpar_compare]').show();
         }
     </script> 
  </div>

@@ -29,7 +29,6 @@
         "Cocher la case pour forcer la récupération des données même si déjà présentes": "Check this option to force data retrieval even if data already present for concerned periods",
         "Template de widget": "Widget template",
         "Sélectionnez le template de widget à utiliser": "Choose the widget's template to use",
-        "Aucun": "None",
         "Exemple de rendu avec le template de widget sélectionné :": "Example of display with selected widget's template:",
         "Unité préférée": "Prefered unit",
         "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)": "Choose the unit to use by default (only for widget Jazpar 2)",
@@ -40,7 +39,10 @@
         "Utiliser des dates dans les widgets": "Use dates in widgets",
         "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Check this option to use dates instead of command names in widgets",
         "Cocher la case pour arrondir les valeurs dans les widgets": "Check this option to round values in widgets",
-        "Arrondir les valeurs": "Round values"
+        "Arrondir les valeurs": "Round values",
+        "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)": "Specify the PCE number if you own several gas meters (optional)",
+        "Numéro PCE": "PCE number",
+        "Identifiant du compteur (PCE)": "Gas meter identifier (PCE)"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
@@ -67,7 +69,7 @@
         "Novembre": "November",
         "Décembre": "December",
         "MOIS EN COURS": "CURRENT MONTH",
-        "VEILLE": "YESTERDAY"
+        "DERNIER JOUR": "LAST DAY"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."

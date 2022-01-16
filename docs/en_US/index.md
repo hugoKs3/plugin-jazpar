@@ -26,15 +26,23 @@ To access the different equipment **GRDF Gazpar**, go to the menu **Plugins → 
 
 On the equipment page, fill in the'**Login** as well as the **Password** of your customer account *GRDF* then click on the button **Save**.
 
+You can also specify the PCE if you own several gas meters.
+
 The option **Force data retrieval** to force data retrieval even if data is already present for concerned periods.
 
 The plugin will then check the correct connection to the site *GRDF* and retrieve and insert in history :
-- **daily consumption** : the last 10 days,
+- **daily consumption** : the last 365 days,
 - **monthly consumption** : the last 12 months,
-- **maximum, minimum and average monthly consumptions of similar profiles**
-- **current month threshold** as defined on the website
+- **maximum, minimum and average monthly consumptions of similar profiles of the last 12 months**
+- **monthly thresholds** as defined on the website
 
 Four widget's tmplates are available. The ones with comparison inform you how your previous month consumption compares with similar profiles.
+
+# Potential issues
+
+From time to time, a captccha might be required to connect to the website.
+It will be mentioned in the plugin's logs.
+In this case, you need to connect to the website "manually" and resolve the captcha.
 
 # Remarks
 

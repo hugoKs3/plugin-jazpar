@@ -29,7 +29,6 @@
         "Cocher la case pour forcer la récupération des données même si déjà présentes": "Cocher la case pour forcer la récupération des données même si déjà présentes",
         "Template de widget": "Template de widget",
         "Sélectionnez le template de widget à utiliser": "Sélectionnez le template de widget à utiliser",
-        "Aucun": "Aucun",
         "Exemple de rendu avec le template de widget sélectionné :": "Exemple de rendu avec le template de widget sélectionné :",
         "Unité préférée": "Unité préférée",
         "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)": "Sélectionnez l'unité à utiliser par défaut (uniquement pour le widget Jazpar 2)",
@@ -40,7 +39,10 @@
         "Utiliser des dates dans les widgets": "Utiliser des dates dans les widgets",
         "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets": "Cocher la case pour utiliser des dates plutôt que les noms des commandes dans les widgets",
         "Cocher la case pour arrondir les valeurs dans les widgets": "Cocher la case pour arrondir les valeurs dans les widgets",
-        "Arrondir les valeurs": "Arrondir les valeurs"
+        "Arrondir les valeurs": "Arrondir les valeurs",
+        "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)": "Indiquez le numéro PCE si vous possédez plusieurs compteurs (optionnel)",
+        "Numéro PCE": "Numéro PCE",
+        "Identifiant du compteur (PCE)": "Identifiant du compteur (PCE)"
     },
     "plugins\/jazpar\/desktop\/js\/jazpar.js": {
         "Min": "Min",
@@ -67,7 +69,7 @@
         "Novembre": "Novembre",
         "Décembre": "Décembre",
         "MOIS EN COURS": "MOIS EN COURS",
-        "VEILLE": "VEILLE"
+        "DERNIER JOUR": "DERNIER JOUR"
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."

@@ -144,7 +144,35 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setUnite('kWh');
             $cmd->setGeneric_type('CONSUMPTION');
             $cmd->save();
+        } else {
+          $cmd->setName('Seuil mensuel');
+          $cmd->save();
         }
+
+        $cmd = $eqLogic->getCmd(null, 'consod');
+        if (is_object($cmd)) {
+          $cmd->setName('Conso jour');
+          $cmd->save();
+        }
+
+        $cmd = $eqLogic->getCmd(null, 'consod3');
+        if (is_object($cmd)) {
+          $cmd->setName('Conso jour (m3)');
+          $cmd->save();
+        }
+
+        $cmd = $eqLogic->getCmd(null, 'consom');
+        if (is_object($cmd)) {
+          $cmd->setName('Conso mois');
+          $cmd->save();
+        }
+
+        $cmd = $eqLogic->getCmd(null, 'consom3');
+        if (is_object($cmd)) {
+          $cmd->setName('Conso mois (m3)');
+          $cmd->save();
+        }
+
         $eqLogic->save();
     }
     
