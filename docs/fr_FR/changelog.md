@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Stable - 24/01/2022
+- Correction sur le calcul de la consommation mensuelle du mois "m - 12"
+
 # Stable - 16/01/2022
 >**Important**
 >

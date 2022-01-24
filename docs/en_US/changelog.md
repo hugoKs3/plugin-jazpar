@@ -4,6 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# Stable - 24/01/2022
+- Fix on monthly consumption computation for the last year month
+
 # Stable - 16/01/2022
 >**Important**
 >

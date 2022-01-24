@@ -77,7 +77,8 @@ class jazpar extends eqLogic {
       if ($need_refresh == true)
       {
         sleep(rand(5,50));
-        $data = $this->connectJazpar();
+        $start = date('Y-m-01', strtotime('-1 year'));
+        $data = $this->connectJazpar($start);
 
         if (!is_null($data)) {
           $consoDay = $this->getCmd(null, 'consod');
@@ -99,6 +100,9 @@ class jazpar extends eqLogic {
               $dt = DateTime::createFromFormat('Y-m-d', $measure->journeeGaziere);
               $dateDay = $dt->format('Y-m-d 00:00:00'); 
               $dateMonth = $dt->format('Y-m-t 00:00:00'); 
+              if (new DateTime($measure->journeeGaziere) < new DateTime($start)) {
+                continue;
+              }
               $this->recordDay($consoDay3, $dateDay, $measure->volumeBrutConsomme);
               $this->recordDay($consoDay, $dateDay, $measure->energieConsomme);
               $month = 0;
@@ -275,7 +279,7 @@ class jazpar extends eqLogic {
       }
     }
 
-    public function connectJazpar()
+    public function connectJazpar($start)
 		{
       $login = $this->getConfiguration('login');
       $password = $this->getConfiguration('password');
@@ -372,7 +376,6 @@ class jazpar extends eqLogic {
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');
       $end = date('Y-m-d', strtotime('-1 day'));
-      $start = date('Y-m-d', strtotime('-1 year'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);
