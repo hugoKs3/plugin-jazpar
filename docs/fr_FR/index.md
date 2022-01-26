@@ -15,6 +15,10 @@ Plugin permettant la récupération des consommations du compteur communicant *G
 
 Le plugin **GRDF Gazpar** ne nécessite aucune configuration spécifique et doit seulement être activé après l'installation.
 
+Deux options sont disponibles dans la configuration du plugin pour gérer la réaction en cas de détecion de captcha à la connexion:
+- Ajouter une entrée dans le centre de message (cochée par défaut)
+- Désactiver l'équipement 
+
 Les données sont vérifiées toutes les heures entre 4h et 22h et mises à jour uniquement si non disponibles dans Jeedom.
 
 ## Configuration des équipements
@@ -41,7 +45,7 @@ Quatre templates de widget sont disponibles. Ceux avec comparaison vous informen
 # Problèmes potentiels
 
 De temps en temps, il se peut que le site demande une résolution de captcha pour se connecter.
-Ce sera indiqué dans les logs du plugin.
+Ce sera indiqué dans les logs du plugin t le plugin réagira en fonction de sa configuration.
 Dans ce cas, vous devez vous connecter "manuellement" au site GRDF afin de résoudre la captcha.
 
 # Remarques

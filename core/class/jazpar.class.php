@@ -130,21 +130,23 @@ class jazpar extends eqLogic {
             log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune information de consommation trouvée');
           }
           
-          foreach ($compare as $measure) {
-            $cmd = null;
-            switch($measure->consommationType)
-            {
-              case 'conso_median':
-                $cmd = $this->getCmd(null, 'localavg');
-                break;
-              case 'conso_P10':
-                $cmd = $this->getCmd(null, 'localmin');
-                break;
-              case 'conso_P90':
-                $cmd = $this->getCmd(null, 'localmax');
-                break;
+          if (!is_null($compare)) {
+            foreach ($compare as $measure) {
+              $cmd = null;
+              switch($measure->consommationType)
+              {
+                case 'conso_median':
+                  $cmd = $this->getCmd(null, 'localavg');
+                  break;
+                case 'conso_P10':
+                  $cmd = $this->getCmd(null, 'localmin');
+                  break;
+                case 'conso_P90':
+                  $cmd = $this->getCmd(null, 'localmax');
+                  break;
+              }
+              $this->recordComparison($cmd, $measure);
             }
-            $this->recordComparison($cmd, $measure);
           }
 
           if (!is_null($thresholds)) {
@@ -330,6 +332,13 @@ class jazpar extends eqLogic {
           log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, state = ' . $obj->state . ', captcha = ' . $obj->displayCaptcha);
           if ($obj->displayCaptcha == true) {
             log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, a captcha needs to be entered on the website');
+            if (config::byKey('captcha-warning','jazpar','',true) == 1) {
+              message::add($this->getHumanName(), __('Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre.',__FILE__), '', $this->getId());
+            }
+            if (config::byKey('captcha-disable','jazpar','',true) == 1) {
+              $this->setIsEnable(0);
+              log::add(__CLASS__, 'info', $this->getHumanName() . ' Equipment disabled (as per plugin config)');
+            }
           }
           return null;
         }
@@ -397,9 +406,8 @@ class jazpar extends eqLogic {
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve comparison data');
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve comparison data');
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
-        return null;
       } else {
         $comparison = json_decode($response);
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');

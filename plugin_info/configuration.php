@@ -28,6 +28,18 @@ if (!isConnect('admin')) {
     <div class="col-lg-4">
      <input class="configKey form-control" data-l1key="cronMinute" disabled/>
    </div>
+   <div class="form-group">
+			<label class="col-lg-4 control-label help" data-help="{{Ajouter un message dans le centre de message lorsqu'un captcha est détecté}}">{{Warning captcha}}</label>
+			<div class="col-lg-4">
+        <input type="checkbox" class="configKey form-control" data-l1key="captcha-warning"/>
+			</div>
+		</div>
+    <div class="form-group">
+			<label class="col-lg-4 control-label help" data-help="{{Désactiver l'équipement lorsqu'un captcha est détecté}}">{{Désactivation sur captcha}}</label>
+			<div class="col-lg-4">
+        <input type="checkbox" class="configKey form-control" data-l1key="captcha-disable"/>
+			</div>
+		</div>
  </div>
 </fieldset>
 </form>

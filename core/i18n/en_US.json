@@ -1,7 +1,11 @@
 {
     "plugins\/jazpar\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Récupération des données à la minute": "Data recovery by the minute"
+        "Récupération des données à la minute": "Data recovery by the minute",
+        "Warning captcha": "Warning captcha",
+        "Désactivation sur captcha": "Deactivation on captcha",
+        "Ajouter un message dans le centre de message lorsqu'un captcha est détecté": "Add an entry in the message center when a captcha is detected",
+        "Désactiver l'équipement lorsqu'un captcha est détecté": "Disable the equipment when a captcha is detected"
     },
     "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
@@ -69,7 +73,8 @@
         "Novembre": "November",
         "Décembre": "December",
         "MOIS EN COURS": "CURRENT MONTH",
-        "DERNIER JOUR": "LAST DAY"
+        "DERNIER JOUR": "LAST DAY",
+        "Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre.": "A captcha has been detected. Connect to your account to resolve it."
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."

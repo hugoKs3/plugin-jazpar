@@ -15,6 +15,10 @@ Plugin allowing the recovery of consumption of the communicating meter *Gazpar* 
 
 The plugin **GRDF Gazpar** does not require any specific configuration and should only be activated after installation.
 
+Two options are available in the plugin's configuration to manage behavior when a captcha is detected at connection time:
+- Add an entry in the message center (checked by default)
+- Disable the equipment
+
 The data is checked every hour between 4 a.m. and 10 p.m. and updated only if not available in Jeedom.
 
 ## Equipment configuration
@@ -41,7 +45,7 @@ Four widget's tmplates are available. The ones with comparison inform you how yo
 # Potential issues
 
 From time to time, a captccha might be required to connect to the website.
-It will be mentioned in the plugin's logs.
+It will be mentioned in the plugin's logs and the plugin will react depending on the plugin's configuration you defined.
 In this case, you need to connect to the website "manually" and resolve the captcha.
 
 # Remarks
