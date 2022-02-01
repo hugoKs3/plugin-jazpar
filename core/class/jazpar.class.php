@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
-      $daydelay = config::byKey('days-delay','jazpar','',true);
+      $daydelay = config::byKey('daysdelay','jazpar','',true);
       if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-'.$daydelay.' day'))) {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : données déjà présentes');
       } else {
@@ -451,6 +451,12 @@ class jazpar extends eqLogic {
       }
       if (empty($this->getConfiguration('password'))) {
         throw new Exception(__('Le mot de passe du compte GRDF doit être renseigné',__FILE__));
+      }
+    }
+
+    public static function preConfig_daysdelay($value) {
+      if (filter_var($value, FILTER_VALIDATE_INT, $options) === false) {
+        throw new Exception(__('Le nombre de jours doit être un entier positif ou 0'),__FILE__);
       }
     }
 

@@ -62,6 +62,7 @@
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Authentication error: check the validity of the username and password",
         "L\\'identifiant du compte GRDF doit être renseigné": "The identifier of the GRDF account must be entered",
         "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered",
+        "Le nombre de jours doit être un entier positif ou 0": "The number of days must be a positive integer or 0",
         "Janvier": "January",
         "Février": "February",
         "Mars": "March",
