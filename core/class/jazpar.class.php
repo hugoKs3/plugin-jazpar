@@ -62,7 +62,7 @@ class jazpar extends eqLogic {
 
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
-      $daydelay = config::byKey('captcha-warning','jazpar','',true);
+      $daydelay = config::byKey('days-delay','jazpar','',true);
       if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-'.$daydelay.' day'))) {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : données déjà présentes');
       } else {
