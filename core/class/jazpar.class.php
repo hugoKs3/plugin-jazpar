@@ -454,11 +454,14 @@ class jazpar extends eqLogic {
       }
     }
 
+    /*
     public static function preConfig_daysdelay($value) {
+      $options = array('options' => array('min_range' => 0));
       if (filter_var($value, FILTER_VALIDATE_INT, $options) === false) {
         throw new Exception(__('Le nombre de jours doit être un entier positif ou 0',__FILE__));
       }
     }
+    */
 
  // Fonction exécutée automatiquement après la mise à jour de l'équipement
     public function postUpdate() {
