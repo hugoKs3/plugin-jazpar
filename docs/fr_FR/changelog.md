@@ -4,6 +4,11 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Beta - 01/02/2022
+- Correction lorsque les données de comparaison ne sont pas disponibles
+- Nouvelles options de configuration du plugin lorsqu'un captcha est détecté
+- Nouvelles option de configuration du plugin pour spécifier le nombre de jours de retard
+
 # Stable - 24/01/2022
 - Correction sur le calcul de la consommation mensuelle du mois "m - 12"
 

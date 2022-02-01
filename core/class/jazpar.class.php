@@ -62,10 +62,11 @@ class jazpar extends eqLogic {
 
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
-      if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-1 day'))) {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes');
+      $daydelay = config::byKey('daysdelay','jazpar','',true);
+      if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-'.$daydelay.' day'))) {
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : données déjà présentes');
       } else {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données');
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : absence de données');
         $need_refresh = true;
       }
 
@@ -78,7 +79,8 @@ class jazpar extends eqLogic {
       {
         sleep(rand(5,50));
         $start = date('Y-m-01', strtotime('-1 year'));
-        $data = $this->connectJazpar($start);
+        $end = date('Y-m-d', strtotime('-'.$daydelay.' day'));
+        $data = $this->connectJazpar($start, $end);
 
         if (!is_null($data)) {
           $consoDay = $this->getCmd(null, 'consod');
@@ -130,21 +132,23 @@ class jazpar extends eqLogic {
             log::add(__CLASS__, 'warning', $this->getHumanName() . ' Aucune information de consommation trouvée');
           }
           
-          foreach ($compare as $measure) {
-            $cmd = null;
-            switch($measure->consommationType)
-            {
-              case 'conso_median':
-                $cmd = $this->getCmd(null, 'localavg');
-                break;
-              case 'conso_P10':
-                $cmd = $this->getCmd(null, 'localmin');
-                break;
-              case 'conso_P90':
-                $cmd = $this->getCmd(null, 'localmax');
-                break;
+          if (!is_null($compare)) {
+            foreach ($compare as $measure) {
+              $cmd = null;
+              switch($measure->consommationType)
+              {
+                case 'conso_median':
+                  $cmd = $this->getCmd(null, 'localavg');
+                  break;
+                case 'conso_P10':
+                  $cmd = $this->getCmd(null, 'localmin');
+                  break;
+                case 'conso_P90':
+                  $cmd = $this->getCmd(null, 'localmax');
+                  break;
+              }
+              $this->recordComparison($cmd, $measure);
             }
-            $this->recordComparison($cmd, $measure);
           }
 
           if (!is_null($thresholds)) {
@@ -167,7 +171,7 @@ class jazpar extends eqLogic {
         if ($this->getCache('getJazparData') != 'done')
         {
           $this->setCache('getJazparData', 'done');
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : toutes les données sont à jour - désactivation de la vérification automatique pour aujourd\'hui');
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : toutes les données sont à jour - désactivation de la vérification automatique pour aujourd\'hui');
         }
       }
 
@@ -279,7 +283,7 @@ class jazpar extends eqLogic {
       }
     }
 
-    public function connectJazpar($start)
+    public function connectJazpar($start, $end)
 		{
       $login = $this->getConfiguration('login');
       $password = $this->getConfiguration('password');
@@ -330,6 +334,13 @@ class jazpar extends eqLogic {
           log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, state = ' . $obj->state . ', captcha = ' . $obj->displayCaptcha);
           if ($obj->displayCaptcha == true) {
             log::add(__CLASS__, 'error', $this->getHumanName() . ' Authentification error, a captcha needs to be entered on the website');
+            if (config::byKey('captcha-warning','jazpar','',true) == 1) {
+              message::add($this->getHumanName(), __('Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre.',__FILE__), '', $this->getId());
+            }
+            if (config::byKey('captcha-disable','jazpar','',true) == 1) {
+              $this->setIsEnable(0);
+              log::add(__CLASS__, 'info', $this->getHumanName() . ' Equipment disabled (as per plugin config)');
+            }
           }
           return null;
         }
@@ -375,7 +386,6 @@ class jazpar extends eqLogic {
       }
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');
-      $end = date('Y-m-d', strtotime('-1 day'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);
@@ -397,9 +407,8 @@ class jazpar extends eqLogic {
       $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
       if ($responseStatus != "200") {
-        log::add(__CLASS__, 'error', $this->getHumanName() . ' Unable to retrieve comparison data');
+        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve comparison data');
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
-        return null;
       } else {
         $comparison = json_decode($response);
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');
@@ -444,6 +453,16 @@ class jazpar extends eqLogic {
         throw new Exception(__('Le mot de passe du compte GRDF doit être renseigné',__FILE__));
       }
     }
+
+    
+    public static function preConfig_daysdelay($value) {
+      $options = array('options' => array('min_range' => 0));
+      if (filter_var($value, FILTER_VALIDATE_INT, $options) === false) {
+        throw new Exception(__('Le nombre de jours doit être un entier positif ou 0',__FILE__));
+      }
+      return $value;
+    }
+    
 
  // Fonction exécutée automatiquement après la mise à jour de l'équipement
     public function postUpdate() {

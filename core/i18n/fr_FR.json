@@ -1,7 +1,13 @@
 {
     "plugins\/jazpar\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
-        "Récupération des données à la minute": "Récupération des données à la minute"
+        "Récupération des données à la minute": "Récupération des données à la minute",
+        "Warning captcha": "Warning captcha",
+        "Désactivation sur captcha": "Désactivation sur captcha",
+        "Ajouter un message dans le centre de message lorsqu'un captcha est détecté": "Ajouter un message dans le centre de message lorsqu'un captcha est détecté",
+        "Désactiver l'équipement lorsqu'un captcha est détecté": "Désactiver l'équipement lorsqu'un captcha est détecté",
+        "Nombre de jours de retard": "Nombre de jours de retard",
+        "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté": "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté"
     },
     "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
@@ -56,6 +62,7 @@
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe",
         "L\\'identifiant du compte GRDF doit être renseigné": "L\\'identifiant du compte GRDF doit être renseigné",
         "Le mot de passe du compte GRDF doit être renseigné": "Le mot de passe du compte GRDF doit être renseigné",
+        "Le nombre de jours doit être un entier positif ou 0": "Le nombre de jours doit être un entier positif ou 0",
         "Janvier": "Janvier",
         "Février": "Février",
         "Mars": "Mars",
@@ -69,7 +76,8 @@
         "Novembre": "Novembre",
         "Décembre": "Décembre",
         "MOIS EN COURS": "MOIS EN COURS",
-        "DERNIER JOUR": "DERNIER JOUR"
+        "DERNIER JOUR": "DERNIER JOUR",
+        "Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre.": "Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre."
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF."

@@ -1,7 +1,13 @@
 {
     "plugins\/jazpar\/plugin_info\/configuration.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
-        "Récupération des données à la minute": "Data recovery by the minute"
+        "Récupération des données à la minute": "Data recovery by the minute",
+        "Warning captcha": "Warning captcha",
+        "Désactivation sur captcha": "Deactivation on captcha",
+        "Ajouter un message dans le centre de message lorsqu'un captcha est détecté": "Add an entry in the message center when a captcha is detected",
+        "Désactiver l'équipement lorsqu'un captcha est détecté": "Disable the equipment when a captcha is detected",
+        "Nombre de jours de retard": "Number of days delay",
+        "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté": "Depending on users, GRDF is giving the last daily consumption at D-1, D-2... To prevent the plugin querying the website for nothing, specify the number of days delay you generally witness"
     },
     "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",
@@ -56,6 +62,7 @@
         "Erreur d\\'authentification : vérifier la validité de l\\'identifiant et du mot de passe": "Authentication error: check the validity of the username and password",
         "L\\'identifiant du compte GRDF doit être renseigné": "The identifier of the GRDF account must be entered",
         "Le mot de passe du compte GRDF doit être renseigné": "The password for the GRDF account must be entered",
+        "Le nombre de jours doit être un entier positif ou 0": "The number of days must be a positive integer or 0",
         "Janvier": "January",
         "Février": "February",
         "Mars": "March",
@@ -69,7 +76,8 @@
         "Novembre": "November",
         "Décembre": "December",
         "MOIS EN COURS": "CURRENT MONTH",
-        "DERNIER JOUR": "LAST DAY"
+        "DERNIER JOUR": "LAST DAY",
+        "Un captcha a été détecté. Connectez-vous à votre espace pour le résoudre.": "A captcha has been detected. Connect to your account to resolve it."
     },
     "info.json": {
         "Récupérer les informations du compteur communicant Gazpar à partir de son compte-client GRDF.": "Retrieve the information of the Gazpar smart meter from their GRDF customer account."

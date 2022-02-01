@@ -25,6 +25,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       $randMinute = rand(3, 59);
       config::save('cronMinute', $randMinute, 'jazpar');
     }
+    config::save('captcha-warning', 1, 'jazpar');
   }
 
 // Fonction exécutée automatiquement après la mise à jour du plugin
@@ -34,6 +35,17 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       $randMinute = rand(3, 59);
       config::save('cronMinute', $randMinute, 'jazpar');
     }
+
+    $captcha = config::byKey('captcha-warning','jazpar','unset',true);
+    if ($captcha == 'unset') {
+      config::save('captcha-warning', 1, 'jazpar');
+    }
+
+    $daysdelay = config::byKey('daysdelay','jazpar','unset',true);
+    if ($daysdelay == 'unset') {
+      config::save('daysdelay', 2, 'jazpar');
+    }
+
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
