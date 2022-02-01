@@ -42,7 +42,7 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
     }
 
     $daysdelay = config::byKey('days-delay','jazpar','unset',true);
-    if ($captcha == 'unset') {
+    if ($daysdelay == 'unset') {
       config::save('days-delay', 2, 'jazpar');
     }
 
