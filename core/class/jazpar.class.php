@@ -457,8 +457,6 @@ class jazpar extends eqLogic {
     public static function preConfig_daysdelay($value) {
       if (filter_var($value, FILTER_VALIDATE_INT, $options) === false) {
         throw new Exception(__('Le nombre de jours doit être un entier positif ou 0',__FILE__));
-      } else {
-        config::save('daysdelay', $value, 'jazpar');
       }
     }
 
