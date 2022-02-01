@@ -5,7 +5,9 @@
         "Warning captcha": "Warning captcha",
         "Désactivation sur captcha": "Désactivation sur captcha",
         "Ajouter un message dans le centre de message lorsqu'un captcha est détecté": "Ajouter un message dans le centre de message lorsqu'un captcha est détecté",
-        "Désactiver l'équipement lorsqu'un captcha est détecté": "Désactiver l'équipement lorsqu'un captcha est détecté"
+        "Désactiver l'équipement lorsqu'un captcha est détecté": "Désactiver l'équipement lorsqu'un captcha est détecté",
+        "Nombre de jours de retard": "Nombre de jours de retard",
+        "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté": "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté"
     },
     "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",

@@ -62,10 +62,11 @@ class jazpar extends eqLogic {
 
       $consoDay = $this->getCmd(null, 'consod');
       $consoDay->execCmd();
-      if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-1 day'))) {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : données déjà présentes');
+      $daydelay = config::byKey('captcha-warning','jazpar','',true);
+      if ($consoDay->getCollectDate() == date('Y-m-d 00:00:00', strtotime('-'.$daydelay.' day'))) {
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : données déjà présentes');
       } else {
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : absence de données');
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : absence de données');
         $need_refresh = true;
       }
 
@@ -78,7 +79,8 @@ class jazpar extends eqLogic {
       {
         sleep(rand(5,50));
         $start = date('Y-m-01', strtotime('-1 year'));
-        $data = $this->connectJazpar($start);
+        $end = date('Y-m-d', strtotime('-'.$daydelay.' day'));
+        $data = $this->connectJazpar($start, $end);
 
         if (!is_null($data)) {
           $consoDay = $this->getCmd(null, 'consod');
@@ -169,7 +171,7 @@ class jazpar extends eqLogic {
         if ($this->getCache('getJazparData') != 'done')
         {
           $this->setCache('getJazparData', 'done');
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-1 day')) . ' : toutes les données sont à jour - désactivation de la vérification automatique pour aujourd\'hui');
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' le ' . date('d/m/Y', strtotime('-'.$daydelay.' day')) . ' : toutes les données sont à jour - désactivation de la vérification automatique pour aujourd\'hui');
         }
       }
 
@@ -281,7 +283,7 @@ class jazpar extends eqLogic {
       }
     }
 
-    public function connectJazpar($start)
+    public function connectJazpar($start, $end)
 		{
       $login = $this->getConfiguration('login');
       $password = $this->getConfiguration('password');
@@ -384,7 +386,6 @@ class jazpar extends eqLogic {
       }
 
       log::add(__CLASS__, 'info', $this->getHumanName() . ' Get consumption data...');
-      $end = date('Y-m-d', strtotime('-1 day'));
       curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/consommation/informatives?dateDebut=".$start."&dateFin=".$end."&pceList%5B%5D=". $mypce);
       $response = curl_exec($curl);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' conso: ' . $response);

@@ -19,6 +19,8 @@ Deux options sont disponibles dans la configuration du plugin pour gérer la ré
 - Ajouter une entrée dans le centre de message (cochée par défaut)
 - Désactiver l'équipement 
 
+Vous pouvez également spécifier le nombre de jours de retard généralement constaté afin d'éviter au plugin d'interroger le site pour rien.
+
 Les données sont vérifiées toutes les heures entre 4h et 22h et mises à jour uniquement si non disponibles dans Jeedom.
 
 ## Configuration des équipements

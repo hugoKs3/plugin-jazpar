@@ -19,6 +19,8 @@ Two options are available in the plugin's configuration to manage behavior when 
 - Add an entry in the message center (checked by default)
 - Disable the equipment
 
+You can also specify the number of days delay generally witnessed in order to prevent the plugin querying the website for nothing.
+
 The data is checked every hour between 4 a.m. and 10 p.m. and updated only if not available in Jeedom.
 
 ## Equipment configuration

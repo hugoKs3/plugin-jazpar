@@ -41,6 +41,11 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       config::save('captcha-warning', 1, 'jazpar');
     }
 
+    $daysdelay = config::byKey('days-delay','jazpar','unset',true);
+    if ($captcha == 'unset') {
+      config::save('days-delay', 2, 'jazpar');
+    }
+
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');
