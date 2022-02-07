@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Stable - 07/02/2022
+- Compatibilité 4.2
+
 # Stable - 01/02/2022
 - Correction lorsque les données de comparaison ne sont pas disponibles
 - Nouvelles options de configuration du plugin lorsqu'un captcha est détecté

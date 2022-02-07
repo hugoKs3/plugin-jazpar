@@ -122,7 +122,6 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
             $cmd->setName('Rafraichir');
             $cmd->setType('action');
             $cmd->setSubType('other');
-            $cmd->setEventOnly(1);
             $cmd->save();
         }
         $cmd = $eqLogic->getCmd(null, 'index');
