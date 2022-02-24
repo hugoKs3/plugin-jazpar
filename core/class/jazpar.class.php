@@ -25,8 +25,8 @@ class jazpar extends eqLogic {
   /*
    * Permet de définir les possibilités de personnalisation du widget (en cas d'utilisation de la fonction 'toHtml' par exemple)
    * Tableau multidimensionnel - exemple: array('custom' => true, 'custom::layout' => false)
-	public static $_widgetPossibility = array();
    */
+  public static $_widgetPossibility = array('custom' => true);
 
     /*     * ***********************Methode static*************************** */
 
