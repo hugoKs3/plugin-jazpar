@@ -1,35 +1,41 @@
 <div class="eqLogic eqLogic-widget allowResize #eqLogic_class# #class#" data-eqType="#eqType#" data-eqLogic_id="#id#" data-eqLogic_uid="#uid#" data-version="#version#" data-translate-category="#translate_category#" data-category="#category#" data-tags="#tags#" style="width:#width#;height:#height#;background-color:#FF9849!important;">
-<link rel="stylesheet" href="plugins/jazpar/data/css/jazpar.template.css"/>
-  <div class="text-center" style="padding:2% 0;">
-	   <span class="warning" title="#alert_name#"><i class='#alert_icon#'></i></span>
-	   <span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
-	   <a href="#eqLink#" class="reportModeHidden jazparEqlogicName">#name_display# <span class="object_name">#object_name#</span></a>
-  </div>
-  <div class="jazpar_template text-center">
-	   <div class="history cursor" data-cmd_id="#consom_id#" title="#consom_collect#" style="padding-top:25%;">
-		    <div class="jazparCdc">#consom_name#</div>
-		    <div class="jazparValueUnite"><span class="jazparValue">#consom#</span><span class="jazparUnite"> kWh</span></div>
-	   </div>
-	   <div class="history cursor" data-cmd_id="#consom3_id#" title="#consom3_collect#">
-		  <div class="jazparCdc">#consom3_name#</div>
-		  <div class="jazparValueUnite"><span class="jazparValue">#consom3#</span><span class="jazparUnite"> m3</span></div>
-	  </div>
-	  <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#">
-		  <div class="jazparCdc">#consod_name#</div>
-		  <div class="jazparValueUnite"><span class="jazparValue">#consod#</span><span class="jazparUnite"> kWh</span></div>
-	  </div>
-	  <div class="history cursor" data-cmd_id="#consod3_id#" title="#consod3_collect#">
-	 	  <div class="jazparCdc">#consod3_name#</div>
-		  <div class="jazparValueUnite"><span class="jazparValue">#consod3#</span><span class="jazparUnite"> m3</span></div>
-	  </div>
- </div>
-<script>
-    var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
-    var eqlogic_width = eqLogic.width();
-    var LinkyScreen_width = eqLogic.find('.jazpar_template').width();
-    eqLogic.find('.jazparEqlogicName').attr('style', 'font-size :' + (eqlogic_width*0.13)+'px !important');
-    eqLogic.find('.jazparCdc').css('font-size', (LinkyScreen_width*0.10)+'px');
-    eqLogic.find('.jazparValue').css('font-size', (LinkyScreen_width*0.12)+'px');
-    eqLogic.find('.jazparUnite').css('font-size', (LinkyScreen_width*0.08)+'px');
- </script>
+    <link rel="stylesheet" href="plugins/jazpar/data/css/jazpar.template.css"/>
+    <div class="text-center" style="padding:2% 0;">
+        <span class="warning" title="#alert_name#"><i class='#alert_icon#'></i></span>
+        <span class="reportModeVisible">#name_display# <span class="object_name">#object_name#</span></span>
+        <a href="#eqLink#" class="reportModeHidden jazparEqlogicName">#name_display# <span
+                class="object_name">#object_name#</span></a>
+    </div>
+    <div class="jazpar_template text-center">
+        <div class="history cursor" data-cmd_id="#consom_id#" title="#consom_collect#" style="padding-top:25%;">
+            <div class="jazparCdc">#consom_name#</div>
+            <div class="jazparValueUnite"><span class="jazparValue">#consom#</span><span class="jazparUnite"> kWh</span>
+            </div>
+        </div>
+        <div class="history cursor" data-cmd_id="#consom3_id#" title="#consom3_collect#">
+            <div class="jazparCdc">#consom3_name#</div>
+            <div class="jazparValueUnite"><span class="jazparValue">#consom3#</span><span class="jazparUnite"> m3</span>
+            </div>
+        </div>
+        <div class="history cursor" data-cmd_id="#consod_id#" title="#consod_collect#">
+            <div class="jazparCdc">#consod_name#</div>
+            <div class="jazparValueUnite"><span class="jazparValue">#consod#</span><span class="jazparUnite"> kWh</span>
+            </div>
+        </div>
+        <div class="history cursor" data-cmd_id="#consod3_id#" title="#consod3_collect#">
+            <div class="jazparCdc">#consod3_name#</div>
+            <div class="jazparValueUnite"><span class="jazparValue">#consod3#</span><span class="jazparUnite"> m3</span>
+            </div>
+        </div>
+    </div>
+    #divGraphInfo#
+    <script>
+        var eqLogic = $('.eqLogic[data-eqLogic_uid=#uid#]');
+        var eqlogic_width = eqLogic.width();
+        var LinkyScreen_width = eqLogic.find('.jazpar_template').width();
+        eqLogic.find('.jazparEqlogicName').attr('style', 'font-size :' + (eqlogic_width * 0.13) + 'px !important');
+        eqLogic.find('.jazparCdc').css('font-size', (LinkyScreen_width * 0.10) + 'px');
+        eqLogic.find('.jazparValue').css('font-size', (LinkyScreen_width * 0.12) + 'px');
+        eqLogic.find('.jazparUnite').css('font-size', (LinkyScreen_width * 0.08) + 'px');
+    </script>
 </div>
