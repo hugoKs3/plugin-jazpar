@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Stable - 04/03/2022
+- Compatibilité avec les graphiques en fond de widget (contribution de @Spine34)
+
 # Stable - 07/02/2022
 - Compatibilité 4.2
 
