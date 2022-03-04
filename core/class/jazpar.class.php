@@ -283,7 +283,6 @@ class jazpar extends eqLogic {
         }
         if ($thresholdsType == 0 && $cmd->getUnite() == 'kWh') {
           $thresholdCmd = $this->getCmd(null, 'threshold');
-          log::add(__CLASS__, 'info', $this->getHumanName() . ' Computing monthly threshold data from last year consumption...');
           $dt = new DateTime($theDate);
           $dtf = $dt->format('Y-m-t H:i:s');
           $dt->modify('-1 year');
@@ -291,13 +290,14 @@ class jazpar extends eqLogic {
           $dt->modify('+1 year');
           $cmdHistory = history::byCmdIdDatetime($cmdId, $dtfOld);
           if (is_object($cmdHistory)) {
+            log::add(__CLASS__, 'info', $this->getHumanName() . ' Computing monthly threshold data from last year consumption...');
             $lastYearValue = $cmdHistory->getValue();
             $cmdThresholdHistory = history::byCmdIdDatetime($thresholdCmd->getId(), $dtf);
             if (is_object($cmdThresholdHistory) && $cmdThresholdHistory->getValue() == $lastYearValue) {
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' Seuil déjà en historique - Aucune action : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
             } else {
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean threshold history from ' . $dt->format('Y-m-01') . ' to ' . $dtf);
-              history::removes($cmdId, $dt->format('Y-m-01'), $dtf);
+              history::removes($thresholdCmd->getId(), $dt->format('Y-m-01'), $dtf);
               log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement seuil : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
               $thresholdCmd->event($theValue, $dtf);
             }
