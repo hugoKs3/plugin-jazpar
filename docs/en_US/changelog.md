@@ -4,7 +4,7 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
-# Beta - 25/02/2022
+# Stable - 04/03/2022
 - Compatibility with tile background graphics (contribution from @Spine34)
 
 # Stable - 07/02/2022
