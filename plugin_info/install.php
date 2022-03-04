@@ -46,6 +46,11 @@ require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
       config::save('daysdelay', 2, 'jazpar');
     }
 
+    $thresholds = config::byKey('thresholds-site','jazpar','unset',true);
+    if ($thresholds == 'unset') {
+      config::save('thresholds-site', 1, 'jazpar');
+    }
+
     foreach (eqLogic::byType('jazpar') as $eqLogic) {
         if (empty($eqLogic->getConfiguration('defaultUnit'))) {
             $eqLogic->setConfiguration('defaultUnit', 'kwh');

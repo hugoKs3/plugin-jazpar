@@ -263,6 +263,7 @@ class jazpar extends eqLogic {
 
     public function recordMonths($cmd, $records, $lastDate) 
     {
+      $thresholdsType = config::byKey('thresholds-site','jazpar','',true);
       $cmdId = $cmd->getId();
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
@@ -279,6 +280,28 @@ class jazpar extends eqLogic {
           history::removes($cmdId, $dt->format('Y-m-01'), $theDate);
           log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (mois '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
+        }
+        if ($thresholdsType == 0 && $cmd->getUnite() == 'kWh') {
+          $thresholdCmd = $this->getCmd(null, 'threshold');
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' Computing monthly threshold data from last year consumption...');
+          $dt = new DateTime($theDate);
+          $dtf = $dt->format('Y-m-t H:i:s');
+          $dt->modify('-1 year');
+          $dtfOld = $dt->format('Y-m-t H:i:s');
+          $dt->modify('+1 year');
+          $cmdHistory = history::byCmdIdDatetime($cmdId, $dtfOld);
+          if (is_object($cmdHistory)) {
+            $lastYearValue = $cmdHistory->getValue();
+            $cmdThresholdHistory = history::byCmdIdDatetime($thresholdCmd->getId(), $dtf);
+            if (is_object($cmdThresholdHistory) && $cmdThresholdHistory->getValue() == $lastYearValue) {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Seuil déjà en historique - Aucune action : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
+            } else {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean threshold history from ' . $dt->format('Y-m-01') . ' to ' . $dtf);
+              history::removes($cmdId, $dt->format('Y-m-01'), $dtf);
+              log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement seuil : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
+              $thresholdCmd->event($theValue, $dtf);
+            }
+          }
         }
       }
     }
@@ -414,18 +437,21 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');
       }
 
-      log::add(__CLASS__, 'info', $this->getHumanName() . ' Get monthly threshold datas...');
-      curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/seuils?frequence=Mensuel");
-      $response = curl_exec($curl);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' thresholds: ' . $response);
-      $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      $thresholdsType = config::byKey('thresholds-site','jazpar','',true);
+      if ($thresholdsType == 1) {
+        log::add(__CLASS__, 'info', $this->getHumanName() . ' Get monthly threshold datas...');
+        curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/seuils?frequence=Mensuel");
+        $response = curl_exec($curl);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' thresholds: ' . $response);
+        $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-      if ($responseStatus != "200") {
-        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
-      } else {
-        $thresholds = json_decode($response);
-        log::add(__CLASS__, 'info', $this->getHumanName() . ' ...monthly thresholds data retrieved!');
+        if ($responseStatus != "200") {
+          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
+        } else {
+          $thresholds = json_decode($response);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' ...monthly thresholds data retrieved!');
+        }
       }
 
       curl_close($curl);

@@ -21,6 +21,9 @@ Deux options sont disponibles dans la configuration du plugin pour gérer la ré
 
 Vous pouvez également spécifier le nombre de jours de retard généralement constaté afin d'éviter au plugin d'interroger le site pour rien.
 
+Le site GRDF vous permet de spécifier des seuils menusels que le plugin récupère et stocke dans la commande dédiée.
+Si vous préférez utiliser les valeurs mensuelles de l'année précédente comme seuils, décochez l'option correspondante.
+
 Les données sont vérifiées toutes les heures entre 4h et 22h et mises à jour uniquement si non disponibles dans Jeedom.
 
 ## Configuration des équipements

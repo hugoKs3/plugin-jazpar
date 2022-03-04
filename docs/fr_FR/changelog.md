@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
+# Beta - 04/03/2022
+- Nouvelle option de configuration pour calculer les seuils mensuels en fonction des valeurs de l'année précendete a lieu de récupérer ces valeurs du site GRDF
+
 # Stable - 04/03/2022
 - Compatibilité avec les graphiques en fond de widget (contribution de @Spine34)
 

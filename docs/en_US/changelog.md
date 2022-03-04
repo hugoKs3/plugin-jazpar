@@ -4,6 +4,9 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.
 
+# Beta - 04/03/2022
+- Plugion's option to compute monthly thresholds instead of retrieving the ones defined on the website
+
 # Stable - 04/03/2022
 - Compatibility with tile background graphics (contribution from @Spine34)
 

@@ -21,6 +21,9 @@ Two options are available in the plugin's configuration to manage behavior when 
 
 You can also specify the number of days delay generally witnessed in order to prevent the plugin querying the website for nothing.
 
+The webste allows you to define thresholds for each mnth (in kWh). The plugin is retrieving these values and stores them in a dedicated command.
+If you prefer to compute thresholds based on last year consumptions, uncheck the option.
+
 The data is checked every hour between 4 a.m. and 10 p.m. and updated only if not available in Jeedom.
 
 ## Equipment configuration
