@@ -7,7 +7,9 @@
         "Ajouter un message dans le centre de message lorsqu'un captcha est détecté": "Add an entry in the message center when a captcha is detected",
         "Désactiver l'équipement lorsqu'un captcha est détecté": "Disable the equipment when a captcha is detected",
         "Nombre de jours de retard": "Number of days delay",
-        "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté": "Depending on users, GRDF is giving the last daily consumption at D-1, D-2... To prevent the plugin querying the website for nothing, specify the number of days delay you generally witness"
+        "Suivant les régions, GRDF donne la dernière consommation journaliere à J-1, J-2... Pour éviter au plugin d'intérroger le site pour rien, indiquez le nombre de jours de retard généralement constaté": "Depending on users, GRDF is giving the last daily consumption at D-1, D-2... To prevent the plugin querying the website for nothing, specify the number of days delay you generally witness",
+        "Utiliser les seuils du site": "Use thresholds from website",
+        "Désactivez cette option si vous voulez calculer les seuils en fonction des consommations de l'année précédente": "Deactivate this option if you prefer to calculate thresholds based on last year's consumptions"
     },
     "plugins\/jazpar\/desktop\/php\/jazpar.php": {
         "401 - Accès non autorisé": "401 - Unauthorized access",

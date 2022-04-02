@@ -50,5 +50,12 @@ if (!isConnect('admin')) {
 			</div>
 		</div>
 		</div>
+	<div class="form-group">
+			<label class="col-lg-4 control-label" title="{{Désactivez cette option si vous voulez calculer les seuils en fonction des consommations de l'année précédente}}">{{Utiliser les seuils du site}}</label>
+			<div class="col-lg-4">
+        <input type="checkbox" class="configKey form-control" data-l1key="thresholds-site"/>
+			</div>
+		</div>
+		</div>
 </fieldset>
 </form>

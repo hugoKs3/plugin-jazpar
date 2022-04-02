@@ -190,7 +190,9 @@ class jazpar extends eqLogic {
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Comparaison ('.$measure->consommationType.') déjà en historique - Aucune action : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
         }
-        else {      
+        else {     
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean comparison history ('.$measure->consommationType.') from ' . $date->format('Y-m-01') . ' to ' . $fullDate);
+            history::removes($cmdId, $date->format('Y-m-01'), $fullDate); 
             log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement comparaison ('.$measure->consommationType.') : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
             $cmd->event($theValue, $fullDate);
         }
@@ -263,6 +265,7 @@ class jazpar extends eqLogic {
 
     public function recordMonths($cmd, $records, $lastDate) 
     {
+      $thresholdsType = config::byKey('thresholds-site','jazpar','',true);
       $cmdId = $cmd->getId();
       foreach (array_keys($records) as $array_key) {
         $theDate = $array_key;
@@ -279,6 +282,28 @@ class jazpar extends eqLogic {
           history::removes($cmdId, $dt->format('Y-m-01'), $theDate);
           log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement mesure (mois '. $cmd->getUnite() . ') : ' . ' Date = ' . $theDate . ' => Mesure = ' . $theValue);
           $cmd->event($theValue, $theDate);
+        }
+        if ($thresholdsType == 0 && $cmd->getUnite() == 'kWh') {
+          $thresholdCmd = $this->getCmd(null, 'threshold');
+          $dt = new DateTime($theDate);
+          $dtf = $dt->format('Y-m-t H:i:s');
+          $dt->modify('-1 year');
+          $dtfOld = $dt->format('Y-m-t H:i:s');
+          $dt->modify('+1 year');
+          $cmdHistory = history::byCmdIdDatetime($cmdId, $dtfOld);
+          if (is_object($cmdHistory)) {
+            log::add(__CLASS__, 'info', $this->getHumanName() . ' Computing monthly threshold data from last year consumption...');
+            $lastYearValue = round($cmdHistory->getValue(), 0);
+            $cmdThresholdHistory = history::byCmdIdDatetime($thresholdCmd->getId(), $dtf);
+            if (is_object($cmdThresholdHistory) && $cmdThresholdHistory->getValue() == $lastYearValue) {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Seuil déjà en historique - Aucune action : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
+            } else {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean threshold history from ' . $dt->format('Y-m-01') . ' to ' . $dtf);
+              history::removes($thresholdCmd->getId(), $dt->format('Y-m-01'), $dtf);
+              log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement seuil : ' . ' Date = ' . $dtf . ' => Mesure = ' . $lastYearValue);
+              $thresholdCmd->event($lastYearValue, $dtf);
+            }
+          }
         }
       }
     }
@@ -414,18 +439,21 @@ class jazpar extends eqLogic {
         log::add(__CLASS__, 'info', $this->getHumanName() . ' ...comparison data retrieved!');
       }
 
-      log::add(__CLASS__, 'info', $this->getHumanName() . ' Get monthly threshold datas...');
-      curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/seuils?frequence=Mensuel");
-      $response = curl_exec($curl);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' thresholds: ' . $response);
-      $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+      $thresholdsType = config::byKey('thresholds-site','jazpar','',true);
+      if ($thresholdsType == 1) {
+        log::add(__CLASS__, 'info', $this->getHumanName() . ' Get monthly threshold datas...');
+        curl_setopt($curl, CURLOPT_URL, "https://monespace.grdf.fr/api/e-conso/pce/".$mypce."/seuils?frequence=Mensuel");
+        $response = curl_exec($curl);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' thresholds: ' . $response);
+        $responseStatus = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-      if ($responseStatus != "200") {
-        log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
-      } else {
-        $thresholds = json_decode($response);
-        log::add(__CLASS__, 'info', $this->getHumanName() . ' ...monthly thresholds data retrieved!');
+        if ($responseStatus != "200") {
+          log::add(__CLASS__, 'warning', $this->getHumanName() . ' Unable to retrieve monthly thresholds data');
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' error: ' . $response);
+        } else {
+          $thresholds = json_decode($response);
+          log::add(__CLASS__, 'info', $this->getHumanName() . ' ...monthly thresholds data retrieved!');
+        }
       }
 
       curl_close($curl);
@@ -667,7 +695,7 @@ class jazpar extends eqLogic {
       $padding = 45;
       $compareValues = [];
 
-      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory) && is_object($cmdMonthHistory)) {
+      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory)) {
         $month = date_fr($date->format('F'));
         $year = $date->format('Y');
         $avg = round($cmdAvgHistory->getValue(), 0);
@@ -679,25 +707,27 @@ class jazpar extends eqLogic {
         $max = round($cmdMaxHistory->getValue(), 0);
         $max_collect = $cmdMaxHistory->getDatetime();
         $max_id = $cmdMaxHistory->getCmd_id();
-        $conso = round($cmdMonthHistory->getValue(), 0);
-        $conso_collect = $cmdMonthHistory->getDatetime();
-        $conso_id = $cmdMonthHistory->getCmd_id();
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
-        if ($conso == $avg) {
-          $padding = 45;
-        }
-        if ($conso > $avg) {
-            $padding = 45 - round((($conso - $avg) * 45) / ($max - $avg), 0);
-        }
-        if ($conso < $avg) {
-            $padding = 45 + round((($avg - $conso) * 45) / ($avg - $min), 0);
-        }
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
-        if ($padding > 90) {
-          $padding = 90;
-        }
-        if ($padding < 0) {
-          $padding = 0;
+        if (is_object($cmdMonthHistory)) {
+          $conso = round($cmdMonthHistory->getValue(), 0);
+          $conso_collect = $cmdMonthHistory->getDatetime();
+          $conso_id = $cmdMonthHistory->getCmd_id();
+          if ($conso == $avg) {
+            $padding = 45;
+          }
+          if ($conso > $avg) {
+              $padding = 45 - round((($conso - $avg) * 45) / ($max - $avg), 0);
+          }
+          if ($conso < $avg) {
+              $padding = 45 + round((($avg - $conso) * 45) / ($avg - $min), 0);
+          }
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+          if ($padding > 90) {
+            $padding = 90;
+          }
+          if ($padding < 0) {
+            $padding = 0;
+          }
         }
       }
       
