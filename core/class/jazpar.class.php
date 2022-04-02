@@ -190,7 +190,9 @@ class jazpar extends eqLogic {
         if (is_object($cmdHistory) && $cmdHistory->getValue() == $theValue) {
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' Comparaison ('.$measure->consommationType.') déjà en historique - Aucune action : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
         }
-        else {      
+        else {     
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' Clean comparison history ('.$measure->consommationType.') from ' . $date->format('Y-m-01') . ' to ' . $fullDate);
+            history::removes($cmdId, $date->format('Y-m-01'), $fullDate); 
             log::add(__CLASS__, 'info', $this->getHumanName() . ' Enregistrement comparaison ('.$measure->consommationType.') : ' . ' Date = ' . $fullDate . ' => Mesure = ' . $theValue);
             $cmd->event($theValue, $fullDate);
         }
@@ -693,7 +695,7 @@ class jazpar extends eqLogic {
       $padding = 45;
       $compareValues = [];
 
-      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory) && is_object($cmdMonthHistory)) {
+      if (is_object($cmdAvgHistory) && is_object($cmdMinHistory) && is_object($cmdMaxHistory)) {
         $month = date_fr($date->format('F'));
         $year = $date->format('Y');
         $avg = round($cmdAvgHistory->getValue(), 0);
@@ -705,25 +707,27 @@ class jazpar extends eqLogic {
         $max = round($cmdMaxHistory->getValue(), 0);
         $max_collect = $cmdMaxHistory->getDatetime();
         $max_id = $cmdMaxHistory->getCmd_id();
-        $conso = round($cmdMonthHistory->getValue(), 0);
-        $conso_collect = $cmdMonthHistory->getDatetime();
-        $conso_id = $cmdMonthHistory->getCmd_id();
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' values (min/max/avg): '.$min.' '.$max.' '.$avg);
-        if ($conso == $avg) {
-          $padding = 45;
-        }
-        if ($conso > $avg) {
-            $padding = 45 - round((($conso - $avg) * 45) / ($max - $avg), 0);
-        }
-        if ($conso < $avg) {
-            $padding = 45 + round((($avg - $conso) * 45) / ($avg - $min), 0);
-        }
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
-        if ($padding > 90) {
-          $padding = 90;
-        }
-        if ($padding < 0) {
-          $padding = 0;
+        if (is_object($cmdMonthHistory)) {
+          $conso = round($cmdMonthHistory->getValue(), 0);
+          $conso_collect = $cmdMonthHistory->getDatetime();
+          $conso_id = $cmdMonthHistory->getCmd_id();
+          if ($conso == $avg) {
+            $padding = 45;
+          }
+          if ($conso > $avg) {
+              $padding = 45 - round((($conso - $avg) * 45) / ($max - $avg), 0);
+          }
+          if ($conso < $avg) {
+              $padding = 45 + round((($avg - $conso) * 45) / ($avg - $min), 0);
+          }
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' Calculated padding : '.$padding);
+          if ($padding > 90) {
+            $padding = 90;
+          }
+          if ($padding < 0) {
+            $padding = 0;
+          }
         }
       }
       
