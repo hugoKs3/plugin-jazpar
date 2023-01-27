@@ -1,3 +1,6 @@
+> **Warning**
+> This plugin is no longer maintained
+
 # plugin-jazpar
 This is a plugin for Jeedom aimed at retrieveing gaz consumptions metrics from GRDF. 
 
